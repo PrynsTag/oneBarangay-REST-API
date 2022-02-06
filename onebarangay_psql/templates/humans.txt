@@ -1,0 +1,15 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Prince Carl Velasco -- Project Manager / Lead Developer -- www.linkedin.com/in/princevelasco
+
+# THANKS
+
+    Sir Mark
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3, BootStrap, JavaScript, Vue.js
+    Python, Django, PostgreSQL, Redis

@@ -1,0 +1,32 @@
+---
+runtime: python39
+env: standard
+instance_class: F4_1G
+inbound_services:
+  - warmup
+entrypoint: gunicorn main:app -w 8 -k uvicorn.workers.UvicornWorker
+handlers:
+  - url: /favicon.ico
+    static_files: onebarangay_psql/templates/favicon.ico
+    require_matching_file: false
+    upload: onebarangay_psql/templates/favicon.ico
+  - url: /robots.txt
+    static_files: onebarangay_psql/templates/robots.txt
+    require_matching_file: false
+    upload: onebarangay_psql/templates/robots.txt
+  - url: /humans.txt
+    static_files: onebarangay_psql/templates/humans.txt
+    require_matching_file: false
+    upload: onebarangay_psql/templates/humans.txt
+  - url: .*
+    script: auto
+automatic_scaling:
+  min_idle_instances: automatic
+  max_idle_instances: automatic
+  min_pending_latency: 0.900s
+  max_pending_latency: automatic
+  max_concurrent_requests: 80
+  target_throughput_utilization: 0.95
+  target_cpu_utilization: 0.95
+  max_instances: 2
+network: {}
