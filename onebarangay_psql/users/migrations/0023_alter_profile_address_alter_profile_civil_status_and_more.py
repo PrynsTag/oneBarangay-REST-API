@@ -7,28 +7,58 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0022_alter_profile_user_alter_profile_username'),
+        ("users", "0022_alter_profile_user_alter_profile_username"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='profile',
-            name='address',
-            field=models.CharField(blank=True, default=None, help_text='Lot/Blk/Phase Floor Number, building name or Apartment name,  street name, barangay, city, province, zipcode', max_length=255),
+            model_name="profile",
+            name="address",
+            field=models.CharField(
+                blank=True,
+                default=None,
+                help_text="Lot/Blk/Phase Floor Number, building name or Apartment name,  street name, barangay, city, province, zipcode",
+                max_length=255,
+            ),
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='civil_status',
-            field=models.CharField(blank=True, choices=[('Single', 'Single'), ('Married', 'Married'), ('Widowed', 'Widowed'), ('Separated', 'Separated'), ('Divorced', 'Divorced'), ('Annulled', 'Annulled'), ('Cohabiting', 'Cohabiting')], default='Single', max_length=255),
+            model_name="profile",
+            name="civil_status",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("Single", "Single"),
+                    ("Married", "Married"),
+                    ("Widowed", "Widowed"),
+                    ("Separated", "Separated"),
+                    ("Divorced", "Divorced"),
+                    ("Annulled", "Annulled"),
+                    ("Cohabiting", "Cohabiting"),
+                ],
+                default="Single",
+                max_length=255,
+            ),
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='phone_number',
-            field=models.CharField(blank=True, default=None, max_length=17, validators=[django.core.validators.RegexValidator(message="Phone number must be entered in the format: '+639123456789'. Up to 15 digits allowed.", regex='^\\+?1?\\d{9,15}$')]),
+            model_name="profile",
+            name="phone_number",
+            field=models.CharField(
+                blank=True,
+                default=None,
+                max_length=17,
+                validators=[
+                    django.core.validators.RegexValidator(
+                        message="Phone number must be entered in the format: '+639123456789'. Up to 15 digits allowed.",
+                        regex="^\\+?1?\\d{9,15}$",
+                    )
+                ],
+            ),
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='profile_image',
-            field=models.ImageField(blank=True, default='profile_pics/default.jpg', upload_to='profile_pics'),
+            model_name="profile",
+            name="profile_image",
+            field=models.ImageField(
+                blank=True, default="profile_pics/default.jpg", upload_to="profile_pics"
+            ),
         ),
     ]

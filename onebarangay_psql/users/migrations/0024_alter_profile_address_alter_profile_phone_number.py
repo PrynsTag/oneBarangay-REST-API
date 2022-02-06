@@ -7,18 +7,31 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0023_alter_profile_address_alter_profile_civil_status_and_more'),
+        ("users", "0023_alter_profile_address_alter_profile_civil_status_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='profile',
-            name='address',
-            field=models.CharField(blank=True, help_text='Lot/Blk/Phase Floor Number, building name or Apartment name,  street name, barangay, city, province, zipcode', max_length=255),
+            model_name="profile",
+            name="address",
+            field=models.CharField(
+                blank=True,
+                help_text="Lot/Blk/Phase Floor Number, building name or Apartment name,  street name, barangay, city, province, zipcode",
+                max_length=255,
+            ),
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='phone_number',
-            field=models.CharField(blank=True, max_length=17, validators=[django.core.validators.RegexValidator(message="Phone number must be entered in the format: '+639123456789'. Up to 15 digits allowed.", regex='^\\+?1?\\d{9,15}$')]),
+            model_name="profile",
+            name="phone_number",
+            field=models.CharField(
+                blank=True,
+                max_length=17,
+                validators=[
+                    django.core.validators.RegexValidator(
+                        message="Phone number must be entered in the format: '+639123456789'. Up to 15 digits allowed.",
+                        regex="^\\+?1?\\d{9,15}$",
+                    )
+                ],
+            ),
         ),
     ]

@@ -6,13 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0010_alter_profile_phone_number'),
+        ("users", "0010_alter_profile_phone_number"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='profile',
-            name='address',
-            field=models.CharField(blank=True, help_text='Lot/Blk/Phase Floor Number, building name or Apartment name,  street name, barangay, city, province, zipcode', max_length=255, null=True),
+            model_name="profile",
+            name="address",
+            field=models.CharField(
+                blank=True,
+                help_text="Lot/Blk/Phase Floor Number, building name or Apartment name,  street name, barangay, city, province, zipcode",
+                max_length=255,
+                null=True,
+            ),
         ),
     ]
