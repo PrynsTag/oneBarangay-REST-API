@@ -5,9 +5,11 @@ sphinx:
   configuration: docs/conf.py
 
 build:
+  os: ubuntu-20.04
   image: testing
+  tools:
+    python: "3.10"
 
 python:
-  version: 3.9
   install:
     - requirements: requirements/local.txt
