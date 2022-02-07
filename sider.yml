@@ -51,7 +51,7 @@ linter:
   # stylelint example. See https://help.sider.review/tools/css/stylelint
   stylelint:
     npm_install: false
-    config: frontend/.stylelintrc.json
+    #    config: frontend/.stylelintrc.json
     ignore-path: .gitignore
     ignore-disables: true
     report-needless-disables: true
