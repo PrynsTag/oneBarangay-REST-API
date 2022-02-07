@@ -79,10 +79,12 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
     # "dj_rest_auth",
     "dj_rest_auth.registration",
+    "taggit",
 ]
 
 LOCAL_APPS = [
     "onebarangay_psql.users",
+    "onebarangay_psql.announcement",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
