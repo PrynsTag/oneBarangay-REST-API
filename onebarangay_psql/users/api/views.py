@@ -1,5 +1,4 @@
 """Create your user API views here."""
-from _pytest.fixtures import FixtureRequest
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework import status
@@ -56,7 +55,7 @@ class UserViewSet(RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
             return get_object_or_404(self.queryset, username=self.kwargs["username"])
 
     @action(detail=False)
-    def me(self, request: FixtureRequest) -> Response:
+    def me(self, request) -> Response:
         """Get the currently authenticated user.
 
         Args:
@@ -118,7 +117,7 @@ class UserProfileViewSet(RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
             )
 
     @action(detail=False)
-    def me(self, request: FixtureRequest) -> Response:
+    def me(self, request) -> Response:
         """Get the currently authenticated user.
 
         Args:
