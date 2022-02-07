@@ -10,6 +10,7 @@ test_patterns = [
 
 exclude_patterns = [
     "migrations/**",
+    "**/migrations/**",
     "/dist/*min.js",
     "bin/**",
     "**/node_modules/",
