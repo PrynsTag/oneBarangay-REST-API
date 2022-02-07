@@ -13,7 +13,6 @@ ci:
   autofix_prs: true
   autoupdate_commit_msg: "bump[pre-commit.ci]: auto-update pre-commit hooks"
   autoupdate_schedule: weekly
-  skip: [pylint, mypy]
   submodules: false
 
 repos:
