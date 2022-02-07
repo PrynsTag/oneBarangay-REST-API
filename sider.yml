@@ -70,7 +70,6 @@ branches:
   exclude:
     - master
     - /^release-.*$/
-
 # ESLint example. See https://help.sider.review/tools/javascript/eslint
 #  eslint:
 #    target: frontend/src/scripts/
