@@ -2,6 +2,7 @@
 from django.conf import settings
 from rest_framework.routers import BaseRouter, DefaultRouter, SimpleRouter
 
+from onebarangay_psql.announcement.views import AnnouncementViewSet
 from onebarangay_psql.users.api.views import (
     UserListViewSet,
     UserProfileListViewSet,
@@ -20,6 +21,7 @@ router.register("user", UserViewSet)
 router.register("list-users", UserListViewSet)
 router.register("profile", UserProfileViewSet)
 router.register("list-profiles", UserProfileListViewSet)
+router.register("announcement", AnnouncementViewSet)
 
 app_name = "api"
 urlpatterns = router.urls
