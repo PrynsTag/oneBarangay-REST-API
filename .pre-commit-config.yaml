@@ -80,7 +80,7 @@ repos:
         name: isort (python)
 
   - repo: https://github.com/rtts/djhtml
-    rev: v1.4.12
+    rev: v1.4.13
     hooks:
       - id: djhtml
 
