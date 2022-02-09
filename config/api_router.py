@@ -2,7 +2,7 @@
 from django.conf import settings
 from rest_framework.routers import BaseRouter, DefaultRouter, SimpleRouter
 
-from onebarangay_psql.announcement.views import AnnouncementViewSet
+from onebarangay_psql.announcement.viewset import AnnouncementViewSet
 from onebarangay_psql.users.api.views import (
     UserListViewSet,
     UserProfileListViewSet,

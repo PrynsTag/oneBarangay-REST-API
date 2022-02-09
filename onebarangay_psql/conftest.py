@@ -5,6 +5,8 @@ from _pytest.tmpdir import TempPathFactory
 from pytest_django.fixtures import SettingsWrapper
 from rest_framework.test import APIClient
 
+from onebarangay_psql.announcement import models
+from onebarangay_psql.announcement.factories import AnnouncementFactory
 from onebarangay_psql.users.factories import UserFactory
 from onebarangay_psql.users.models import User
 
@@ -52,7 +54,7 @@ def user_api_client(user: User) -> APIClient:
         APIClient (APIClient): An API client.
     """
     client = APIClient()
-    client.login(username=user.username, password=user.password)
+    client.force_login(user)
     return client
 
 
@@ -67,5 +69,15 @@ def admin_api_client(admin_user: User) -> APIClient:
         APIClient (APIClient): An API client.
     """
     client = APIClient()
-    client.login(username=admin_user.username, password=admin_user.password)
+    client.force_login(admin_user)
     return client
+
+
+@pytest.fixture(autouse=True)
+def announcement() -> models.Announcement:
+    """Announcement factory for creating announcements.
+
+    Returns:
+        (Announcement): Announcement object
+    """
+    return AnnouncementFactory()
