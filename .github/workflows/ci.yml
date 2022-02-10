@@ -8,11 +8,11 @@ env:
 
 on:
   pull_request:
-    branches: [ "master", "main" ]
+    branches: [ "*" ]
     paths-ignore: [ "docs/**" ]
 
   push:
-    branches: [ "master", "main" ]
+    branches: [ "*" ]
     paths-ignore: [ "docs/**" ]
 
 
@@ -67,6 +67,7 @@ jobs:
   heroku:
     runs-on: ubuntu-latest
     needs: pytest
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout Code Repository
         uses: actions/checkout@v2
