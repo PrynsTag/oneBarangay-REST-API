@@ -25,13 +25,12 @@ class Announcement(models.Model):
     tags = TaggableManager(_("tags"))
     slug = models.SlugField(max_length=255, unique=True)
 
-    def __str__(self):
-        """Return a string representation of the model."""
-        return self.title
+    class Meta:
+        """Metaclass for Announcement model."""
 
-    def get_absolute_url(self):
-        """Return the url to access a particular announcement instance."""
-        return reverse("api:announcement-detail", kwargs={"slug": self.slug})
+        ordering = ["-created_at"]
+        verbose_name = _("announcement")
+        verbose_name_plural = _("announcements")
 
     def save(self, *args, **kwargs):
         """Override the save method to create a slug and username from the models.
@@ -46,7 +45,10 @@ class Announcement(models.Model):
         self.username = self.author.username
         super().save(*args, **kwargs)
 
-    class Meta:
-        """Metaclass for Announcement model."""
+    def __str__(self):
+        """Return a string representation of the model."""
+        return self.title
 
-        ordering = ["-created_at"]
+    def get_absolute_url(self):
+        """Return the url to access a particular announcement instance."""
+        return reverse("api:announcement-detail", kwargs={"slug": self.slug})
