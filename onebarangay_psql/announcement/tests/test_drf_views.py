@@ -94,6 +94,25 @@ class TestAnnouncementViewSet:
         assert response.data["title"] == "Test"
         assert response.data["content"] == "Test"
 
+    def test_announcement_me(self, admin_user: User, rf: RequestFactory) -> None:
+        """Test 'announcement_me' returns the logged-in user's announcement.
+
+        Args:
+            admin_user (User): The logged-in user.
+            rf (RequestFactory): The request factory.
+        """
+        view = AnnouncementViewSet()
+
+        request = rf.get("/fake-url/")
+        request.user = admin_user
+
+        view.request = request
+        view.format_kwarg = None
+
+        response = view.me(request)
+
+        assert response.status_code == status.HTTP_200_OK
+
 
 @pytest.fixture()
 def user_type(request: FixtureRequest, user: User, admin_user: User):
