@@ -1,6 +1,8 @@
 """Create your announcement views here."""
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.response import Response
 
 from onebarangay_psql.announcement.models import Announcement
 from onebarangay_psql.announcement.serializer import AnnouncementSerializer
@@ -28,3 +30,17 @@ class AnnouncementViewSet(viewsets.ModelViewSet):
             serializer (AnnouncementSerializer): The Announcement serializer data to save.
         """
         serializer.save(author=self.request.user)
+
+    @action(detail=False)
+    def me(self, request) -> Response:
+        """Get the currently authenticated user.
+
+        Args:
+            request (FixtureRequest): request object.
+
+        Returns:
+            (Response): response object.
+        """
+        queryset = self.queryset.filter(author=self.request.user)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
