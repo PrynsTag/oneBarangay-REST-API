@@ -6,23 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('announcement', '0002_alter_announcement_options_announcement_slug_and_more'),
+        ("announcement", "0002_alter_announcement_options_announcement_slug_and_more"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='announcement',
-            old_name='featured',
-            new_name='is_featured',
+            model_name="announcement",
+            old_name="featured",
+            new_name="is_featured",
         ),
         migrations.AlterField(
-            model_name='announcement',
-            name='slug',
-            field=models.SlugField(max_length=255, unique=True, verbose_name='Slug'),
+            model_name="announcement",
+            name="slug",
+            field=models.SlugField(max_length=255, unique=True, verbose_name="Slug"),
         ),
         migrations.AlterField(
-            model_name='announcement',
-            name='title',
-            field=models.CharField(max_length=255, unique=True, verbose_name='Title'),
+            model_name="announcement",
+            name="title",
+            field=models.CharField(max_length=255, unique=True, verbose_name="Title"),
         ),
     ]

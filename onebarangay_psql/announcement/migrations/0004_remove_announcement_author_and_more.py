@@ -7,28 +7,33 @@ import taggit.managers
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('taggit', '0004_alter_taggeditem_content_type_alter_taggeditem_tag'),
-        ('announcement', '0003_rename_featured_announcement_is_featured_and_more'),
+        ("taggit", "0004_alter_taggeditem_content_type_alter_taggeditem_tag"),
+        ("announcement", "0003_rename_featured_announcement_is_featured_and_more"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='announcement',
-            name='author',
+            model_name="announcement",
+            name="author",
         ),
         migrations.AlterField(
-            model_name='announcement',
-            name='content',
-            field=models.TextField(verbose_name='content'),
+            model_name="announcement",
+            name="content",
+            field=models.TextField(verbose_name="content"),
         ),
         migrations.AlterField(
-            model_name='announcement',
-            name='tags',
-            field=taggit.managers.TaggableManager(help_text='A comma-separated list of tags.', through='taggit.TaggedItem', to='taggit.Tag', verbose_name='tags'),
+            model_name="announcement",
+            name="tags",
+            field=taggit.managers.TaggableManager(
+                help_text="A comma-separated list of tags.",
+                through="taggit.TaggedItem",
+                to="taggit.Tag",
+                verbose_name="tags",
+            ),
         ),
         migrations.AlterField(
-            model_name='announcement',
-            name='title',
-            field=models.CharField(max_length=255, unique=True, verbose_name='title'),
+            model_name="announcement",
+            name="title",
+            field=models.CharField(max_length=255, unique=True, verbose_name="title"),
         ),
     ]

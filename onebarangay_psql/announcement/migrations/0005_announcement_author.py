@@ -9,14 +9,19 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('announcement', '0004_remove_announcement_author_and_more'),
+        ("announcement", "0004_remove_announcement_author_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='announcement',
-            name='author',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Author'),
+            model_name="announcement",
+            name="author",
+            field=models.ForeignKey(
+                default=None,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Author",
+            ),
             preserve_default=False,
         ),
     ]
