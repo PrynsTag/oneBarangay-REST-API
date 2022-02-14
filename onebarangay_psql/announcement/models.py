@@ -16,7 +16,6 @@ class Announcement(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(_("title"), max_length=255, unique=True)
     author = models.ForeignKey(user, on_delete=models.CASCADE)
-    username = models.CharField(max_length=255, auto_created=True)
     content = models.TextField(_("content"))
     is_featured = models.BooleanField(default=False)
     thumbnail = models.ImageField(
@@ -32,6 +31,10 @@ class Announcement(models.Model):
         verbose_name = _("announcement")
         verbose_name_plural = _("announcements")
 
+    def __str__(self):
+        """Return a string representation of the model."""
+        return self.title
+
     def save(self, *args, **kwargs):
         """Override the save method to create a slug and username from the models.
 
@@ -42,12 +45,7 @@ class Announcement(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
 
-        self.username = self.author.username
         super().save(*args, **kwargs)
-
-    def __str__(self):
-        """Return a string representation of the model."""
-        return self.title
 
     def get_absolute_url(self):
         """Return the url to access a particular announcement instance."""
