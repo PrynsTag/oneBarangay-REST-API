@@ -324,7 +324,6 @@ tags
 
 ### Project template
 MailHog
-onebarangay_psql/media/
 
 .pytest_cache/
 .env
