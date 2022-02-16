@@ -81,3 +81,21 @@ def announcement() -> models.Announcement:
         (Announcement): Announcement object
     """
     return AnnouncementFactory()
+
+
+@pytest.fixture()
+def user_type(request, user: User, admin_user: User):
+    """Return different user type.
+
+    Args:
+        request (pytest.fixture): pytest fixture.
+        user (User): User object.
+        admin_user (User): Admin user object.
+
+    Returns:
+        User: User object.
+    """
+    if request.param == "user":
+        return user
+    else:
+        return admin_user
