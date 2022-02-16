@@ -9,39 +9,28 @@ from django.utils.translation import gettext_lazy as _
 class Appointment(models.Model):
     """Appointment model."""
 
-    INDIGENCY = "IND"
-    VERIFICATION = "VER"
-    LOCAL_EMPLOYMENT = "EMP"
-    CLEARANCE_PERMIT = "CLP"
-    FILE_ACTION = "CFA"
-    COMPLAINT_FILING = "COF"
-    FILE_COUNTERCLAIM = "CFC"
-    BORROW = "BOR"
-    APPOINTMENT = "APT"
-    DOCUMENT_CHOICES = [
-        (INDIGENCY, _("Indigency")),
-        (VERIFICATION, _("Verification")),
-        (LOCAL_EMPLOYMENT, _("Local Employment")),
-        (CLEARANCE_PERMIT, _("Clearance Permit")),
-        (FILE_ACTION, _("Certificate to File Action")),
-        (COMPLAINT_FILING, _("Complaint Filing")),
-        (FILE_COUNTERCLAIM, _("Certificate to File Counterclaim")),
-        (BORROW, _("Borrowing of Tools and Equipment")),
-        (APPOINTMENT, _("General Appointment")),
-    ]
+    class Document(models.TextChoices):
+        """Document choices."""
 
-    PENDING = "PEN"
-    APPROVED = "APP"
-    REJECTED = "REJ"
-    COMPLETED = "COM"
-    CANCELLED = "CAN"
-    STATUS_CHOICES = [
-        (PENDING, _("Pending")),
-        (APPROVED, _("Completed")),
-        (CANCELLED, _("Cancelled")),
-        (REJECTED, _("Rejected")),
-        (APPROVED, _("Approved")),
-    ]
+        INDIGENCY = "IND", _("Indigency")
+        VERIFICATION = "VER", _("Verification")
+        LOCAL_EMPLOYMENT = "EMP", _("Local Employment")
+        CLEARANCE_PERMIT = "CLP", _("Clearance Permit")
+        FILE_ACTION = "CFA", _("Certificate to File Action")
+        COMPLAINT_FILING = "COF", _("Complaint Filing")
+        FILE_COUNTERCLAIM = "CFC", _("Certificate to File Counterclaim")
+        BORROW = "BOR", _("Borrowing of Tools and Equipment")
+        APPOINTMENT = "APT", _("General Appointment")
+
+    class Status(models.TextChoices):
+        """Appointment status choices."""
+
+        PENDING = "PEN", _("Pending")
+        APPROVED = "COM", _("Completed")
+        REJECTED = "CAN", _("Cancelled")
+        COMPLETED = "REJ", _("Rejected")
+        CANCELLED = "APP", _("Approved")
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -52,9 +41,9 @@ class Appointment(models.Model):
     )
     start_appointment = models.DateTimeField(_("Start Appointment"))
     end_appointment = models.DateTimeField(_("End Appointment"), blank=True, null=True)
-    document = models.CharField(_("Document"), choices=DOCUMENT_CHOICES, max_length=3)
+    document = models.CharField(_("Document"), choices=Document.choices, max_length=3)
     status = models.CharField(
-        _("Status"), choices=STATUS_CHOICES, max_length=3, default=PENDING
+        _("Status"), choices=Status.choices, max_length=3, default=Status.PENDING
     )
 
     class Meta:
