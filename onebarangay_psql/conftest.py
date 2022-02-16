@@ -7,6 +7,8 @@ from rest_framework.test import APIClient
 
 from onebarangay_psql.announcement import models
 from onebarangay_psql.announcement.factories import AnnouncementFactory
+from onebarangay_psql.appointment.factories import AppointmentFactory
+from onebarangay_psql.appointment.models import Appointment
 from onebarangay_psql.users.factories import UserFactory
 from onebarangay_psql.users.models import User
 
@@ -81,6 +83,16 @@ def announcement() -> models.Announcement:
         (Announcement): Announcement object
     """
     return AnnouncementFactory()
+
+
+@pytest.fixture()
+def appointment() -> Appointment:
+    """Appointment factory for creating dummy appointments.
+
+    Returns:
+        (Appointment): The dummy appointment object
+    """
+    return AppointmentFactory()
 
 
 @pytest.fixture()
