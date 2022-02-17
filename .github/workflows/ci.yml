@@ -7,7 +7,7 @@ env:
   COMPOSE_DOCKER_CLI_BUILD: 1
   AZURE_WEBAPP_NAME: onebarangay
   AZURE_WEBAPP_PACKAGE_PATH: './onebarangay_psql'
-  STARTUP_COMMAND: 'gunicorn main:app -w 4'
+  STARTUP_COMMAND: 'gunicorn --bind=0.0.0.0 --timeout 600 config.wsgi -w 4'
 
 on:
   pull_request:
