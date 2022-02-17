@@ -126,8 +126,8 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-staging
         with:
-          app-name: 'onebarangay'
+          app-name: 'onebarangay-staging'
           slot-name: 'Staging'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6F9AC006663148EE845C9C9058312BC8 }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_STAGING }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
           startup-command: ${{ env.STARTUP_COMMAND }}
