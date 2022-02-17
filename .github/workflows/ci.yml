@@ -95,7 +95,7 @@ jobs:
     needs: pytest
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: ${{ steps.deploy-to-production.outputs.webapp-url || steps.deploy-to-staging.outputs.webapp-url}}
 
     steps:
       - name: Download artifact from pytest job
@@ -115,7 +115,7 @@ jobs:
       - name: 'Deploy to Azure Web App (Production)'
         if: github.ref == 'refs/heads/master'
         uses: azure/webapps-deploy@v2
-        id: deploy-to-webapp
+        id: deploy-to-production
         with:
           app-name: 'onebarangay'
           slot-name: 'Production'
@@ -124,7 +124,7 @@ jobs:
 
       - name: 'Deploy to Azure Web App (Staging)'
         uses: azure/webapps-deploy@v2
-        id: deploy-to-webapp
+        id: deploy-to-staging
         with:
           app-name: 'onebarangay'
           slot-name: 'Staging'
