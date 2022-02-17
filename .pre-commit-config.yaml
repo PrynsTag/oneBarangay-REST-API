@@ -2,7 +2,7 @@
 exclude: "^docs/|/migrations/"
 default_stages: [commit]
 default_language_version:
-  python: python3.10
+  python: python3.9
 
 # sets up .pre-commit-ci.yaml to ensure pre-commit dependencies stay up to date
 ci:
@@ -143,4 +143,4 @@ repos:
     rev: v2.31.0
     hooks:
       - id: pyupgrade
-        args: [ "--py36-plus", "--py37-plus", "--py38-plus", "--py39-plus", "--py310-plus" ]
+        args: [ "--py36-plus", "--py37-plus", "--py38-plus", "--py39-plus" ]
