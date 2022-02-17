@@ -1,4 +1,5 @@
 """Create your root URL configurations here."""
+from typing import Union
 
 from dj_rest_auth.registration.views import VerifyEmailView
 from django.conf import settings
@@ -10,7 +11,7 @@ from django.views.generic import TemplateView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
 
-urlpatterns: list[URLPattern | URLResolver] = [
+urlpatterns: list[Union[URLPattern, URLResolver]] = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"

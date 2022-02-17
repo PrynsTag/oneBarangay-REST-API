@@ -1,5 +1,6 @@
 """Create your custom management commands here."""
 import random
+from typing import Union
 
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
@@ -31,7 +32,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         """Create your custom management commands here."""
         self.stdout.write("Deleting old data...")
-        models: Appointment | Announcement | User = [
+        models: Union[Appointment, Announcement, User] = [
             Appointment,
             Announcement,
             User,
@@ -69,7 +70,7 @@ class Command(BaseCommand):
 
 
 # mypy: ignore-errors
-def set_sequence(model: Appointment | Announcement | User) -> None:
+def set_sequence(model: Union[Appointment, Announcement, User]) -> None:
     """Reset the id sequence of a table.
 
     Args:

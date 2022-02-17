@@ -22,6 +22,7 @@ class UserViewSet(RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
     lookup_field = "username"
+    # pylint: disable=unsupported-binary-operation
     permission_classes = [IsAuthenticated & (IsOwnProfile | IsAdminUser)]
 
     def get_queryset(self, *args, **kwargs):
@@ -83,6 +84,7 @@ class UserProfileViewSet(RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
     queryset = Profile.objects.all()
     serializer_class = UserProfileSerializer
     lookup_field = "username"
+    # pylint: disable=unsupported-binary-operation
     permission_classes = [IsAuthenticated & (IsOwnProfile | IsAdminUser)]
 
     def get_queryset(self):

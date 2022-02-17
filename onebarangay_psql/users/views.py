@@ -1,4 +1,5 @@
 """Create your user views here."""
+from typing import Union
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -56,7 +57,7 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
     permanent = False
 
-    def get_redirect_url(self, *args, **kwargs) -> str | None:
+    def get_redirect_url(self, *args, **kwargs) -> Union[str, None]:
         """Return the user's redirect url.
 
         Returns:
