@@ -122,7 +122,6 @@ jobs:
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
       - name: 'Deploy to Azure Web App (Staging)'
-        if: github.ref == 'refs/heads/develop'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
