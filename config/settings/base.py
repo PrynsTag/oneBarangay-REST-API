@@ -86,6 +86,7 @@ LOCAL_APPS = [
     "onebarangay_psql.users",
     "onebarangay_psql.announcement",
     "onebarangay_psql.appointment",
+    "onebarangay_psql.rbi",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
