@@ -9,6 +9,8 @@ from onebarangay_psql.announcement import models
 from onebarangay_psql.announcement.factories import AnnouncementFactory
 from onebarangay_psql.appointment.factories import AppointmentFactory
 from onebarangay_psql.appointment.models import Appointment
+from onebarangay_psql.rbi.factories import FamilyMemberFactory, HouseRecordFactory
+from onebarangay_psql.rbi.models import FamilyMember, HouseRecord
 from onebarangay_psql.users.factories import UserFactory
 from onebarangay_psql.users.models import User
 
@@ -93,6 +95,26 @@ def appointment() -> Appointment:
         (Appointment): The dummy appointment object
     """
     return AppointmentFactory()
+
+
+@pytest.fixture()
+def house_record() -> HouseRecord:
+    """House record factory for creating dummy house records.
+
+    Returns:
+        (HouseRecord): The dummy house record object
+    """
+    return HouseRecordFactory()
+
+
+@pytest.fixture()
+def family_member() -> FamilyMember:
+    """Family member factory for creating dummy family member.
+
+    Returns:
+        (FamilyMember): The dummy family member object
+    """
+    return FamilyMemberFactory()
 
 
 @pytest.fixture()
