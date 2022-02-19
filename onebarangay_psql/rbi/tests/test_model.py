@@ -46,125 +46,60 @@ class TestRBI:
         assert hr.house_id == "1"
         assert fm.last_name == hr.family_name
 
-    def test_house_record_str(self):
+    def test_house_record_str(self, house_record: HouseRecord):
         """Test the HouseRecord string representation.
 
         Scenario:
-            - The code should be able to output the HouseRecord model as a string
+            - The code should be able to output the correct HouseRecord model as a string
+        Args:
+            house_record: The HouseRecord object to test
         Returns:
             None
         """
-        hr = HouseRecord.objects.create(
-            house_id="1",
-            date_accomplished=datetime.datetime(
-                year=1990, month=1, day=1, tzinfo=ZoneInfo("Asia/Manila")
-            ),
-            address="Manila, Philippines",
-            family_name="Velasco",
-            street="San Antonio Street",
-        )
+        assert str(house_record) == f"{house_record.house_id}"
 
-        assert str(hr) == "1"
-
-    def test_family_member_str(self):
+    def test_family_member_str(self, family_member: FamilyMember):
         """Test the FamilyMember string representation.
 
         Scenario:
-            - The code should be able to output the FamilyMember model as a string
+            - The code should be able to output the correct FamilyMember model as a string
+        Args:
+            family_member: The FamilyMember object to test
         Returns:
             None
         """
-        hr = HouseRecord.objects.create(
-            house_id="1",
-            date_accomplished=datetime.datetime(
-                year=1990, month=1, day=1, tzinfo=ZoneInfo("Asia/Manila")
-            ),
-            address="Manila, Philippines",
-            family_name="Velasco",
-            street="San Antonio Street",
+        assert (
+            str(family_member)
+            == f"{family_member.house_id}. {family_member.first_name} {family_member.last_name}"
         )
 
-        fm = FamilyMember.objects.create(
-            house_id=hr,
-            first_name="Prince",
-            middle_name="Salonga",
-            last_name=hr.family_name,
-            age="26",
-            birth_place="Manila",
-            citizenship="Filipino",
-            civil_status="S",
-            date_of_birth=datetime.datetime(
-                year=1990, month=1, day=1, tzinfo=ZoneInfo("Asia/Manila")
-            ),
-            extension="Dr.",
-            monthly_income=100000,
-            remarks="Son",
-            gender="M",
-        )
-
-        assert str(fm) == f"{fm.house_id}. {fm.first_name} {fm.last_name}"
-
-    def test_update_hr(self):
+    def test_update_hr(self, house_record: HouseRecord):
         """Test updating HouseRecord model.
 
         Scenario:
             - The code should be able to update the HouseRecord model
+        Args:
+            house_record: The HouseRecord object to test
         Returns:
             None
         """
-        hr = HouseRecord.objects.create(
-            house_id="1",
-            date_accomplished=datetime.datetime(
-                year=1990, month=1, day=1, tzinfo=ZoneInfo("Asia/Manila")
-            ),
-            address="Manila, Philippines",
-            family_name="Velasco",
-            street="San Antonio Street",
-        )
+        house_record.street = "San Martino Street"
 
-        hr.street = "San Martino Street"
+        assert house_record.street == "San Martino Street"
 
-        assert hr.street == "San Martino Street"
-
-    def test_update_fm(self):
+    def test_update_fm(self, family_member: FamilyMember):
         """Test updating FamilyMember model.
 
         Scenario:
             - The code should be able to update the FamilyMember model
+        Args:
+            family_member: The FamilyMember object to test
         Returns:
             None
         """
-        hr = HouseRecord.objects.create(
-            house_id="1",
-            date_accomplished=datetime.datetime(
-                year=1990, month=1, day=1, tzinfo=ZoneInfo("Asia/Manila")
-            ),
-            address="Manila, Philippines",
-            family_name="Velasco",
-            street="San Antonio Street",
-        )
+        family_member.age = 27
 
-        fm = FamilyMember.objects.create(
-            house_id=hr,
-            first_name="Prince",
-            middle_name="Salonga",
-            last_name=hr.family_name,
-            age=26,
-            birth_place="Manila",
-            citizenship="Filipino",
-            civil_status="S",
-            date_of_birth=datetime.datetime(
-                year=1990, month=1, day=1, tzinfo=ZoneInfo("Asia/Manila")
-            ),
-            extension="Dr.",
-            monthly_income=100000,
-            remarks="Son",
-            gender="M",
-        )
-
-        fm.age = 27
-
-        assert fm.age == 27
+        assert family_member.age == 27
 
     def test_hr_ordering(self):
         """Test the HouseRecord ordering.
@@ -193,29 +128,21 @@ class TestRBI:
         assert HouseRecord.objects.all()[0] == hr2
         assert HouseRecord.objects.all()[1] == hr1
 
-    def test_fm_ordering(self):
+    def test_fm_ordering(self, house_record: HouseRecord):
         """Test the FamilyMember ordering.
 
         Scenario:
             - The code should output the proper ordering of FamilyMember model (Last created model should be first)
+        Args:
+            house_record: The HouseRecord object to test
         Returns:
             None
         """
-        hr = HouseRecord.objects.create(
-            house_id="1",
-            date_accomplished=datetime.datetime(
-                year=1990, month=1, day=1, tzinfo=ZoneInfo("Asia/Manila")
-            ),
-            address="Manila, Philippines",
-            family_name="Velasco",
-            street="San Antonio Street",
-        )
-
         fm1 = FamilyMember.objects.create(
-            house_id=hr,
+            house_id=house_record,
             first_name="Prince",
             middle_name="Salonga",
-            last_name=hr.family_name,
+            last_name=house_record.family_name,
             age=26,
             birth_place="Manila",
             citizenship="Filipino",
@@ -230,10 +157,10 @@ class TestRBI:
         )
 
         fm2 = FamilyMember.objects.create(
-            house_id=hr,
+            house_id=house_record,
             first_name="Princess",
             middle_name="Salonga",
-            last_name=hr.family_name,
+            last_name=house_record.family_name,
             age=26,
             birth_place="Manila",
             citizenship="Filipino",
