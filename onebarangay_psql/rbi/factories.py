@@ -10,7 +10,7 @@ from onebarangay_psql.rbi.models import FamilyMember, HouseRecord
 class HouseRecordFactory(DjangoModelFactory):
     """HouseRecord factory."""
 
-    house_id = factory.Faker("random_number", digits=5)
+    house_id = factory.Sequence(lambda n: n)
     date_accomplished = factory.Faker(
         "date_time_between",
         start_date="-3y",
