@@ -4,6 +4,7 @@ from rest_framework.routers import BaseRouter, DefaultRouter, SimpleRouter
 
 from onebarangay_psql.announcement.viewset import AnnouncementViewSet
 from onebarangay_psql.appointment.viewset import AppointmentViewSet, StatusUpdateViewSet
+from onebarangay_psql.rbi.viewset import FamilyMemberViewSet, HouseRecordViewSet
 from onebarangay_psql.users.api.views import (
     UserListViewSet,
     UserProfileListViewSet,
@@ -25,6 +26,8 @@ router.register("list-profiles", UserProfileListViewSet)
 router.register("announcement", AnnouncementViewSet)
 router.register("appointment", AppointmentViewSet)
 router.register("status", StatusUpdateViewSet, basename="status")
+router.register("house-record", HouseRecordViewSet, basename="house")
+router.register("family-member", FamilyMemberViewSet, basename="family")
 
 app_name = "api"
 urlpatterns = router.urls
