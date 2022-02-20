@@ -50,7 +50,7 @@ class FamilyMember(models.Model):
         NON_BINARY = "N", _("Non-binary")
         OTHERS = "O", _("Others")
 
-    house_id = models.ForeignKey(
+    house_record = models.ForeignKey(
         verbose_name=_("House Number"), to=HouseRecord, on_delete=models.CASCADE
     )
     family_member_id = models.AutoField(_("Family Member ID"), primary_key=True)
@@ -89,4 +89,4 @@ class FamilyMember(models.Model):
 
     def __str__(self):
         """Return string representation of rbi."""
-        return f"{self.house_id}. {self.first_name} {self.last_name}"
+        return f"{self.house_record.house_id}. {self.first_name} {self.last_name}"
