@@ -110,7 +110,7 @@ class TestRBI:
             None
         """
         hr1 = HouseRecord.objects.create(
-            house_id="1",
+            house_id=1,
             date_accomplished=datetime.datetime.now(tz=ZoneInfo("Asia/Manila")),
             address="Manila, Philippines",
             family_name="Velasco",
@@ -118,7 +118,7 @@ class TestRBI:
         )
 
         hr2 = HouseRecord.objects.create(
-            house_id="2",
+            house_id=2,
             date_accomplished=datetime.datetime.now(tz=ZoneInfo("Asia/Manila")),
             address="Manila, Philippines",
             family_name="Velasco",
