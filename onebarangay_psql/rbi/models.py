@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 class HouseRecord(models.Model):
     """HouseRecord model."""
 
-    house_id = models.CharField(_("House Number"), primary_key=True, max_length=255)
+    house_id = models.PositiveBigIntegerField(_("House Number"), primary_key=True)
     created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Updated At"), auto_now=True)
     date_accomplished = models.DateTimeField(
@@ -53,7 +53,7 @@ class FamilyMember(models.Model):
     house_record = models.ForeignKey(
         verbose_name=_("House Number"), to=HouseRecord, on_delete=models.CASCADE
     )
-    family_member_id = models.AutoField(_("Family Member ID"), primary_key=True)
+    family_member_id = models.BigAutoField(_("Family Member ID"), primary_key=True)
     created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Updated At"), auto_now=True)
     first_name = models.CharField(_("First Name"), max_length=255)
