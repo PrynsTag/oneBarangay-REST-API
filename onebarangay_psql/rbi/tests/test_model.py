@@ -26,7 +26,7 @@ class TestRBI:
             street="San Antonio Street",
         )
         fm = FamilyMember.objects.create(
-            house_id=hr,
+            house_record=hr,
             first_name="Prince",
             middle_name="Salonga",
             last_name=hr.family_name,
@@ -70,7 +70,7 @@ class TestRBI:
         """
         assert (
             str(family_member)
-            == f"{family_member.house_id}. {family_member.first_name} {family_member.last_name}"
+            == f"{family_member.house_record}. {family_member.first_name} {family_member.last_name}"
         )
 
     def test_update_hr(self, house_record: HouseRecord):
@@ -139,7 +139,7 @@ class TestRBI:
             None
         """
         fm1 = FamilyMember.objects.create(
-            house_id=house_record,
+            house_record=house_record,
             first_name="Prince",
             middle_name="Salonga",
             last_name=house_record.family_name,
@@ -157,7 +157,7 @@ class TestRBI:
         )
 
         fm2 = FamilyMember.objects.create(
-            house_id=house_record,
+            house_record=house_record,
             first_name="Princess",
             middle_name="Salonga",
             last_name=house_record.family_name,

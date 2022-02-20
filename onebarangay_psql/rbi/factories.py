@@ -31,11 +31,11 @@ class HouseRecordFactory(DjangoModelFactory):
 class FamilyMemberFactory(DjangoModelFactory):
     """FamilyMember factory."""
 
-    house_id = factory.SubFactory(HouseRecordFactory)
+    house_record = factory.SubFactory(HouseRecordFactory)
     family_member_id = factory.Sequence(lambda n: n)
     first_name = factory.Faker("first_name")
     middle_name = factory.Faker("last_name")
-    last_name = house_id.get_factory().family_name
+    last_name = house_record.get_factory().family_name
     age = factory.Faker("random_number", digits=2)
     birth_place = factory.Faker("city")
     citizenship = factory.Faker(
