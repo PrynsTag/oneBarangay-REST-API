@@ -1,5 +1,6 @@
 """Create your custom management commands here."""
 import random
+from pathlib import Path
 from typing import Union
 
 from django.contrib.auth import get_user_model
@@ -7,6 +8,7 @@ from django.core.management.base import BaseCommand
 from django.db import connection, transaction
 from django.db.models import Max
 
+from config.settings.base import APPS_DIR
 from onebarangay_psql.announcement.factories import AnnouncementFactory
 from onebarangay_psql.announcement.models import Announcement
 from onebarangay_psql.appointment.factories import AppointmentFactory
@@ -82,6 +84,9 @@ class Command(BaseCommand):
         for m in models:
             set_sequence(m)
 
+        self.stdout.write("Deleting old images...")
+        delete_all_media_files()
+
 
 def set_sequence(
     model: Union[Appointment, Announcement, User, HouseRecord, FamilyMember]
@@ -107,3 +112,17 @@ def set_sequence(
             "SELECT setval(pg_get_serial_sequence(%s,%s), %s);",
             [model._meta.db_table, model_id, seq],
         )
+
+
+def delete_all_media_files():
+    """Delete all media files.
+
+    Returns:
+        None
+    """
+    media_path = Path(APPS_DIR / "media/appointment/government_id")
+
+    for f in media_path.iterdir():
+        if not f.name.startswith(".") and f.is_file() and f.suffix in [".jpg", ".png"]:
+            if f.name != "default.png":
+                f.unlink()
