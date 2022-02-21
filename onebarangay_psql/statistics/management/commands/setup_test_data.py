@@ -53,24 +53,17 @@ class Command(BaseCommand):
         User.objects.create_user("test", "test@onebarangay.com", "prynstag")
 
         self.stdout.write("Creating new data...")
+
         # Create all the users
-        people = []
-        for _ in range(NUM_USERS):
-            person = UserFactory()
-            person.profile.phone_number = f"09{random.randint(1000000, 9999999)}"
-            people.append(person)
+        people = UserFactory.create_batch(size=NUM_USERS)
 
         # Add users as announcers
-        for _ in range(NUM_ANNOUNCEMENTS):
-            announcers = random.choices(people, k=NUM_ANNOUNCEMENTS_PER_USER)
-            #  pylint: disable=expression-not-assigned
-            [AnnouncementFactory(author=announcer) for announcer in announcers]
+        for person in random.choices(people, k=NUM_ANNOUNCEMENTS_PER_USER):
+            AnnouncementFactory.create_batch(size=NUM_ANNOUNCEMENTS, author=person)
 
         # Add users as appointees
-        for _ in range(NUM_APPOINTMENTS):
-            appointee = random.choices(people, k=NUM_APPOINTMENTS_PER_USER)
-            #  pylint: disable=expression-not-assigned
-            [AppointmentFactory(user=user) for user in appointee]
+        for person in random.choices(people, k=NUM_APPOINTMENTS_PER_USER):
+            AppointmentFactory.create_batch(size=NUM_APPOINTMENTS, user=person)
 
         houses = HouseRecordFactory.create_batch(size=NUM_HOUSE)
         for house in houses:
