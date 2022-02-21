@@ -1,5 +1,6 @@
 """Create your custom management commands here."""
 import random
+from typing import Union
 
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
@@ -10,6 +11,8 @@ from onebarangay_psql.announcement.factories import AnnouncementFactory
 from onebarangay_psql.announcement.models import Announcement
 from onebarangay_psql.appointment.factories import AppointmentFactory
 from onebarangay_psql.appointment.models import Appointment
+from onebarangay_psql.rbi.factories import FamilyMemberFactory, HouseRecordFactory
+from onebarangay_psql.rbi.models import FamilyMember, HouseRecord
 from onebarangay_psql.users.factories import UserFactory
 
 NUM_USERS = 50
@@ -17,6 +20,8 @@ NUM_APPOINTMENTS = 25
 NUM_APPOINTMENTS_PER_USER = 4
 NUM_ANNOUNCEMENTS = 25
 NUM_ANNOUNCEMENTS_PER_USER = 5
+NUM_HOUSE = 25
+NUM_FAMILY_PER_HOUSE = random.randrange(2, 6)
 
 User = get_user_model()
 
@@ -31,10 +36,12 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         """Create your custom management commands here."""
         self.stdout.write("Deleting old data...")
-        models: Appointment | Announcement | User = [
+        models = [
             Appointment,
             Announcement,
             User,
+            HouseRecord,
+            FamilyMember,
         ]
         for m in models:
             m.objects.all().delete()
@@ -63,13 +70,22 @@ class Command(BaseCommand):
             #  pylint: disable=expression-not-assigned
             [AppointmentFactory(user=user) for user in appointee]
 
+        houses = HouseRecordFactory.create_batch(size=NUM_HOUSE)
+        for house in houses:
+            FamilyMemberFactory.create_batch(
+                size=NUM_FAMILY_PER_HOUSE,
+                house_record=house,
+                last_name=house.family_name,
+            )
+
         self.stdout.write("Resetting indexes...")
         for m in models:
             set_sequence(m)
 
 
-# mypy: ignore-errors
-def set_sequence(model: Appointment | Announcement | User) -> None:
+def set_sequence(
+    model: Union[Appointment, Announcement, User, HouseRecord, FamilyMember]
+) -> None:
     """Reset the id sequence of a table.
 
     Args:
@@ -77,10 +93,17 @@ def set_sequence(model: Appointment | Announcement | User) -> None:
     Returns:
         None
     """
-    max_id = model.objects.aggregate(m=Max("id"))["m"]
+    if model == HouseRecord:
+        model_id = "house_id"
+    elif model == FamilyMember:
+        model_id = "family_member_id"
+    else:
+        model_id = "id"
+
+    max_id = model.objects.aggregate(m=Max(model_id))["m"]
     seq = max_id or 1
     with connection.cursor() as cursor:
         cursor.execute(
-            "SELECT setval(pg_get_serial_sequence(%s,'id'), %s);",
-            [model._meta.db_table, seq],
+            "SELECT setval(pg_get_serial_sequence(%s,%s), %s);",
+            [model._meta.db_table, model_id, seq],
         )
