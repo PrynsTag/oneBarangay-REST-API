@@ -1,7 +1,9 @@
 """Create your custom management commands here."""
 import random
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Union
+from zoneinfo import ZoneInfo
 
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
@@ -119,3 +121,30 @@ def delete_all_media_files():
         if not f.name.startswith(".") and f.is_file() and f.suffix in [".jpg", ".png"]:
             if f.name != "default.png":
                 f.unlink()
+
+
+def gen_time_between_days(
+    end: datetime,
+    start: datetime = datetime.now(),
+    num_days: int = 7,
+    back_to_past: bool = False,
+) -> list[datetime]:
+    """Generate a list of random datetime objects between two dates.
+
+    Args:
+        start (datetime, optional): The start date. Defaults to datetime.datetime.now().
+        end (datetime): The end date.
+        num_days (int, optional): The number of days to generate. Defaults to 7.
+        back_to_past (bool): Whether to generate dates back to the past. Defaults to False.
+    Returns:
+        list[datetime]: A list of datetime objects.
+    """
+    start_dt_aware = start.astimezone(tz=ZoneInfo("Asia/Manila"))
+    random_second = random.randint(0, abs(int((end - start).total_seconds())))
+    if back_to_past:
+        random_date = start_dt_aware - timedelta(seconds=random_second)
+
+    else:
+        random_date = start_dt_aware + timedelta(seconds=random_second)
+
+    return [random_date for i in range(num_days)]
