@@ -143,4 +143,4 @@ repos:
     rev: v2.31.0
     hooks:
       - id: pyupgrade
-        args: [ "--py36-plus", "--py37-plus", "--py38-plus", "--py39-plus", "--py310-plus" ]
+        args: [ "--py36-plus", "--py37-plus", "--py38-plus", "--py39-plus" ]
