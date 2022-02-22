@@ -25,7 +25,6 @@ NUM_APPOINTMENTS_PER_USER = 4
 NUM_ANNOUNCEMENTS = 25
 NUM_ANNOUNCEMENTS_PER_USER = 5
 NUM_HOUSE = 25
-NUM_FAMILY_PER_HOUSE = random.randrange(2, 6)
 
 User = get_user_model()
 
@@ -82,7 +81,7 @@ class Command(BaseCommand):
         houses = HouseRecordFactory.create_batch(size=NUM_HOUSE)
         for house in houses:
             FamilyMemberFactory.create_batch(
-                size=NUM_FAMILY_PER_HOUSE,
+                size=random.randrange(2, 6),
                 house_record=house,
                 last_name=house.family_name,
             )
