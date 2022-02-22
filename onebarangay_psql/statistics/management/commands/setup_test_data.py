@@ -56,8 +56,20 @@ class Command(BaseCommand):
 
         self.stdout.write("Creating new data...")
 
-        # Create all the users
-        people = UserFactory.create_batch(size=NUM_USERS)
+        people = []
+        last_week = datetime.now() - timedelta(days=7)
+        last_four_months = datetime.now() - timedelta(days=30 * 4)
+        for _ in range(NUM_USERS):
+            people.append(
+                UserFactory.create(
+                    last_login=random.choice(
+                        gen_time_between_days(last_week, back_to_past=True)
+                    ),
+                    date_joined=random.choice(
+                        gen_time_between_days(last_four_months, back_to_past=True)
+                    ),
+                )
+            )
 
         # Add users as announcers
         for person in random.choices(people, k=NUM_ANNOUNCEMENTS_PER_USER):
