@@ -22,9 +22,9 @@ class AppointmentFactory(DjangoModelFactory):
     purpose = factory.Faker("text", max_nb_chars=200)
     government_id = image
     start_appointment = factory.Faker(
-        "date_time_this_century",
-        before_now=True,
-        after_now=False,
+        "date_time_between",
+        start_date="now",
+        end_date="+10d",
         tzinfo=ZoneInfo("Asia/Manila"),
     )
     status = factory.Faker("random_element", elements=Appointment.Status.values)
