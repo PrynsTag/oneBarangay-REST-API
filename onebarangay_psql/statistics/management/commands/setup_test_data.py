@@ -136,7 +136,7 @@ def delete_all_media_files():
 
 def gen_time_between_days(
     end: datetime,
-    start: datetime = datetime.now(),
+    start: datetime = None,
     num_days: int = 7,
     back_to_past: bool = False,
 ) -> list[datetime]:
@@ -150,6 +150,9 @@ def gen_time_between_days(
     Returns:
         list[datetime]: A list of datetime objects.
     """
+    if start is None:
+        start = datetime.now()
+
     start_dt_aware = start.astimezone(tz=ZoneInfo("Asia/Manila"))
     random_second = random.randint(0, abs(int((end - start).total_seconds())))
     if back_to_past:
