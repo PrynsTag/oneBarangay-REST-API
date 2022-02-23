@@ -2,6 +2,7 @@
 import pytest
 from django.test import RequestFactory
 from django.urls import reverse
+from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 
@@ -158,3 +159,25 @@ class TestStatisticsViewSet:
         viewsets.format_kwarg = None
 
         assert viewsets.permission_classes[0] == IsAuthenticated
+
+
+def test_refresh_materialized_viewset_create(admin_user: User, rf: RequestFactory):
+    """Test RefreshMaterializedViewset create method.
+
+    Scenario:
+        - The create method should return a response with status code 201.
+    Args:
+        admin_user (User): The admin user making the post request.
+        rf (RequestFactory): The request factory mocking the get request.
+    """
+    viewsets = viewset.RefreshMaterialViewSet()
+
+    request = Request(rf.post(reverse("api:mv-refresh-list")))
+    request.user = admin_user
+
+    viewsets.request = request
+    viewsets.format_kwarg = None
+
+    response = viewsets.create(request)
+
+    assert response.status_code == status.HTTP_201_CREATED
