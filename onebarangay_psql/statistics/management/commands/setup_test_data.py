@@ -129,9 +129,13 @@ def delete_all_media_files():
     media_path = Path(APPS_DIR / "media/appointment/government_id")
 
     for f in media_path.iterdir():
-        if not f.name.startswith(".") and f.is_file() and f.suffix in [".jpg", ".png"]:
-            if f.name != "default.png":
-                f.unlink()
+        if (
+            not f.name.startswith(".")
+            and f.is_file()
+            and f.suffix in [".jpg", ".png"]
+            and f.name != "default.png"
+        ):
+            f.unlink()
 
 
 def gen_time_between_days(
