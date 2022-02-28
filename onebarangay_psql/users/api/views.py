@@ -10,7 +10,7 @@ from rest_framework.mixins import (
     RetrieveModelMixin,
     UpdateModelMixin,
 )
-from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
+from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
@@ -69,11 +69,11 @@ class UserViewSet(
         Returns:
             (Response): response object.
         """
-        if str(request.user) != "AnonymousUser":
+        if str(request.user) == "AnonymousUser":
+            raise PermissionDenied
+        else:
             serializer = UserSerializer(request.user, context={"request": request})
             return Response(status=status.HTTP_200_OK, data=serializer.data)
-        else:
-            raise PermissionDenied
 
 
 class ProfileViewSet(
@@ -129,9 +129,9 @@ class ProfileViewSet(
         Returns:
             (Response): Response object.
         """
-        if str(self.request.user) != "AnonymousUser":
+        if str(self.request.user) == "AnonymousUser":
+            raise PermissionDenied
+        else:
             data = self.queryset.get(user__username=self.request.user.username)
             serializer = ProfileSerializer(data, context={"request": request})
             return Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            raise PermissionDenied

@@ -6,10 +6,7 @@ from onebarangay_psql.announcement.viewset import AnnouncementViewSet
 from onebarangay_psql.appointment.viewset import AppointmentViewSet, StatusUpdateViewSet
 from onebarangay_psql.rbi.viewset import FamilyMemberViewSet, HouseRecordViewSet
 from onebarangay_psql.statistics import viewset
-from onebarangay_psql.users.api.views import (
-    ProfileViewSet,
-    UserViewSet,
-)
+from onebarangay_psql.users.api.views import ProfileViewSet, UserViewSet
 
 router = BaseRouter()
 
