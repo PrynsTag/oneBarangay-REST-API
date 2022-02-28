@@ -54,7 +54,7 @@ jobs:
 
       - name: Migrate Database
         run: |
-          ./manange.py makemigrations
+          ./manage.py makemigrations
           ./manage.py migrate
 
       - name: Test with pytest and upload to coveralls
