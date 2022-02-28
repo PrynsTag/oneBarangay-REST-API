@@ -2,7 +2,7 @@
 import pytest
 from django.test import RequestFactory
 
-from onebarangay_psql.users.api.views import UserProfileViewSet, UserViewSet
+from onebarangay_psql.users.api.views import ProfileViewSet, UserViewSet
 from onebarangay_psql.users.models import User
 
 pytestmark = pytest.mark.django_db
@@ -48,7 +48,7 @@ class TestUserViewSet:
         }
 
     class TestUserProfileViewSet:
-        """Test xDRF UserProfileViewSet View."""
+        """Test xDRF ProfileViewSet View."""
 
         def test_get_queryset(self, user: User, rf: RequestFactory) -> None:
             """Test 'get_queryset' returns the requesting user profile is returned.
@@ -57,13 +57,13 @@ class TestUserViewSet:
                 user (User): The user to test.
                 rf (RequestFactory): The request factory.
             """
-            view = UserProfileViewSet()
+            view = ProfileViewSet()
             request = rf.get("/fake-url/")
             request.user = user
 
             view.request = request
 
-            assert user.profile == view.get_queryset()
+            assert user.profile in view.get_queryset()
 
         def test_me(self, user: User, rf: RequestFactory) -> None:
             """Test 'me' view returns requesting authenticated user's profile.
@@ -72,7 +72,7 @@ class TestUserViewSet:
                 user (User): The user to test.
                 rf (RequestFactory): The request factory.
             """
-            view = UserProfileViewSet()
+            view = ProfileViewSet()
             request = rf.get("/fake-url/")
             request.user = user
 
@@ -94,7 +94,7 @@ class TestUserViewSet:
                 user (User): The user to test.
                 rf (RequestFactory): The request factory.
             """
-            view = UserProfileViewSet()
+            view = ProfileViewSet()
             request = rf.get("/fake-url/")
             request.user = user
 
