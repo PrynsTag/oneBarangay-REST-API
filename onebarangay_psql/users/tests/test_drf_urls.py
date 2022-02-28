@@ -20,8 +20,8 @@ class TestUserViewSetUrls:
 
     def test_user_list(self):
         """Test user 'list' drf url to reverse and resolve."""
-        assert reverse("api:user-list") == "/api/list-users/"
-        assert resolve("/api/list-users/").view_name == "api:user-list"
+        assert reverse("api:user-list") == "/api/user/"
+        assert resolve("/api/user/").view_name == "api:user-list"
 
     def test_user_me(self):
         """Test user 'me' drf url to reverse and resolve."""
@@ -30,7 +30,7 @@ class TestUserViewSetUrls:
 
 
 class TestUserProfileViewSetUrls:
-    """Test DRF URls for UserProfileViewSet."""
+    """Test DRF URls for ProfileViewSet."""
 
     def test_profile_detail(self, user: User):
         """Test profile 'detail' drf url to reverse and resolve.
@@ -48,8 +48,8 @@ class TestUserProfileViewSetUrls:
 
     def test_profile_list(self):
         """Test profile 'list' drf url to reverse and resolve."""
-        assert reverse("api:profile-list") == "/api/list-profiles/"
-        assert resolve("/api/list-profiles/").view_name == "api:profile-list"
+        assert reverse("api:profile-list") == "/api/profile/"
+        assert resolve("/api/profile/").view_name == "api:profile-list"
 
     def test_profile_me(self):
         """Test profile 'me' drf url to reverse and resolve."""

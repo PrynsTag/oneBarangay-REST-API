@@ -4,39 +4,44 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
-from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, UpdateModelMixin
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.mixins import (
+    DestroyModelMixin,
+    ListModelMixin,
+    RetrieveModelMixin,
+    UpdateModelMixin,
+)
+from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from onebarangay_psql.users.api.serializers import UserProfileSerializer, UserSerializer
+from onebarangay_psql.users.api.serializers import ProfileSerializer, UserSerializer
 from onebarangay_psql.users.models import Profile
 from onebarangay_psql.users.permissions import IsOwnProfile
 
 User = get_user_model()
 
 
-class UserViewSet(RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
+class UserViewSet(
+    RetrieveModelMixin,
+    UpdateModelMixin,
+    ListModelMixin,
+    DestroyModelMixin,
+    GenericViewSet,
+):
     """Retrieve and update user profile."""
 
     serializer_class = UserSerializer
     queryset = User.objects.all()
     lookup_field = "username"
-    permission_classes = [IsAuthenticated & (IsOwnProfile | IsAdminUser)]
 
-    def get_queryset(self, *args, **kwargs):
-        """Get the User queryset for the currently authenticated user.
-
-        Args:
-            *args (list): list of arguments.
-            **kwargs (dict): dictionary of keyword arguments.
-
-        Returns:
-            (QuerySet) queryset.
-        """
-        user = self.request.user
-        assert isinstance(user.id, int)
-        return self.queryset.filter(username=user.username)
+    def get_permissions(self):
+        """Return the appropriate permissions that each action requires."""
+        if self.action in ["retrieve", "update", "partial_update", "destroy", "me"]:
+            self.permission_classes = [IsOwnProfile]
+        else:
+            # Only admin can list all users
+            self.permission_classes = [IsAdminUser]
+        return [permission() for permission in self.permission_classes]
 
     def get_object(self):
         """Get User object.
@@ -64,39 +69,37 @@ class UserViewSet(RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
         Returns:
             (Response): response object.
         """
-        serializer = UserSerializer(request.user, context={"request": request})
-        return Response(status=status.HTTP_200_OK, data=serializer.data)
+        if str(request.user) == "AnonymousUser":
+            raise PermissionDenied
+        else:
+            serializer = UserSerializer(request.user, context={"request": request})
+            return Response(status=status.HTTP_200_OK, data=serializer.data)
 
 
-class UserListViewSet(ListModelMixin, GenericViewSet):
-    """List all users."""
-
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
-    permission_classes = [IsAuthenticated & IsAdminUser]
-    lookup_field = "username"
-
-
-class UserProfileViewSet(RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
+class ProfileViewSet(
+    RetrieveModelMixin,
+    UpdateModelMixin,
+    ListModelMixin,
+    DestroyModelMixin,
+    GenericViewSet,
+):
     """Retrieve or Update user profile."""
 
     queryset = Profile.objects.all()
-    serializer_class = UserProfileSerializer
+    serializer_class = ProfileSerializer
     lookup_field = "username"
-    permission_classes = [IsAuthenticated & (IsOwnProfile | IsAdminUser)]
 
-    def get_queryset(self):
-        """Get for the requesting user.
-
-        Returns:
-            (Profile): Profile queryset.
-        """
-        user = self.request.user
-        assert isinstance(user.id, int)
-        return self.queryset.filter(user__username=user.username).first()
+    def get_permissions(self):
+        """Return the appropriate permissions that each action requires."""
+        if self.action in ["retrieve", "update", "partial_update", "destroy", "me"]:
+            self.permission_classes = [IsOwnProfile]
+        else:
+            # Only admin can list all profiles
+            self.permission_classes = [IsAdminUser]
+        return [permission() for permission in self.permission_classes]
 
     def get_object(self):
-        """Return Profile object for UserProfileViewSet view.
+        """Return Profile object for ProfileViewSet view.
 
         Return a Profile object if user is admin or the user is
         requesting its own data.
@@ -126,15 +129,9 @@ class UserProfileViewSet(RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
         Returns:
             (Response): Response object.
         """
-        data = self.queryset.get(user__username=self.request.user.username)
-        serializer = UserProfileSerializer(data, context={"request": request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-class UserProfileListViewSet(ListModelMixin, GenericViewSet):
-    """List all user profiles."""
-
-    queryset = Profile.objects.all()
-    serializer_class = UserProfileSerializer
-    lookup_field = "username"
-    permission_classes = [IsAuthenticated & IsAdminUser]
+        if str(self.request.user) == "AnonymousUser":
+            raise PermissionDenied
+        else:
+            data = self.queryset.get(user__username=self.request.user.username)
+            serializer = ProfileSerializer(data, context={"request": request})
+            return Response(serializer.data, status=status.HTTP_200_OK)

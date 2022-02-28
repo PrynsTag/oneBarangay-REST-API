@@ -44,7 +44,6 @@ class Profile(models.Model):
         ("Cohabiting", "Cohabiting"),
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE, auto_created=True)
-    username = models.CharField(max_length=255, auto_created=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     profile_image = models.ImageField(
@@ -80,10 +79,6 @@ class Profile(models.Model):
     def __str__(self):
         """Profile model string representation."""
         return f"{self.user.username.capitalize()}'s Profile"
-
-    def __repr__(self):
-        """Profile model object representation."""
-        return f"<Profile: {self.user.username.capitalize()}'s Profile>"
 
     def save(self, *args, **kwargs):
         """Override save method to add username to profile."""
