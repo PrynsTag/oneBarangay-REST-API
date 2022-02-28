@@ -52,6 +52,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements/local.txt
 
+      - name: Migrate Database
+        run: |
+          ./manange.py makemigrations
+          ./manage.py migrate
+
       - name: Test with pytest and upload to coveralls
         run: |
           mkdir -p test-results
