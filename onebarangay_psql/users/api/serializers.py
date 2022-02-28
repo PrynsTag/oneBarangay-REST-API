@@ -22,7 +22,7 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
 
-class UserProfileSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
     """Serializer for user profile objects."""
 
     user: HyperlinkedRelatedField = serializers.HyperlinkedRelatedField(
