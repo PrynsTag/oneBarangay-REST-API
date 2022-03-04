@@ -304,6 +304,10 @@ REST_FRAMEWORK = {
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
 CORS_URLS_REGEX = r"^/api/.*$"
 
+# https://dj-rest-auth.readthedocs.io/en/latest/api_endpoints.html
+# ------------------------------------------------------------------------------
+OLD_PASSWORD_FIELD_ENABLED = True
+
 # By Default swagger ui is available only to admin user. You can change permission class to change that
 # See more configuration options at https://drf-spectacular.readthedocs.io/en/latest/settings.html#settings
 SPECTACULAR_SETTINGS = {
