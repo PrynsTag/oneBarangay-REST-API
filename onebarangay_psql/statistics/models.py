@@ -13,6 +13,7 @@ class TotalMaterializedView(models.Model):
         """Meta class for TotalsMaterializedView."""
 
         managed = False
+        ordering = ["id"]
         db_table = "materialized_statistics_total"
 
     def __str__(self):
@@ -32,6 +33,7 @@ class UserSignUpMaterializedView(models.Model):
         """Meta class for UserSignUpMaterializedView."""
 
         managed = False
+        ordering = ["id"]
         db_table = "materialized_statistics_user_signup"
 
     def __str__(self):
@@ -50,6 +52,7 @@ class AppointmentMaterializedView(models.Model):
         """Meta class for AppointmentMaterializedView."""
 
         managed = False
+        ordering = ["id"]
         db_table = "materialized_statistics_appointment"
 
     def __str__(self):
@@ -68,6 +71,7 @@ class UserLogInMaterializedView(models.Model):
         """Meta class for UserLogInMaterializedView."""
 
         managed = False
+        ordering = ["id"]
         db_table = "materialized_statistics_user_login"
 
     def __str__(self):
@@ -87,6 +91,7 @@ class AgeGroupMaterializedView(models.Model):
         """Meta class for AgeGroupMaterializedView."""
 
         managed = False
+        ordering = ["id"]
         db_table = "materialized_statistics_age_group"
 
     def __str__(self):
@@ -105,6 +110,7 @@ class CitizenshipMaterializedView(models.Model):
         """Meta class for CitizenshipMaterializedView."""
 
         managed = False
+        ordering = ["id"]
         db_table = "materialized_statistics_citizenship"
 
     def __str__(self):
@@ -123,6 +129,7 @@ class CivilStatusMaterializedView(models.Model):
         """Meta class for CivilStatusMaterializedView."""
 
         managed = False
+        ordering = ["id"]
         db_table = "materialized_statistics_civil_status"
 
     def __str__(self):
@@ -141,6 +148,7 @@ class AverageMaterializedView(models.Model):
         """Meta class for AverageMaterializedView."""
 
         managed = False
+        ordering = ["id"]
         db_table = "materialized_statistics_average"
 
     def __str__(self):
@@ -160,6 +168,7 @@ class SocialClassMaterializedView(models.Model):
         """Meta class for SocialClassMaterializedView."""
 
         managed = False
+        ordering = ["id"]
         db_table = "materialized_statistics_social_class"
 
     def __str__(self):
