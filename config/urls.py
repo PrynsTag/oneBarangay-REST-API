@@ -1,6 +1,7 @@
 """Create your root URL configurations here."""
 
 from dj_rest_auth.registration.views import VerifyEmailView
+from dj_rest_auth.views import PasswordResetConfirmView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -26,6 +27,11 @@ urlpatterns: list[URLPattern | URLResolver] = [
 
 # API URLS
 urlpatterns += [
+    path(
+        "auth/reset-password/<uidb64>/<token>/",
+        PasswordResetConfirmView.as_view(),
+        name="password_reset_confirm",
+    ),
     # API base url
     path("api/", include("config.api_router")),
     # DRF auth token
