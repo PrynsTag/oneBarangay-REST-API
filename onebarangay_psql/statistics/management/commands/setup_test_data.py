@@ -57,15 +57,15 @@ class Command(BaseCommand):
 
         people = []
         last_week = datetime.now() - timedelta(days=7)
-        last_four_months = datetime.now() - timedelta(days=30 * 4)
+        last_six_months = datetime.now() - timedelta(days=30 * 6)
         for _ in range(NUM_USERS):
             people.append(
                 UserFactory.create(
                     last_login=random.choice(
-                        gen_time_between_days(last_week, back_to_past=True)
+                        gen_time_between_days(last_six_months, back_to_past=True)
                     ),
                     date_joined=random.choice(
-                        gen_time_between_days(last_four_months, back_to_past=True)
+                        gen_time_between_days(last_six_months, back_to_past=True)
                     ),
                 )
             )
