@@ -56,7 +56,6 @@ class Command(BaseCommand):
         self.stdout.write("Creating new data...")
 
         people = []
-        last_week = datetime.now() - timedelta(days=7)
         last_six_months = datetime.now() - timedelta(days=30 * 6)
         for _ in range(NUM_USERS):
             people.append(
