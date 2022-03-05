@@ -60,6 +60,16 @@ router.register(
     basename="mv-social-class",
 )
 router.register(
+    "statistics/user-login-by-month",
+    viewset.UserLoginMonthlyMaterializedViewSet,
+    basename="mv-login-monthly",
+)
+router.register(
+    "statistics/user-signup-by-month",
+    viewset.UserSignUpMonthlyMaterializedViewSet,
+    basename="mv-signup-monthly",
+)
+router.register(
     "statistics/refresh",
     viewset.RefreshMaterialViewSet,
     basename="mv-refresh",
