@@ -116,6 +116,7 @@ repos:
           - django-debug-toolbar
           - django-extensions
           - django-taggit
+          - django-filter
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v0.931
@@ -136,7 +137,8 @@ repos:
           dj-rest-auth,
           django-compressor,
           psycopg2-binary,
-          django-taggit
+          django-taggit,
+          django-filter
         ]
 
   - repo: https://github.com/asottile/pyupgrade
