@@ -41,6 +41,44 @@ class UserSignUpMaterializedView(models.Model):
         return self.label
 
 
+class UserSignUpMonthlyMaterializedView(models.Model):
+    """User Signup Monthly Materialized View."""
+
+    id = models.IntegerField(primary_key=True)
+    label = models.CharField(max_length=20)
+    value = models.PositiveBigIntegerField()
+
+    class Meta:
+        """Meta class for UserSignUpMonthlyMaterializedView."""
+
+        managed = False
+        ordering = ["id"]
+        db_table = "materialized_statistics_user_signup_monthly"
+
+    def __str__(self):
+        """Return String Representation of UserSignUpMonthlyMaterializedView."""
+        return self.label
+
+
+class UserLoginMonthlyMaterializedView(models.Model):
+    """User Login Monthly Materialized View."""
+
+    id = models.IntegerField(primary_key=True)
+    label = models.CharField(max_length=20)
+    value = models.PositiveBigIntegerField()
+
+    class Meta:
+        """Meta class for UserLoginMonthlyMaterializedView."""
+
+        managed = False
+        ordering = ["id"]
+        db_table = "materialized_statistics_user_login_monthly"
+
+    def __str__(self):
+        """Return String Representation of UserLoginMonthlyMaterializedView."""
+        return self.label
+
+
 class AppointmentMaterializedView(models.Model):
     """Appointment Materialized View."""
 
