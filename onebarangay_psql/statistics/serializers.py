@@ -24,6 +24,26 @@ class UserSignUpMaterializedViewSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class UserSignUpMonthlyMaterializedViewSerializer(serializers.ModelSerializer):
+    """User Signup Monthly Materialized View Serializer."""
+
+    class Meta:
+        """Meta class for UserSignupMonthlyMaterializedViewSerializer."""
+
+        model = models.UserSignUpMonthlyMaterializedView
+        fields = "__all__"
+
+
+class UserLoginMonthlyMaterializedViewSerializer(serializers.ModelSerializer):
+    """User Login Monthly Materialized View Serializer."""
+
+    class Meta:
+        """Meta class for UserLoginMonthlyMaterializedViewSerializer."""
+
+        model = models.UserLoginMonthlyMaterializedView
+        fields = "__all__"
+
+
 class AppointmentMaterializedViewSerializer(serializers.ModelSerializer):
     """Appointment Materialized View Serializer."""
 
