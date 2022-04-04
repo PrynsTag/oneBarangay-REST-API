@@ -1,7 +1,7 @@
 argon2-cffi==21.3.0  # https://github.com/hynek/argon2_cffi
 crispy-bootstrap5==0.6  # https://github.com/django-crispy-forms/crispy-bootstrap5
 # For REST login, logout, ang register.
-dj-rest-auth==2.2.3 # https://github.com/iMerica/dj-rest-auth
+dj-rest-auth==2.2.4 # https://github.com/iMerica/dj-rest-auth
 
 # Django
 # ------------------------------------------------------------------------------
