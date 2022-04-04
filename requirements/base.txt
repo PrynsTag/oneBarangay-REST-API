@@ -25,7 +25,7 @@ hiredis==2.0.0  # https://github.com/redis/hiredis-py
 newrelic==7.8.0.174
 Pillow==9.0.1  # https://github.com/python-pillow/Pillow
 python-slugify==6.1.1  # https://github.com/un33k/python-slugify
-pytz==2021.3  # https://github.com/stub42/pytz
+pytz==2022.1  # https://github.com/stub42/pytz
 rcssmin==1.1.0  # https://github.com/ndparker/rcssmin
 redis==4.1.4  # https://github.com/redis/redis-py
 whitenoise==6.0.0  # https://github.com/evansd/whitenoise
