@@ -14,7 +14,11 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from onebarangay_psql.users.api.serializers import ProfileSerializer, UserSerializer
+from onebarangay_psql.users.api.serializers import (
+    ProfileImageSerializer,
+    ProfileSerializer,
+    UserSerializer,
+)
 from onebarangay_psql.users.models import Profile
 from onebarangay_psql.users.permissions import IsOwnProfile
 
@@ -137,3 +141,27 @@ class ProfileViewSet(
             data = self.queryset.get(user__username=self.request.user.username)
             serializer = ProfileSerializer(data, context={"request": request})
             return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class ProfilePhotoViewSet(UpdateModelMixin, GenericViewSet):
+    """Update user profile photo."""
+
+    queryset = Profile.objects.all()
+    serializer_class = ProfileImageSerializer
+    lookup_field = "user__username"
+
+    def patch(self, request):
+        """Change user profile photo."""
+        if str(self.request.user) == "AnonymousUser":
+            raise PermissionDenied
+        else:
+            image = request.data["profile_image"]
+            data = self.queryset.get(user__username=self.request.user.username)
+            data.profile_image = image
+            serializer = ProfileImageSerializer(
+                data, context={"request": request}, partial=True
+            )
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

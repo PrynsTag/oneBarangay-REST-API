@@ -6,7 +6,11 @@ from onebarangay_psql.announcement.viewset import AnnouncementViewSet
 from onebarangay_psql.appointment.viewset import AppointmentViewSet, StatusUpdateViewSet
 from onebarangay_psql.rbi.viewset import FamilyMemberViewSet, HouseRecordViewSet
 from onebarangay_psql.statistics import viewset
-from onebarangay_psql.users.api.views import ProfileViewSet, UserViewSet
+from onebarangay_psql.users.api.views import (
+    ProfilePhotoViewSet,
+    ProfileViewSet,
+    UserViewSet,
+)
 
 router = BaseRouter()
 
@@ -17,6 +21,7 @@ else:
 
 router.register("user", UserViewSet)
 router.register("profile", ProfileViewSet)
+router.register("profile/change_photo", ProfilePhotoViewSet, "change_photo")
 router.register("announcement", AnnouncementViewSet)
 router.register("appointment", AppointmentViewSet)
 router.register("status", StatusUpdateViewSet, basename="status")
