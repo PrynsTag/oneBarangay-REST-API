@@ -82,6 +82,7 @@ THIRD_PARTY_APPS = [
     "dj_rest_auth.registration",
     "taggit",
     "django_filters",
+    "import_export",
     "auditlog",
 ]
 
