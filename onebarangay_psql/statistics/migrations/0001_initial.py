@@ -22,6 +22,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_age_group',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -34,6 +35,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_appointment',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -46,6 +48,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_average',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -58,6 +61,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_citizenship',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -70,6 +74,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_civil_status',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -83,6 +88,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_social_class',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -95,6 +101,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_total',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -107,6 +114,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_user_login',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -120,6 +128,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_user_signup',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -132,6 +141,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_user_signup_monthly',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -144,6 +154,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_user_login_monthly',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
