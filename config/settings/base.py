@@ -84,6 +84,7 @@ THIRD_PARTY_APPS = [
     "django_filters",
     "import_export",
     "auditlog",
+    "adminactions",
     "tinymce",
     "push_notifications",
 ]
