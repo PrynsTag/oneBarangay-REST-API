@@ -1,6 +1,10 @@
 """Create your user API views here."""
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
+from push_notifications.api.rest_framework import (
+    GCMDeviceAuthorizedViewSet,
+    GCMDeviceSerializer,
+)
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
@@ -165,3 +169,26 @@ class ProfilePhotoViewSet(UpdateModelMixin, GenericViewSet):
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GCMAuthorizedFilterSet(GCMDeviceAuthorizedViewSet):
+    """Filter GCMDeviceAuthorizedViewSet by authorized devices."""
+
+    filterset_fields = ["id"]
+
+    @action(detail=False, methods=["get"])
+    def me(self, request):
+        """Get the GCM data of the currently authenticated user.
+
+        Args:
+            request (FixtureRequest): FixtureRequest object.
+
+        Returns:
+            (Response): Response object.
+        """
+        if str(self.request.user) == "AnonymousUser":
+            raise PermissionDenied
+        else:
+            data = self.queryset.get(user__username=self.request.user.username)
+            serializer = GCMDeviceSerializer(data, context={"request": request})
+            return Response(serializer.data, status=status.HTTP_200_OK)

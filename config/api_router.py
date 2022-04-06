@@ -7,6 +7,7 @@ from onebarangay_psql.appointment.viewset import AppointmentViewSet, StatusUpdat
 from onebarangay_psql.rbi.viewset import FamilyMemberViewSet, HouseRecordViewSet
 from onebarangay_psql.statistics import viewset
 from onebarangay_psql.users.api.views import (
+    GCMAuthorizedFilterSet,
     ProfilePhotoViewSet,
     ProfileViewSet,
     UserViewSet,
@@ -27,6 +28,7 @@ router.register("appointment", AppointmentViewSet)
 router.register("status", StatusUpdateViewSet, basename="status")
 router.register("house-record", HouseRecordViewSet, basename="house")
 router.register("family-member", FamilyMemberViewSet, basename="family")
+router.register("device/gcm", GCMAuthorizedFilterSet)
 router.register(
     "statistics/user-signup",
     viewset.UserSignUpMaterializedViewSet,
