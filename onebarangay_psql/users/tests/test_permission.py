@@ -1,4 +1,6 @@
 """Create your test for permissions."""
+from datetime import datetime
+
 import pytest
 from _pytest.fixtures import FixtureRequest
 from django.test.client import Client
@@ -129,34 +131,33 @@ class TestUserAndProfileDetailPermission:
             user_type (User): User to test permission for.
             url_name (str): URL name to test.
         """
+        api_client.force_authenticate(user_type)
+
+        last_login_data = datetime.now()
+        patch_data = {"last_login": last_login_data}
+        put_data = {
+            "last_login": last_login_data,
+            "gender": user_type.profile.gender or "O",
+            "civil_status": user_type.profile.civil_status,
+        }
         user_data = {"username": user_type.username}
+        url = reverse(url_name, kwargs=user_data)
 
-        if url_name == "api:user-detail":
-            put_new_data = f"{user_type.username}-put"
-            patch_new_data = f"{user_type.username}-patch"
-            patch_data = {"username": patch_new_data}
-            put_data = {"username": put_new_data}
+        get_response = api_client.get(url)
+        put_response = api_client.put(url, put_data | user_data)
+        patch_response = api_client.patch(url, patch_data)
+
+        date_format = "%A, %b %d, %Y %I:%M %p"
+        date_data = datetime.strftime(last_login_data, date_format)
+
+        if "user-detail" in url_name:
+            # User Model
+            assert date_data == put_response.data["last_login"]
+            assert date_data == patch_response.data["last_login"]
         else:
-            put_new_data = "new address"
-            patch_new_data = "new address"
-            patch_data = {"address": patch_new_data}
-            put_data = {"address": put_new_data}
-
-        api_client.force_login(user_type)
-
-        get_response = api_client.get(reverse(url_name, kwargs=user_data))
-        put_response = api_client.put(reverse(url_name, kwargs=user_data), put_data)
-        patch_response = api_client.patch(
-            reverse(url_name, kwargs={"username": put_response.data["username"]}),
-            patch_data,
-        )
-
-        if url_name == "api:user-detail":
-            assert put_new_data == put_response.data["username"]
-            assert patch_new_data == patch_response.data["username"]
-        else:
-            assert put_new_data == put_response.data["address"]
-            assert patch_new_data == patch_response.data["address"]
+            # Profile Model
+            assert date_data == put_response.data["created_at"]
+            assert date_data == patch_response.data["created_at"]
 
         assert get_response.status_code == status.HTTP_200_OK
         assert put_response.status_code == status.HTTP_200_OK
