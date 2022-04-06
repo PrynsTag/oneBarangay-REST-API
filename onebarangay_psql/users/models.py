@@ -1,4 +1,5 @@
 """Create your announcement models here."""
+from auditlog.registry import auditlog
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from django.db import models
@@ -83,7 +84,6 @@ class Profile(models.Model):
         """Profile model string representation."""
         return f"{self.user.username.capitalize()}'s Profile"
 
-    def save(self, *args, **kwargs):
-        """Override save method to add username to profile."""
-        self.username = self.user.username
-        super().save(*args, **kwargs)
+
+auditlog.register(User)
+auditlog.register(Profile)

@@ -1,4 +1,5 @@
 """Create your announcement models here."""
+from auditlog.registry import auditlog
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
@@ -50,3 +51,6 @@ class Announcement(models.Model):
     def get_absolute_url(self):
         """Return the url to access a particular announcement instance."""
         return reverse("api:announcement-detail", kwargs={"slug": self.slug})
+
+
+auditlog.register(Announcement)

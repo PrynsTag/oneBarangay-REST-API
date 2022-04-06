@@ -1,4 +1,5 @@
 """Create your rbi models here."""
+from auditlog.registry import auditlog
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -90,3 +91,7 @@ class FamilyMember(models.Model):
     def __str__(self):
         """Return string representation of rbi."""
         return f"{self.house_record.house_id}. {self.first_name} {self.last_name}"
+
+
+auditlog.register(HouseRecord)
+auditlog.register(FamilyMember)

@@ -82,6 +82,7 @@ THIRD_PARTY_APPS = [
     "dj_rest_auth.registration",
     "taggit",
     "django_filters",
+    "auditlog",
 ]
 
 LOCAL_APPS = [
@@ -149,6 +150,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.common.BrokenLinkEmailsMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "auditlog.middleware.AuditlogMiddleware",
 ]
 
 # STATIC
