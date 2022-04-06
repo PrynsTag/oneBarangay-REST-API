@@ -4,6 +4,7 @@ from rest_framework import serializers
 from rest_framework.relations import HyperlinkedRelatedField
 
 from onebarangay_psql.users.models import Profile
+from onebarangay_psql.utils.choice_field import ChoicesField
 
 User = get_user_model()
 
@@ -15,7 +16,17 @@ class UserSerializer(serializers.ModelSerializer):
         """Meta class for user serializer."""
 
         model = User
-        fields = ["username", "name", "url"]
+        fields = [
+            "id",
+            "username",
+            "last_login",
+            "is_superuser",
+            "email",
+            "is_staff",
+            "is_active",
+            "date_joined",
+            "url",
+        ]
 
         extra_kwargs = {
             "url": {"view_name": "api:user-detail", "lookup_field": "username"}
@@ -30,25 +41,14 @@ class ProfileSerializer(serializers.ModelSerializer):
     )
     email = serializers.CharField(source="user.email", read_only=True)
     username = serializers.CharField(source="user.username", read_only=True)
+    gender = ChoicesField(choices=Profile.Gender.choices)
+    civil_status = ChoicesField(choices=Profile.CivilStatus.choices)
 
     class Meta:
         """Meta class for user profile serializer."""
 
         model = Profile
-        fields = [
-            "created_at",
-            "updated_at",
-            "user",
-            "username",
-            "email",
-            "profile_image",
-            "address",
-            "phone_number",
-            "age",
-            "birth_place",
-            "birth_date",
-            "civil_status",
-        ]
+        fields = "__all__"
 
         extra_kwargs = {
             "url": {"view_name": "api:profile-detail", "lookup_field": "username"}
