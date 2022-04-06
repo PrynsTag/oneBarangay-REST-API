@@ -63,6 +63,7 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
+    "jazzmin",  # third-party
     "django.contrib.admin",
     "django.forms",
     "django.contrib.postgres",
@@ -360,4 +361,67 @@ SOCIALACCOUNT_PROVIDERS = {
 PUSH_NOTIFICATIONS_SETTINGS = {
     "FCM_API_KEY": env.str("FCM_API_KEY"),
     "UPDATE_ON_DUPLICATE_REG_ID": True,
+}
+
+# django-jazzmin
+# ------------------------------------------------------------------------------
+# https://django-jazzmin.readthedocs.io/configuration/
+JAZZMIN_SETTINGS = {
+    "site_title": "oneBarangay Admin",
+    "site_header": "oneBarangay Login",
+    "site_brand": "oneBarangay Admin",
+    "site_logo": "images/brand/onebarangay-logo.png",
+    "login_logo": "images/brand/onebarangay-brand.png",
+    "site_icon": "images/favicons/favicon.ico",
+    "hide_apps": ["socialaccount"],
+    "hide_models": [
+        "push_notifications.APNSDevice",
+        "push_notifications.WNSDevice",
+        "push_notifications.WebPushDevice",
+    ],
+    "site_logo_classes": "img-circle,img-responsive",
+    "JAZZMIN_USE_MINIFIED_ASSETS": True,
+    "JAZZMIN_USE_MINIFIED_JS": True,
+    "JAZZMIN_USE_MINIFIED_CSS": True,
+    "JAZZMIN_USE_MINIFIED_HTML": True,
+    "show_ui_builder": True,
+    "language_chooser": True,
+    "welcome_sign": "Welcome to the oneBarangay Admin",
+    "copyright": "oneBarangay",
+    "search_model": "users.User",
+    "icons": {
+        "account.EmailAddress": "fas fa-at",
+        "announcement.announcement": "fas fa-scroll",
+        "appointment.appointment": "fas fa-calendar-check",
+        "auditlog.LogEntry": "fas fa-user-secret",
+        "authtoken.TokenProxy": "fas fa-fingerprint",
+        "auth.Group": "fas fa-users",
+        "push_notifications.GCMDevice": "fas fa-bell",
+        "rbi.FamilyMember": "fas fa-people-arrows",
+        "rbi.HouseRecord": "fas fa-house-user",
+        "sites.Site": "fas fa-satellite-dish",
+        "taggit.Tag": "fas fa-tags",
+        "users.profile": "fas fa-address-card",
+        "users.user": "fas fa-user",
+    },
+    "topmenu_links": [
+        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
+        {
+            "name": "API Docs",
+            "url": "api-docs",
+            "new_window": True,
+        },
+        {
+            "name": "Code Docs",
+            "url": "/admin/doc",
+        },
+        {"app": "appointment"},
+        {"app": "announcement"},
+        {"app": "users"},
+        {"app": "rbi"},
+    ],
+}
+JAZZMIN_UI_TWEAKS = {
+    "theme": "cosmo",
+    "dark_mode_theme": "darkly",
 }
