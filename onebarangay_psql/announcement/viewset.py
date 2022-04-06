@@ -1,4 +1,6 @@
 """Create your announcement views here."""
+from django.utils.html import strip_tags
+from push_notifications.models import GCMDevice
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
@@ -30,6 +32,10 @@ class AnnouncementViewSet(viewsets.ModelViewSet):
             serializer (AnnouncementSerializer): The Announcement serializer data to save.
         """
         serializer.save(author=self.request.user)
+        data = serializer.data
+        GCMDevice.objects.all().send_message(
+            message={"title": data["title"], "body": strip_tags(data["content"])}
+        )
 
     @action(detail=False)
     def me(self, request) -> Response:
