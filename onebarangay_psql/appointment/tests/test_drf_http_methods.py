@@ -64,7 +64,7 @@ class TestAppointmentViewSetUrls:
         api_client.force_login(user_type)
 
         a1 = Appointment.objects.create(
-            recipient_name=user_type.name,
+            recipient_name=f"{user_type.first_name} {user_type.last_name}",
             purpose="Test Appointment",
             start_appointment=datetime.now(tz=ZoneInfo("Asia/Manila")),
             document="IND",
@@ -224,7 +224,7 @@ class TestAppointmentViewSetUrls:
 
         for _ in range(2):
             Appointment.objects.create(
-                recipient_name=user.name,
+                recipient_name=f"{user.profile.first_name} {user.profile.last_name}",
                 purpose="Test Appointment",
                 start_appointment=datetime.now(tz=ZoneInfo("Asia/Manila")),
                 document="IND",
@@ -267,7 +267,7 @@ class TestStatusViewSetUrls:
             admin_api_client (Client): The admin api client.
         """
         a1 = Appointment.objects.create(
-            recipient_name=admin_user.name,
+            recipient_name=f"{admin_user.profile.first_name} {admin_user.profile.last_name}",
             purpose="Test Appointment",
             start_appointment=datetime.now(tz=ZoneInfo("Asia/Manila")),
             document="IND",
@@ -292,7 +292,7 @@ class TestStatusViewSetUrls:
             admin_api_client (Client): The admin api client.
         """
         a1 = Appointment.objects.create(
-            recipient_name=admin_user.name,
+            recipient_name=f"{admin_user.profile.first_name} {admin_user.profile.last_name}",
             purpose="Test Appointment",
             start_appointment=datetime.now(tz=ZoneInfo("Asia/Manila")),
             document="IND",

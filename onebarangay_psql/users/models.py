@@ -14,7 +14,7 @@ class User(AbstractUser):
     """
 
     #: First and last name do not cover name patterns around the globe
-    name = models.CharField(_("Name of User"), blank=True, max_length=255)
+    # name = models.CharField(_("Name of User"), blank=True, max_length=255)
     first_name = None  # type: ignore
     last_name = None  # type: ignore
 
@@ -45,6 +45,9 @@ class Profile(models.Model):
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE, auto_created=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    first_name = models.CharField(max_length=255, blank=True)
+    middle_name = models.CharField(max_length=255, blank=True)
+    last_name = models.CharField(max_length=255, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
     profile_image = models.ImageField(
         upload_to="profile_pics",
