@@ -20,6 +20,7 @@ django-import-export==2.8.0 # https://github.com/django-import-export/django-imp
 django-model-utils==4.2.0  # https://github.com/jazzband/django-model-utils
 django-redis==5.2.0  # https://github.com/jazzband/django-redis
 django-taggit==2.1.0 # https://github.com/jazzband/django-taggit
+django-tinymce==3.4.0 # https://github.com/jazzband/django-tinymce
 # Django REST Framework
 djangorestframework==3.13.1  # https://github.com/encode/django-rest-framework
 # DRF-spectacular for api documentation

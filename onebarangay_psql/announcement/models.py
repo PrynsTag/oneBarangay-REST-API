@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
+from tinymce.models import HTMLField
 
 user = get_user_model()
 
@@ -17,7 +18,7 @@ class Announcement(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(_("title"), max_length=255, unique=True)
     author = models.ForeignKey(user, on_delete=models.CASCADE)
-    content = models.TextField(_("content"))
+    content = HTMLField()
     is_featured = models.BooleanField(default=False)
     thumbnail = models.ImageField(
         upload_to="announcement/thumbnail", default="announcement/thumbnail/default.jpg"
