@@ -343,6 +343,12 @@ SPECTACULAR_SETTINGS = {
         },
     ],
 }
+
+# Django File Upload Max Limit
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/4.0/ref/settings/#data-upload-max-memory-size
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
+
 # Your stuff...
 # ------------------------------------------------------------------------------
 # https://django-allauth.readthedocs.io/en/latest/configuration.html?highlight=SOCIALACCOUNT_PROVIDERS#configuration
