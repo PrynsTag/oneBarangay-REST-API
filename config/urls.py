@@ -13,6 +13,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns: list[URLPattern | URLResolver] = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    path("admin/doc/", include("django.contrib.admindocs.urls"), name="code"),
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),
@@ -24,6 +25,7 @@ urlpatterns: list[URLPattern | URLResolver] = [
     # Your stuff: custom urls includes go here
     path("adminactions/", include("adminactions.urls")),
     path("tinymce/", include("tinymce.urls")),
+    path("i18n/", include("django.conf.urls.i18n")),
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
 

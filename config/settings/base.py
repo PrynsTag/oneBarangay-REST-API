@@ -62,6 +62,7 @@ DJANGO_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.admindocs",
     # "django.contrib.humanize", # Handy template tags
     "jazzmin",  # third-party
     "django.contrib.admin",
@@ -156,6 +157,7 @@ MIDDLEWARE = [
     "django.middleware.common.BrokenLinkEmailsMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "auditlog.middleware.AuditlogMiddleware",
+    "django.contrib.admindocs.middleware.XViewMiddleware",
 ]
 
 # STATIC
