@@ -23,3 +23,4 @@ class FamilyMemberViewSet(viewsets.ModelViewSet):
     queryset = FamilyMember.objects.all()
     serializer_class = FamilyMemberSerializer
     permission_classes = [IsAdminUser]
+    filterset_fields = ["house_record"]

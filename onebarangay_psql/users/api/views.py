@@ -33,6 +33,8 @@ class UserViewSet(
     serializer_class = UserSerializer
     queryset = User.objects.all()
     lookup_field = "username"
+    filterset_fields = ["username"]
+    search_fields = ["username"]
 
     def get_permissions(self):
         """Return the appropriate permissions that each action requires."""
