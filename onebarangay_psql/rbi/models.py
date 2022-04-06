@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 class HouseRecord(models.Model):
     """HouseRecord model."""
 
-    house_id = models.PositiveBigIntegerField(_("House Number"), primary_key=True)
+    house_id = models.BigAutoField(_("House Number"), primary_key=True)
     created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Updated At"), auto_now=True)
     date_accomplished = models.DateTimeField(
