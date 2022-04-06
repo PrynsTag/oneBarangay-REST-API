@@ -369,7 +369,7 @@ SOCIALACCOUNT_PROVIDERS = {
 # ------------------------------------------------------------------------------
 # https://github.com/jazzband/django-push-notifications#settings-list
 PUSH_NOTIFICATIONS_SETTINGS = {
-    "FCM_API_KEY": env.str("FCM_API_KEY"),
+    "FCM_API_KEY": env.str("FCM_API_KEY", ""),
     "UPDATE_ON_DUPLICATE_REG_ID": True,
 }
 
