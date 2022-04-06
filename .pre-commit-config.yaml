@@ -124,34 +124,34 @@ repos:
           - django-tinymce
           - django-push-notifications
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.931
-    hooks:
-      - id: mypy
-        exclude: "[a-zA-Z]*/(migrations)/(.)*"
-        additional_dependencies: [
-          djangorestframework-stubs,
-          django-stubs,
-          django,
-          faker,
-          djangorestframework,
-          crispy-bootstrap5,
-          django-environ,
-          django-allauth,
-          django-cors-headers,
-          drf-spectacular,
-          dj-rest-auth,
-          django-compressor,
-          psycopg2-binary,
-          django-taggit,
-          django-filter,
-          django-import-export,
-          django-jazzmin,
-          django-auditlog,
-          django-adminactions,
-          django-tinymce,
-          django-push-notifications,
-        ]
+  #  - repo: https://github.com/pre-commit/mirrors-mypy
+  #    rev: v0.931
+  #    hooks:
+  #      - id: mypy
+  #        exclude: "[a-zA-Z]*/(migrations)/(.)*"
+  #        additional_dependencies: [
+  #          djangorestframework-stubs,
+  #          django-stubs,
+  #          django,
+  #          faker,
+  #          djangorestframework,
+  #          crispy-bootstrap5,
+  #          django-environ,
+  #          django-allauth,
+  #          django-cors-headers,
+  #          drf-spectacular,
+  #          dj-rest-auth,
+  #          django-compressor,
+  #          psycopg2-binary,
+  #          django-taggit,
+  #          django-filter,
+  #          django-import-export,
+  #          django-jazzmin,
+  #          django-auditlog,
+  #          django-adminactions,
+  #          django-tinymce,
+  #          django-push-notifications,
+  #        ]
 
   - repo: https://github.com/asottile/pyupgrade
     rev: v2.31.0
