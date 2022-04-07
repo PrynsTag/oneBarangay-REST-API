@@ -22,7 +22,7 @@ hiredis==2.0.0  # https://github.com/redis/hiredis-py
 
 # NewRelic
 # ------------------------------------------------------------------------------
-newrelic==7.8.0.174
+newrelic==7.10.0.175
 Pillow==9.1.0  # https://github.com/python-pillow/Pillow
 python-slugify==6.1.1  # https://github.com/un33k/python-slugify
 pytz==2022.1  # https://github.com/stub42/pytz
