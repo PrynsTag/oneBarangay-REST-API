@@ -89,7 +89,7 @@ class Profile(models.Model):
         default=CivilStatus.SINGLE,
     )
     gender = models.CharField(
-        _("Gender`"), max_length=1, choices=Gender.choices, blank=True
+        _("Gender"), max_length=1, choices=Gender.choices, blank=True
     )
 
     def __str__(self):
