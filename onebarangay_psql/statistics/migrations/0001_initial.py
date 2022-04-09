@@ -22,6 +22,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_age_group',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -34,6 +35,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_appointment',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -46,6 +48,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_average',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -58,6 +61,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_citizenship',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -70,6 +74,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_civil_status',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -83,6 +88,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_social_class',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -95,6 +101,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_total',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -107,6 +114,7 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_user_login',
                 'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -120,6 +128,33 @@ class Migration(migrations.Migration):
             options={
                 'db_table': 'materialized_statistics_user_signup',
                 'managed': False,
+                'ordering': ['id']
+            },
+        ),
+        migrations.CreateModel(
+            name='UserSignUpMonthlyMaterializedView',
+            fields=[
+                ('id', models.IntegerField(primary_key=True, serialize=False)),
+                ('label', models.CharField(max_length=20)),
+                ('value', models.PositiveBigIntegerField()),
+            ],
+            options={
+                'db_table': 'materialized_statistics_user_signup_monthly',
+                'managed': False,
+                'ordering': ['id']
+            },
+        ),
+        migrations.CreateModel(
+            name='UserLoginMonthlyMaterializedView',
+            fields=[
+                ('id', models.IntegerField(primary_key=True, serialize=False)),
+                ('label', models.CharField(max_length=20)),
+                ('value', models.PositiveBigIntegerField()),
+            ],
+            options={
+                'db_table': 'materialized_statistics_user_login_monthly',
+                'managed': False,
+                'ordering': ['id']
             },
         ),
         migrations.CreateModel(
@@ -312,6 +347,46 @@ class Migration(migrations.Migration):
                 )
             SELECT ROW_NUMBER() OVER (ORDER BY max_income) AS id, *
             FROM social_class_frequency_cte;
+            
+            CREATE MATERIALIZED VIEW materialized_statistics_user_signup_monthly AS
+            WITH RECURSIVE
+                past_six_months_cte as (
+                    SELECT generate_series(now() - INTERVAL '6 month', now(), interval '1 month')::date as label
+                    LIMIT 7
+                ),
+                user_signup_cte as (
+                    SELECT t.label,
+                           CASE WHEN u.date_joined IS NULL THEN 0 ELSE 1
+                           END as value
+                    FROM (SELECT label FROM past_six_months_cte) AS t
+                    LEFT JOIN users_user AS u
+                        ON to_char(u.date_joined, 'YYYY-MM') = to_char(t.label, 'YYYY-MM')
+                    GROUP BY t.label, u.date_joined
+                    ORDER BY t.label
+                )
+            SELECT ROW_NUMBER() OVER (ORDER BY label, label DESC) AS id, to_char(label, 'Mon, yyyy') as label, sum(value) as value
+            FROM user_signup_cte
+            GROUP BY label;
+            
+            CREATE MATERIALIZED VIEW materialized_statistics_user_login_monthly AS
+            WITH RECURSIVE
+                past_six_months_cte as (
+                    SELECT generate_series(now() - INTERVAL '6 month', now(), interval '1 month')::date as label
+                    LIMIT 7
+                ),
+                user_login_cte as (
+                  SELECT t.label,
+                         CASE WHEN u.last_login IS NULL THEN 0 ELSE 1
+                         END as value
+                  FROM (SELECT label FROM past_six_months_cte) AS t
+                  LEFT JOIN users_user as u
+                      ON to_char(last_login, 'YYYY-MM') = to_char(t.label, 'YYYY-MM')
+                  GROUP BY t.label, u.last_login
+                  ORDER BY t.label
+                )
+            SELECT ROW_NUMBER() OVER (ORDER BY label, label DESC) AS id, to_char(label, 'Mon, yyyy') as label, sum(value) as value
+            FROM user_login_cte
+            GROUP BY label;
 
             CREATE UNIQUE INDEX ON materialized_statistics_total(id);
             CREATE UNIQUE INDEX ON materialized_statistics_user_signup(id);
@@ -322,6 +397,8 @@ class Migration(migrations.Migration):
             CREATE UNIQUE INDEX ON materialized_statistics_civil_status(id);
             CREATE UNIQUE INDEX ON materialized_statistics_average(id);
             CREATE UNIQUE INDEX ON materialized_statistics_social_class(id);
+            CREATE UNIQUE INDEX ON materialized_statistics_user_signup_monthly(id);
+            CREATE UNIQUE INDEX ON materialized_statistics_user_login_monthly(id);
             """,
             """
             DROP MATERIALIZED VIEW IF EXISTS materialized_statistics_total;
@@ -333,6 +410,8 @@ class Migration(migrations.Migration):
             DROP MATERIALIZED VIEW IF EXISTS materialized_statistics_civil_status;
             DROP MATERIALIZED VIEW IF EXISTS materialized_statistics_average;
             DROP MATERIALIZED VIEW IF EXISTS materialized_statistics_social_class;
+            DROP MATERIALIZED VIEW IF EXISTS materialized_statistics_user_signup_monthly;
+            DROP MATERIALIZED VIEW IF EXISTS materialized_statistics_user_login_monthly;
             """,
         ),
     ]

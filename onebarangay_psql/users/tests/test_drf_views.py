@@ -41,11 +41,12 @@ class TestUserViewSet:
 
         response = view.me(request)
 
-        assert response.data == {
+        data = {
             "username": user.username,
-            "name": user.name,
             "url": f"http://testserver/api/user/{user.username}/",
         }
+
+        assert set(data.items()).issubset(set(response.data.items()))
 
     class TestUserProfileViewSet:
         """Test xDRF ProfileViewSet View."""

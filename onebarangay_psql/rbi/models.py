@@ -1,4 +1,5 @@
 """Create your rbi models here."""
+from auditlog.registry import auditlog
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -7,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 class HouseRecord(models.Model):
     """HouseRecord model."""
 
-    house_id = models.PositiveBigIntegerField(_("House Number"), primary_key=True)
+    house_id = models.BigAutoField(_("House Number"), primary_key=True)
     created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Updated At"), auto_now=True)
     date_accomplished = models.DateTimeField(
@@ -90,3 +91,7 @@ class FamilyMember(models.Model):
     def __str__(self):
         """Return string representation of rbi."""
         return f"{self.house_record.house_id}. {self.first_name} {self.last_name}"
+
+
+auditlog.register(HouseRecord)
+auditlog.register(FamilyMember)

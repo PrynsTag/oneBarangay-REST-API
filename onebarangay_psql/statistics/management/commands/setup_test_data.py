@@ -1,10 +1,11 @@
 """Create your custom management commands here."""
 import random
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Union
 from zoneinfo import ZoneInfo
 
+from allauth.account.models import EmailAddress
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 from django.db import connection, transaction
@@ -18,6 +19,8 @@ from onebarangay_psql.appointment.models import Appointment
 from onebarangay_psql.rbi.factories import FamilyMemberFactory, HouseRecordFactory
 from onebarangay_psql.rbi.models import FamilyMember, HouseRecord
 from onebarangay_psql.users.factories import UserFactory
+from onebarangay_psql.users.models import Profile
+from onebarangay_psql.utils.refresh_material_view import refresh_mv
 
 NUM_USERS = 50
 NUM_APPOINTMENTS = 25
@@ -51,23 +54,63 @@ class Command(BaseCommand):
 
         self.stdout.write("Creating test and superuser account...")
         User.objects.create_superuser("prince", "prince@onebarangay.com", "prynstag")
-        User.objects.create_user("test", "test@onebarangay.com", "prynstag")
+        EmailAddress.objects.create(
+            user=User.objects.get(username="prince"),
+            email="prince@onebarangay.com",
+            primary=True,
+            verified=True,
+        )
 
+        prince = Profile.objects.get(user__username="prince")
+        prince.first_name = "Prince"
+        prince.middle_name = "Salonga"
+        prince.last_name = "Velasco"
+        prince.gender = "M"
+        prince.civil_status = "SI"
+        prince.birth_date = date(2000, 1, 16)
+        prince.address = "San Mateo, Rizal"
+        prince.phone_number = "09171234567"
+        today = date.today()
+        age = (
+            today.year
+            - prince.birth_date.year
+            - (
+                (today.month, today.day)
+                < (prince.birth_date.month, prince.birth_date.day)
+            )
+        )
+        prince.age = age
+        prince.birth_place = "Marikina City"
+        prince.save()
+
+        User.objects.create_user("test", "test@onebarangay.com", "prynstag")
+        EmailAddress.objects.create(
+            user=User.objects.get(username="test"),
+            email="test@onebarangay.com",
+            primary=True,
+            verified=True,
+        )
         self.stdout.write("Creating new data...")
 
         people = []
-        last_week = datetime.now() - timedelta(days=7)
-        last_four_months = datetime.now() - timedelta(days=30 * 4)
+        last_six_months = datetime.now() - timedelta(days=30 * 6)
         for _ in range(NUM_USERS):
+            user = UserFactory()
             people.append(
-                UserFactory.create(
+                user.create(
                     last_login=random.choice(
-                        gen_time_between_days(last_week, back_to_past=True)
+                        gen_time_between_days(last_six_months, back_to_past=True)
                     ),
                     date_joined=random.choice(
-                        gen_time_between_days(last_four_months, back_to_past=True)
+                        gen_time_between_days(last_six_months, back_to_past=True)
                     ),
                 )
+            )
+            EmailAddress.objects.create(
+                user=User.objects.get(username=user.username),
+                email=user.email,
+                primary=True,
+                verified=True,
             )
 
         # Add users as announcers
@@ -85,6 +128,9 @@ class Command(BaseCommand):
                 house_record=house,
                 last_name=house.family_name,
             )
+
+        # Refresh materialized views
+        refresh_mv()
 
         self.stdout.write("Resetting indexes...")
         for m in models:
@@ -126,16 +172,24 @@ def delete_all_media_files():
     Returns:
         None
     """
-    media_path = Path(APPS_DIR / "media/appointment/government_id")
+    appointment_media_path = Path(APPS_DIR / "media/appointment/government_id")
+    announcement_media_path = Path(APPS_DIR / "media/announcement/thumbnail")
+    profile_media_path = Path(APPS_DIR / "media/profile_pics")
 
-    for f in media_path.iterdir():
-        if (
-            not f.name.startswith(".")
-            and f.is_file()
-            and f.suffix in [".jpg", ".png"]
-            and f.name != "default.png"
-        ):
-            f.unlink()
+    for path in [
+        appointment_media_path,
+        announcement_media_path,
+        profile_media_path,
+    ]:
+        for f in path.iterdir():
+            if (
+                not f.name.startswith(".")
+                and f.is_file()
+                and f.suffix in [".jpg", ".png"]
+                and f.name != "default.png"
+                and f.name != "default.jpg"
+            ):
+                f.unlink()
 
 
 def gen_time_between_days(

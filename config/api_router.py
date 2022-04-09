@@ -6,7 +6,12 @@ from onebarangay_psql.announcement.viewset import AnnouncementViewSet
 from onebarangay_psql.appointment.viewset import AppointmentViewSet, StatusUpdateViewSet
 from onebarangay_psql.rbi.viewset import FamilyMemberViewSet, HouseRecordViewSet
 from onebarangay_psql.statistics import viewset
-from onebarangay_psql.users.api.views import ProfileViewSet, UserViewSet
+from onebarangay_psql.users.api.views import (
+    GCMAuthorizedFilterSet,
+    ProfilePhotoViewSet,
+    ProfileViewSet,
+    UserViewSet,
+)
 
 router = BaseRouter()
 
@@ -17,11 +22,13 @@ else:
 
 router.register("user", UserViewSet)
 router.register("profile", ProfileViewSet)
+router.register("profile/change_photo", ProfilePhotoViewSet, "change_photo")
 router.register("announcement", AnnouncementViewSet)
 router.register("appointment", AppointmentViewSet)
 router.register("status", StatusUpdateViewSet, basename="status")
 router.register("house-record", HouseRecordViewSet, basename="house")
 router.register("family-member", FamilyMemberViewSet, basename="family")
+router.register("device/gcm", GCMAuthorizedFilterSet)
 router.register(
     "statistics/user-signup",
     viewset.UserSignUpMaterializedViewSet,
@@ -58,6 +65,16 @@ router.register(
     "statistics/social-class",
     viewset.SocialClassMaterializedViewSet,
     basename="mv-social-class",
+)
+router.register(
+    "statistics/user-login-by-month",
+    viewset.UserLoginMonthlyMaterializedViewSet,
+    basename="mv-login-monthly",
+)
+router.register(
+    "statistics/user-signup-by-month",
+    viewset.UserSignUpMonthlyMaterializedViewSet,
+    basename="mv-signup-monthly",
 )
 router.register(
     "statistics/refresh",

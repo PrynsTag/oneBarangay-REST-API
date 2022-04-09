@@ -74,6 +74,20 @@ class SocialClassMaterializedViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = serializers.SocialClassMaterializedViewSerializer
 
 
+class UserSignUpMonthlyMaterializedViewSet(viewsets.ReadOnlyModelViewSet):
+    """Display the total number of user sign-ups per month."""
+
+    queryset = models.UserSignUpMonthlyMaterializedView.objects.all()
+    serializer_class = serializers.UserSignUpMonthlyMaterializedViewSerializer
+
+
+class UserLoginMonthlyMaterializedViewSet(viewsets.ReadOnlyModelViewSet):
+    """Display the total number of user log-ins per month."""
+
+    queryset = models.UserLoginMonthlyMaterializedView.objects.all()
+    serializer_class = serializers.UserLoginMonthlyMaterializedViewSerializer
+
+
 class RefreshMaterialViewSet(
     mixins.CreateModelMixin,
     mixins.ListModelMixin,
@@ -101,6 +115,8 @@ class RefreshMaterialViewSet(
             REFRESH MATERIALIZED VIEW CONCURRENTLY materialized_statistics_civil_status;
             REFRESH MATERIALIZED VIEW CONCURRENTLY materialized_statistics_average;
             REFRESH MATERIALIZED VIEW CONCURRENTLY materialized_statistics_social_class;
+            REFRESH MATERIALIZED VIEW CONCURRENTLY materialized_statistics_user_signup_monthly;
+            REFRESH MATERIALIZED VIEW CONCURRENTLY materialized_statistics_user_login_monthly;
             """
             )
         end_time = time.monotonic()

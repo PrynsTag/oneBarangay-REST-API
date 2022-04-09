@@ -7,4 +7,4 @@ class ChoicesField(serializers.ChoiceField):
 
     def to_representation(self, value):
         """Return the human-readable choice."""
-        return self.choices[value]
+        return self.choices.get(value, None)

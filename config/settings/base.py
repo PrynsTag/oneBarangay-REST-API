@@ -8,7 +8,7 @@ ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 APPS_DIR = ROOT_DIR / "onebarangay_psql"
 env = environ.Env()
 
-READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
+READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=True)
 if READ_DOT_ENV_FILE:
     # OS environment variables take precedence over variables from .env
     env.read_env(str(ROOT_DIR / ".env"))
@@ -62,9 +62,12 @@ DJANGO_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.admindocs",
     # "django.contrib.humanize", # Handy template tags
+    "jazzmin",  # third-party
     "django.contrib.admin",
     "django.forms",
+    "django.contrib.postgres",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -80,6 +83,12 @@ THIRD_PARTY_APPS = [
     # "dj_rest_auth",
     "dj_rest_auth.registration",
     "taggit",
+    "django_filters",
+    "import_export",
+    "auditlog",
+    "adminactions",
+    "tinymce",
+    "push_notifications",
 ]
 
 LOCAL_APPS = [
@@ -147,6 +156,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.common.BrokenLinkEmailsMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "auditlog.middleware.AuditlogMiddleware",
+    "django.contrib.admindocs.middleware.XViewMiddleware",
 ]
 
 # STATIC
@@ -217,7 +228,9 @@ FIXTURE_DIRS = (str(APPS_DIR / "fixtures"),)
 # https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-httponly
 SESSION_COOKIE_HTTPONLY = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-httponly
-CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = False
+# https://docs.djangoproject.com/en/4.0/ref/settings/#std:setting-CSRF_TRUSTED_ORIGINS
+CSRF_TRUSTED_ORIGINS = ["https://onebarangay-339606.appspot.com"]
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-browser-xss-filter
 SECURE_BROWSER_XSS_FILTER = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
@@ -296,6 +309,13 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
     ),
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend",
+        "rest_framework.filters.OrderingFilter",
+        "rest_framework.filters.SearchFilter",
+    ],
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 10,
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DATETIME_FORMAT": "%A, %b %d, %Y %I:%M %p",
@@ -303,6 +323,10 @@ REST_FRAMEWORK = {
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
 CORS_URLS_REGEX = r"^/api/.*$"
+
+# https://dj-rest-auth.readthedocs.io/en/latest/api_endpoints.html
+# ------------------------------------------------------------------------------
+OLD_PASSWORD_FIELD_ENABLED = True
 
 # By Default swagger ui is available only to admin user. You can change permission class to change that
 # See more configuration options at https://drf-spectacular.readthedocs.io/en/latest/settings.html#settings
@@ -319,6 +343,12 @@ SPECTACULAR_SETTINGS = {
         },
     ],
 }
+
+# Django File Upload Max Limit
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/4.0/ref/settings/#data-upload-max-memory-size
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
+
 # Your stuff...
 # ------------------------------------------------------------------------------
 # https://django-allauth.readthedocs.io/en/latest/configuration.html?highlight=SOCIALACCOUNT_PROVIDERS#configuration
@@ -332,4 +362,76 @@ SOCIALACCOUNT_PROVIDERS = {
             "access_type": "online",
         },
     },
+}
+
+
+# django-push-notifications
+# ------------------------------------------------------------------------------
+# https://github.com/jazzband/django-push-notifications#settings-list
+PUSH_NOTIFICATIONS_SETTINGS = {
+    "FCM_API_KEY": env.str("FCM_API_KEY", ""),
+    "UPDATE_ON_DUPLICATE_REG_ID": True,
+}
+
+# django-jazzmin
+# ------------------------------------------------------------------------------
+# https://django-jazzmin.readthedocs.io/configuration/
+JAZZMIN_SETTINGS = {
+    "site_title": "oneBarangay Admin",
+    "site_header": "oneBarangay Login",
+    "site_brand": "oneBarangay Admin",
+    "site_logo": "images/brand/onebarangay-logo.png",
+    "login_logo": "images/brand/onebarangay-brand.png",
+    "site_icon": "images/favicons/favicon.ico",
+    "hide_apps": ["socialaccount"],
+    "hide_models": [
+        "push_notifications.APNSDevice",
+        "push_notifications.WNSDevice",
+        "push_notifications.WebPushDevice",
+    ],
+    "site_logo_classes": "img-circle,img-responsive",
+    "JAZZMIN_USE_MINIFIED_ASSETS": True,
+    "JAZZMIN_USE_MINIFIED_JS": True,
+    "JAZZMIN_USE_MINIFIED_CSS": True,
+    "JAZZMIN_USE_MINIFIED_HTML": True,
+    "show_ui_builder": True,
+    "language_chooser": True,
+    "welcome_sign": "Welcome to the oneBarangay Admin",
+    "copyright": "oneBarangay",
+    "search_model": "users.User",
+    "icons": {
+        "account.EmailAddress": "fas fa-at",
+        "announcement.announcement": "fas fa-scroll",
+        "appointment.appointment": "fas fa-calendar-check",
+        "auditlog.LogEntry": "fas fa-user-secret",
+        "authtoken.TokenProxy": "fas fa-fingerprint",
+        "auth.Group": "fas fa-users",
+        "push_notifications.GCMDevice": "fas fa-bell",
+        "rbi.FamilyMember": "fas fa-people-arrows",
+        "rbi.HouseRecord": "fas fa-house-user",
+        "sites.Site": "fas fa-satellite-dish",
+        "taggit.Tag": "fas fa-tags",
+        "users.profile": "fas fa-address-card",
+        "users.user": "fas fa-user",
+    },
+    "topmenu_links": [
+        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
+        {
+            "name": "API Docs",
+            "url": "api-docs",
+            "new_window": True,
+        },
+        {
+            "name": "Code Docs",
+            "url": "/admin/doc",
+        },
+        {"app": "appointment"},
+        {"app": "announcement"},
+        {"app": "users"},
+        {"app": "rbi"},
+    ],
+}
+JAZZMIN_UI_TWEAKS = {
+    "theme": "cosmo",
+    "dark_mode_theme": "darkly",
 }

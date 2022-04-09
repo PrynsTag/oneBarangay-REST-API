@@ -17,6 +17,18 @@ class AppointmentViewSet(viewsets.ModelViewSet):
 
     queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
+    filterset_fields = [
+        "document",
+        "status",
+        "user__username",
+        "user__email",
+        "created_at",
+        "updated_at",
+        "recipient_name",
+        "start_appointment",
+        "end_appointment",
+    ]
+    search_fields = ["@purpose"]
 
     def get_permissions(self):
         """Return the appropriate permissions that each action requires."""

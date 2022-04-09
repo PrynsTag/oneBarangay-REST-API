@@ -20,7 +20,7 @@ class TestAppointment:
             admin_user (User): The admin user creating the appointment.
         """
         a1 = Appointment.objects.create(
-            recipient_name=admin_user.name,
+            recipient_name=f"{admin_user.profile.first_name} {admin_user.profile.last_name}",
             purpose="Test Purpose",
             user=admin_user,
             start_appointment=datetime.now(tz=zoneinfo.ZoneInfo("Asia/Manila")),
@@ -39,7 +39,7 @@ class TestAppointment:
             admin_user (User): The admin user creating the appointment.
         """
         a1 = Appointment.objects.create(
-            recipient_name=admin_user.name,
+            recipient_name=f"{admin_user.profile.first_name} {admin_user.profile.last_name}",
             purpose="Test Purpose",
             user=admin_user,
             start_appointment=datetime.now(tz=zoneinfo.ZoneInfo("Asia/Manila")),
@@ -56,7 +56,7 @@ class TestAppointment:
             admin_user (User): The admin user creating the appointment.
         """
         a1 = Appointment.objects.create(
-            recipient_name=admin_user.name,
+            recipient_name=f"{admin_user.profile.first_name} {admin_user.profile.last_name}",
             purpose="Test Purpose",
             user=admin_user,
             start_appointment=datetime.now(tz=zoneinfo.ZoneInfo("Asia/Manila")),
@@ -77,7 +77,7 @@ class TestAppointment:
             admin_user (User): The admin user creating the appointment.
         """
         Appointment.objects.create(
-            recipient_name=admin_user.name,
+            recipient_name=f"{admin_user.profile.first_name} {admin_user.profile.last_name}",
             purpose="Test Purpose 1",
             user=admin_user,
             start_appointment=datetime.now(tz=zoneinfo.ZoneInfo("Asia/Manila")),
@@ -86,7 +86,7 @@ class TestAppointment:
         )
 
         Appointment.objects.create(
-            recipient_name=admin_user.name,
+            recipient_name=f"{admin_user.profile.first_name} {admin_user.profile.last_name}",
             purpose="Test Purpose 2",
             user=admin_user,
             start_appointment=datetime.now(tz=zoneinfo.ZoneInfo("Asia/Manila")),

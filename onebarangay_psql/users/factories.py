@@ -11,7 +11,6 @@ class UserFactory(DjangoModelFactory):
 
     username = Faker("user_name")
     email = Faker("email")
-    name = Faker("name")
 
     @post_generation
     # pylint: disable=unused-argument

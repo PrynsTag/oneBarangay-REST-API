@@ -1,6 +1,7 @@
 """Create your appointment models here."""
 from datetime import timedelta
 
+from auditlog.registry import auditlog
 from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -61,3 +62,6 @@ class Appointment(models.Model):
         """Override save method."""
         self.end_appointment = self.start_appointment + timedelta(hours=1)
         super().save(*args, **kwargs)
+
+
+auditlog.register(Appointment)

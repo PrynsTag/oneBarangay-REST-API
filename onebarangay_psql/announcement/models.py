@@ -1,10 +1,12 @@
 """Create your announcement models here."""
+from auditlog.registry import auditlog
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
+from tinymce.models import HTMLField
 
 user = get_user_model()
 
@@ -16,7 +18,7 @@ class Announcement(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(_("title"), max_length=255, unique=True)
     author = models.ForeignKey(user, on_delete=models.CASCADE)
-    content = models.TextField(_("content"))
+    content = HTMLField()
     is_featured = models.BooleanField(default=False)
     thumbnail = models.ImageField(
         upload_to="announcement/thumbnail", default="announcement/thumbnail/default.jpg"
@@ -50,3 +52,6 @@ class Announcement(models.Model):
     def get_absolute_url(self):
         """Return the url to access a particular announcement instance."""
         return reverse("api:announcement-detail", kwargs={"slug": self.slug})
+
+
+auditlog.register(Announcement)
