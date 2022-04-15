@@ -3,15 +3,21 @@ from datetime import datetime
 
 from django.contrib import admin
 from django.http import HttpResponse
+from django.templatetags.static import static
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF2.pdf import PageObject
+from reportlab import rl_config
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import landscape, letter
 from reportlab.lib.units import cm
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Table
 
+from config.settings.base import APPS_DIR
 from onebarangay_psql.rbi.models import FamilyMember, HouseRecord
 from onebarangay_psql.utils.choice_field import ChoicesField
 
@@ -73,7 +79,15 @@ class HouseRecordAdmin(ImportExportModelAdmin):
     )
     def export_rbi_to_pdf(self, request, queryset: list[HouseRecord]):
         """Print RBI."""
+        filename = "/tmp/rbi.pdf"
+        c = canvas.Canvas(
+            filename,
+            pagesize=landscape(letter),
+            pageCompression=1,
+        )
+
         for obj in queryset:
+
             data = [
                 [
                     "#",
@@ -91,8 +105,9 @@ class HouseRecordAdmin(ImportExportModelAdmin):
             ]
 
             family_object = FamilyMember.objects.filter(house_record_id=obj.house_id)
+            count = family_object.count()
 
-            for family, index in zip(family_object, range(family_object.count())):
+            for family, index in zip(family_object, range(count)):
                 family_data = list(family.__dict__.values())[3:]
                 family_data[9] = family_data[9].strftime("%Y-%m-%d")
                 gender_choices = ChoicesField(FamilyMember.CivilStatus.choices)
@@ -112,19 +127,13 @@ class HouseRecordAdmin(ImportExportModelAdmin):
                     ]
                 )
 
-            count = family_object.count()
             for _ in range(count, 9):
                 data.append([])
 
-            filename = "/tmp/rbi.pdf"
-
-            c = canvas.Canvas(
-                filename,
-                pagesize=landscape(letter),
-                pageCompression=1,
-            )
             c.setLineWidth(0.3)
-            c.setFont("Helvetica", 12)
+            rl_config.TTFSearchPath.append(str(APPS_DIR) + static("fonts/"))
+            pdfmetrics.registerFont(TTFont("Roboto", "Roboto-Regular.ttf"))
+            c.setFont("Roboto", 12)
 
             table = Table(
                 data,
@@ -146,25 +155,25 @@ class HouseRecordAdmin(ImportExportModelAdmin):
             c.drawString(600, 20, f"Date Updated: {obj.updated_at.date()}")
 
             c.showPage()
-            c.save()
 
-            with open("onebarangay_psql/static/pdf/rbi_form.pdf", "rb") as pdf:
-                existing_pdf = PdfFileReader(pdf)
-                page = existing_pdf.getPage(0)
+        c.save()
 
-                new_pdf = PdfFileReader(filename)
-                page.mergePage(new_pdf.getPage(0))
+        with open(str(APPS_DIR) + static("pdf/rbi_form.pdf"), "rb") as pdf:
+            pages: list[PageObject] = [PdfFileReader(pdf).getPage(0)] * len(queryset)
 
-                output = PdfFileWriter()
-                output.addPage(page)
+            output, new_pdf = PdfFileWriter(), PdfFileReader(filename)
+            for i in range(new_pdf.numPages):
+                new_pdf.pages[i].mergePage(pages[i])
+                output.addPage(new_pdf.pages[i])
 
-                with open(filename, "wb") as f:
-                    output.write(f)
+            with open(filename, "wb") as f:
+                output.write(f)
 
-            with open(filename, "rb") as pdf:
-                response = HttpResponse(pdf.read(), content_type="application/pdf")
-                response["Content-Disposition"] = "attachment; filename=rbi.pdf"
-                return response
+        with open(filename, "rb") as pdf:
+            response = HttpResponse(pdf.read(), content_type="application/pdf")
+            response["Content-Disposition"] = "attachment; filename=rbi.pdf"
+
+            return response
 
 
 class FamilyRecordResource(resources.ModelResource):
