@@ -2,6 +2,7 @@
 from datetime import datetime
 
 from django.contrib import admin
+from django.core.files.temp import NamedTemporaryFile
 from django.http import HttpResponse
 from django.templatetags.static import static
 from import_export import resources
@@ -79,7 +80,8 @@ class HouseRecordAdmin(ImportExportModelAdmin):
     )
     def export_rbi_to_pdf(self, request, queryset: list[HouseRecord]):
         """Print RBI."""
-        filename = "/tmp/rbi.pdf"
+        file = NamedTemporaryFile(suffix=".pdf")
+        filename = file.name
         c = canvas.Canvas(
             filename,
             pagesize=landscape(letter),
@@ -173,7 +175,8 @@ class HouseRecordAdmin(ImportExportModelAdmin):
             response = HttpResponse(pdf.read(), content_type="application/pdf")
             response["Content-Disposition"] = "attachment; filename=rbi.pdf"
 
-            return response
+        file.close()
+        return response
 
 
 class FamilyRecordResource(resources.ModelResource):
