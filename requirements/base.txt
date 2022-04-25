@@ -9,7 +9,7 @@ django==4.0.4  # pyup: < 4.0  # https://www.djangoproject.com/
 django-adminactions==1.15 # https://github.com/saxix/django-adminactions/
 django-allauth==0.50.0  # https://github.com/pennersr/django-allauth
 django-auditlog==1.0.0 # https://github.com/jazzband/django-auditlog
-django-compressor==3.1  # https://github.com/django-compressor/django-compressor
+django-compressor==4.0  # https://github.com/django-compressor/django-compressor
 django-cors-headers==3.11.0 # https://github.com/adamchainz/django-cors-headers
 django-crispy-forms==1.14.0  # https://github.com/django-crispy-forms/django-crispy-forms
 django-environ==0.8.1  # https://github.com/joke2k/django-environ
