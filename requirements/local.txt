@@ -18,7 +18,7 @@ factory-boy==3.2.1  # https://github.com/FactoryBoy/factory_boy
 # ------------------------------------------------------------------------------
 flake8==4.0.1  # https://github.com/PyCQA/flake8
 flake8-isort==4.1.1  # https://github.com/gforcada/flake8-isort
-httpie==3.1.0 # https://github.com/httpie/httpie ## For HTTP requests
+httpie==3.2.1 # https://github.com/httpie/httpie ## For HTTP requests
 ipdb==0.13.9  # https://github.com/gotcha/ipdb
 jupyterlab==3.4.2  # https://docs.jupyter.org/en/latest/ ## For shell commands
 
@@ -38,4 +38,4 @@ pytest-sugar==0.9.4  # https://github.com/Frozenball/pytest-sugar
 sphinx==4.5.0  # https://github.com/sphinx-doc/sphinx
 sphinx-autobuild==2021.3.14 # https://github.com/GaretJax/sphinx-autobuild
 
-Werkzeug[watchdog]==2.1.1 # https://github.com/pallets/werkzeug
+Werkzeug[watchdog]==2.1.2 # https://github.com/pallets/werkzeug
