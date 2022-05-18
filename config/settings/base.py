@@ -62,10 +62,10 @@ DJANGO_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django.contrib.admindocs",
     # "django.contrib.humanize", # Handy template tags
     "jazzmin",  # third-party
     "django.contrib.admin",
+    "django.contrib.admindocs",
     "django.forms",
     "django.contrib.postgres",
 ]
