@@ -42,7 +42,7 @@ class TestUserViewSet:
         response = view.me(request)
 
         data = {
-            "username": user.username,
+            "id": user.username,
             "url": f"http://testserver/api/user/{user.username}/",
         }
 
