@@ -53,11 +53,32 @@ class HouseRecordResource(resources.ModelResource):
         )
 
 
+class FamilyRecordInline(admin.StackedInline):
+    """Family Record Inline Custom Configuration."""
+
+    model = FamilyMember
+    extra = 1
+    fields = (
+        "family_member_id",
+        "first_name",
+        "middle_name",
+        "last_name",
+        "age",
+        "birth_place",
+        "citizenship",
+        "civil_status",
+        "date_of_birth",
+        "monthly_income",
+        "remarks",
+    )
+
+
 class HouseRecordAdmin(ImportExportModelAdmin):
     """House Record Admin Integration for import and export."""
 
     actions = ["export_rbi_to_pdf"]
     resource_class = HouseRecordResource
+    inlines = (FamilyRecordInline,)
     list_display = (
         "house_id",
         "created_at",
