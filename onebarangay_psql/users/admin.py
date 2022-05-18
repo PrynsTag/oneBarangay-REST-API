@@ -68,6 +68,14 @@ class ProfileAdmin(ImportExportModelAdmin):
     list_select_related = True
 
 
+class ProfileInline(admin.StackedInline):
+    """Profile Inline Custom Configuration."""
+
+    model = Profile
+    can_delete = False
+    verbose_name_plural = "Profile"
+
+
 class UserResource(resources.ModelResource):
     """User Resource for importing and exporting User Model fields."""
 
@@ -99,6 +107,7 @@ class UserAdmin(auth_admin.UserAdmin, ImportExportModelAdmin):
     add_form = UserAdminCreationForm
     resource_class = UserResource
     ordering = ("-date_joined",)
+    inlines = (ProfileInline,)
     fieldsets = (
         (None, {"fields": ("username", "password")}),
         (_("Personal info"), {"fields": ("email",)}),
