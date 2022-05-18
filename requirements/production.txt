@@ -1,7 +1,7 @@
 # PRECAUTION: avoid production dependencies that aren't in development
 
 -r base.txt
-django-anymail[sendgrid]==8.5  # https://github.com/anymail/django-anymail
+django-anymail[sendgrid]==8.6  # https://github.com/anymail/django-anymail
 
 # Django
 # ------------------------------------------------------------------------------
