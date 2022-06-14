@@ -7,8 +7,7 @@ from django.http import HttpResponse
 from django.templatetags.static import static
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-from PyPDF2 import PdfFileReader, PdfFileWriter
-from PyPDF2.pdf import PageObject
+from PyPDF2 import PageObject, PdfFileReader, PdfFileWriter
 from reportlab import rl_config
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import landscape, letter
