@@ -1,6 +1,6 @@
 -r base.txt
 black==22.3.0  # https://github.com/psf/black
-coverage==6.3.3  # https://github.com/nedbat/coveragepy
+coverage==6.4.1  # https://github.com/nedbat/coveragepy
 coveralls==3.3.1 # https://github.com/TheKevJames/coveralls-python ## Coverage Report
 django-coverage-plugin==2.0.3  # https://github.com/nedbat/django_coverage_plugin
 
@@ -20,7 +20,7 @@ flake8==4.0.1  # https://github.com/PyCQA/flake8
 flake8-isort==4.1.1  # https://github.com/gforcada/flake8-isort
 httpie==3.2.1 # https://github.com/httpie/httpie ## For HTTP requests
 ipdb==0.13.9  # https://github.com/gotcha/ipdb
-jupyterlab==3.4.2  # https://docs.jupyter.org/en/latest/ ## For shell commands
+jupyterlab==3.4.3  # https://docs.jupyter.org/en/latest/ ## For shell commands
 
 # Testing
 # ------------------------------------------------------------------------------
