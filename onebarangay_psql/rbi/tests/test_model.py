@@ -43,7 +43,7 @@ class TestRBI:
             gender="M",
         )
 
-        assert hr.house_id == "1"
+        assert hr.house_id == 1
         assert fm.last_name == hr.family_name
 
     def test_house_record_str(self, house_record: HouseRecord):
