@@ -5,7 +5,7 @@ dj-rest-auth==2.2.4 # https://github.com/iMerica/dj-rest-auth
 
 # Django
 # ------------------------------------------------------------------------------
-django==4.0.4  # pyup: < 4.0  # https://www.djangoproject.com/
+django==4.0.5  # pyup: < 4.0  # https://www.djangoproject.com/
 django-adminactions==1.15 # https://github.com/saxix/django-adminactions/
 django-allauth==0.51.0  # https://github.com/pennersr/django-allauth
 django-auditlog==2.0.0 # https://github.com/jazzband/django-auditlog
