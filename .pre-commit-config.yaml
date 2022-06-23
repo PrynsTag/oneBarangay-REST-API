@@ -26,7 +26,6 @@ repos:
       - id: debug-statements
       - id: name-tests-test
         args: [ "--django" ]
-      - id: requirements-txt-fixer
       - id: check-ast
       - id: check-case-conflict
       - id: check-executables-have-shebangs
