@@ -27,14 +27,14 @@ django-tinymce==3.4.0 # https://github.com/jazzband/django-tinymce
 
 # Documentation
 # ------------------------------------------------------------------------------
-drf-spectacular==0.22.1
+drf-spectacular==0.23.1
 
 # Others
 # ------------------------------------------------------------------------------
 Pillow==9.2.0  # https://github.com/python-pillow/Pillow
 PyPDF2==2.5.0 # https://github.com/py-pdf/PyPDF2
 hiredis==2.0.0  # https://github.com/redis/hiredis-py
-newrelic==7.14.0.177 # https://github.com/newrelic/newrelic-python-agent
+newrelic==7.16.0.178 # https://github.com/newrelic/newrelic-python-agent
 psycopg2==2.9.3  # https://github.com/psycopg/psycopg2
 python-slugify==6.1.2  # https://github.com/un33k/python-slugify
 pytz==2022.1  # https://github.com/stub42/pytz
