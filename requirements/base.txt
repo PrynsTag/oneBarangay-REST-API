@@ -16,7 +16,7 @@ djangorestframework==3.13.1  # https://github.com/encode/django-rest-framework
 # Django Admin
 # ------------------------------------------------------------------------------
 django-adminactions==2.0.0 # https://github.com/saxix/django-adminactions/
-django-auditlog==2.1.0 # https://github.com/jazzband/django-auditlog
+django-auditlog==2.1.1 # https://github.com/jazzband/django-auditlog
 django-filter==22.1 # https://github.com/carltongibson/django-filter
 django-import-export==2.8.0 # https://github.com/django-import-export/django-import-export
 django-jazzmin==2.5.0  # https://github.com/farridav/django-jazzmin
