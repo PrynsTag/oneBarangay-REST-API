@@ -123,9 +123,7 @@ class ProfileViewSet(
         if self.request.user.username != self.kwargs["username"]:
             raise PermissionDenied
 
-        return get_object_or_404(
-            self.queryset, user__username=self.kwargs["username"]
-        )
+        return get_object_or_404(self.queryset, user__username=self.kwargs["username"])
 
     @action(detail=False)
     def me(self, request) -> Response:
