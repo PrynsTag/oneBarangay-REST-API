@@ -11,7 +11,8 @@ pytestmark = pytest.mark.django_db
 class TestUserViewSet:
     """Test DRF UserViewSet View."""
 
-    def test_get_queryset(self, user: User, rf: RequestFactory) -> None:
+    @staticmethod
+    def test_get_queryset(user: User, rf: RequestFactory) -> None:
         """Test 'get_queryset' returns the requesting user is returned.
 
         Args:
@@ -26,7 +27,8 @@ class TestUserViewSet:
 
         assert user in view.get_queryset()
 
-    def test_me(self, user: User, rf: RequestFactory) -> None:
+    @staticmethod
+    def test_me(user: User, rf: RequestFactory) -> None:
         """Test 'me' view returns requesting authenticated user.
 
         Args:
@@ -51,7 +53,8 @@ class TestUserViewSet:
     class TestUserProfileViewSet:
         """Test xDRF ProfileViewSet View."""
 
-        def test_get_queryset(self, user: User, rf: RequestFactory) -> None:
+        @staticmethod
+        def test_get_queryset(user: User, rf: RequestFactory) -> None:
             """Test 'get_queryset' returns the requesting user profile is returned.
 
             Args:
@@ -66,7 +69,8 @@ class TestUserViewSet:
 
             assert user.profile in view.get_queryset()
 
-        def test_me(self, user: User, rf: RequestFactory) -> None:
+        @staticmethod
+        def test_me(user: User, rf: RequestFactory) -> None:
             """Test 'me' view returns requesting authenticated user's profile.
 
             Args:
@@ -88,7 +92,8 @@ class TestUserViewSet:
 
             assert set(user_data).issubset(response.data.items())
 
-        def test_get_object(self, user: User, rf: RequestFactory):
+        @staticmethod
+        def test_get_object(user: User, rf: RequestFactory):
             """Test 'get_object' method returns the requesting authenticated user's profile.
 
             Args:

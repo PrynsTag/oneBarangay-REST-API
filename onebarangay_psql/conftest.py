@@ -131,5 +131,4 @@ def user_type(request, user: User, admin_user: User):
     """
     if request.param == "user":
         return user
-    else:
-        return admin_user
+    return admin_user

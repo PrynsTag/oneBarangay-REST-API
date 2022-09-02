@@ -13,7 +13,8 @@ from onebarangay_psql.rbi.models import FamilyMember, HouseRecord
 class TestHouseRecordViewSetUrls:
     """Create your rbi drf http methods tests here."""
 
-    def test_house_record_list(self, admin_api_client: APIClient):
+    @staticmethod
+    def test_house_record_list(admin_api_client: APIClient):
         """Test house record list.
 
         Scenario:
@@ -24,8 +25,9 @@ class TestHouseRecordViewSetUrls:
         response: Response = admin_api_client.get(reverse("api:house-list"))
         assert response.status_code == status.HTTP_200_OK
 
+    @staticmethod
     def test_house_record_retrieve(
-        self, admin_api_client: APIClient, house_record: HouseRecord
+        admin_api_client: APIClient, house_record: HouseRecord
     ):
         """Test house record retrieve.
 
@@ -40,7 +42,8 @@ class TestHouseRecordViewSetUrls:
         )
         assert response.status_code == status.HTTP_200_OK
 
-    def test_house_record_post(self, admin_api_client: APIClient):
+    @staticmethod
+    def test_house_record_post(admin_api_client: APIClient):
         """Test house record post.
 
         Scenario:
@@ -60,8 +63,9 @@ class TestHouseRecordViewSetUrls:
         )
         assert response.status_code == status.HTTP_201_CREATED
 
+    @staticmethod
     def test_house_record_put(
-        self, admin_api_client: APIClient, house_record: HouseRecord
+        admin_api_client: APIClient, house_record: HouseRecord
     ):
         """Test house record put.
 
@@ -84,8 +88,9 @@ class TestHouseRecordViewSetUrls:
         assert response.data["address"] == "Manila, Philippines"
         assert response.status_code == status.HTTP_200_OK
 
+    @staticmethod
     def test_house_record_patch(
-        self, admin_api_client: APIClient, house_record: HouseRecord
+        admin_api_client: APIClient, house_record: HouseRecord
     ):
         """Test house record patch.
 
@@ -102,8 +107,9 @@ class TestHouseRecordViewSetUrls:
         assert response.data["address"] == "Manila, Philippines"
         assert response.status_code == status.HTTP_200_OK
 
+    @staticmethod
     def test_house_record_delete(
-        self, admin_api_client: APIClient, house_record: HouseRecord
+        admin_api_client: APIClient, house_record: HouseRecord
     ):
         """Test house record delete.
 
@@ -122,7 +128,8 @@ class TestHouseRecordViewSetUrls:
 class TestFamilyMemberViewSet:
     """Create your rbi drf http methods tests here."""
 
-    def test_family_member_list(self, admin_api_client: APIClient):
+    @staticmethod
+    def test_family_member_list(admin_api_client: APIClient):
         """Test family member list.
 
         Scenario:
@@ -133,8 +140,9 @@ class TestFamilyMemberViewSet:
         response: Response = admin_api_client.get(reverse("api:family-list"))
         assert response.status_code == status.HTTP_200_OK
 
+    @staticmethod
     def test_family_member_retrieve(
-        self, admin_api_client: APIClient, family_member: FamilyMember
+        admin_api_client: APIClient, family_member: FamilyMember
     ):
         """Test family member retrieve.
 
@@ -149,8 +157,9 @@ class TestFamilyMemberViewSet:
         )
         assert response.status_code == status.HTTP_200_OK
 
+    @staticmethod
     def test_family_member_post(
-        self, admin_api_client: APIClient, house_record: HouseRecord
+        admin_api_client: APIClient, house_record: HouseRecord
     ):
         """Test family member post.
 
@@ -182,8 +191,8 @@ class TestFamilyMemberViewSet:
         )
         assert response.status_code == status.HTTP_201_CREATED
 
+    @staticmethod
     def test_family_member_put(
-        self,
         admin_api_client: APIClient,
         house_record: HouseRecord,
         family_member: FamilyMember,
@@ -218,8 +227,9 @@ class TestFamilyMemberViewSet:
         assert response.data["civil_status"] == "Married"
         assert response.status_code == status.HTTP_200_OK
 
+    @staticmethod
     def test_family_member_patch(
-        self, admin_api_client: APIClient, family_member: FamilyMember
+        admin_api_client: APIClient, family_member: FamilyMember
     ):
         """Test family member patch.
 
@@ -236,8 +246,9 @@ class TestFamilyMemberViewSet:
         assert response.data["civil_status"] == "Married"
         assert response.status_code == status.HTTP_200_OK
 
+    @staticmethod
     def test_family_member_delete(
-        self, admin_api_client: APIClient, family_member: FamilyMember
+        admin_api_client: APIClient, family_member: FamilyMember
     ):
         """Test family member delete.
 

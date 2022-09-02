@@ -54,11 +54,13 @@ class AnnouncementAdmin(ImportExportModelAdmin):
         """Get the queryset of Announcement Model."""
         return super().get_queryset(request).prefetch_related("tags")
 
-    def tag_list(self, obj):
+    @staticmethod
+    def tag_list(obj):
         """Return the tags as a comma separated string."""
         return ", ".join(o.name for o in obj.tags.all())
 
-    def raw_content(self, obj):
+    @staticmethod
+    def raw_content(obj):
         """Return the content without html."""
         return strip_tags(obj.content)
 

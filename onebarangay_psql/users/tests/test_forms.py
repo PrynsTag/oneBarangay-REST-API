@@ -11,7 +11,8 @@ pytestmark = pytest.mark.django_db
 class TestUserAdminCreationForm:
     """Test class for all tests related to the UserAdminCreationForm."""
 
-    def test_username_validation_error_msg(self, user: User) -> None:
+    @staticmethod
+    def test_username_validation_error_msg(user: User) -> None:
         """Tests UserAdminCreation Form's unique validator functions correctly by testing.
 
         Steps:

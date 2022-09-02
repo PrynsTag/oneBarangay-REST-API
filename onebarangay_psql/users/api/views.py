@@ -63,11 +63,10 @@ class UserViewSet(
         """
         if self.request.user.is_superuser:
             return get_object_or_404(self.queryset, username=self.kwargs["username"])
-        else:
-            if self.request.user.username != self.kwargs["username"]:
-                raise PermissionDenied
+        if self.request.user.username != self.kwargs["username"]:
+            raise PermissionDenied
 
-            return get_object_or_404(self.queryset, username=self.kwargs["username"])
+        return get_object_or_404(self.queryset, username=self.kwargs["username"])
 
     @action(detail=False)
     def me(self, request) -> Response:
@@ -81,9 +80,8 @@ class UserViewSet(
         """
         if str(request.user) == "AnonymousUser":
             raise PermissionDenied
-        else:
-            serializer = UserSerializer(request.user, context={"request": request})
-            return Response(status=status.HTTP_200_OK, data=serializer.data)
+        serializer = UserSerializer(request.user, context={"request": request})
+        return Response(status=status.HTTP_200_OK, data=serializer.data)
 
 
 class ProfileViewSet(
@@ -121,13 +119,12 @@ class ProfileViewSet(
             return get_object_or_404(
                 self.queryset, user__username=self.kwargs["username"]
             )
-        else:
-            if self.request.user.username != self.kwargs["username"]:
-                raise PermissionDenied
+        if self.request.user.username != self.kwargs["username"]:
+            raise PermissionDenied
 
-            return get_object_or_404(
-                self.queryset, user__username=self.kwargs["username"]
-            )
+        return get_object_or_404(
+            self.queryset, user__username=self.kwargs["username"]
+        )
 
     @action(detail=False)
     def me(self, request) -> Response:
@@ -141,10 +138,9 @@ class ProfileViewSet(
         """
         if str(self.request.user) == "AnonymousUser":
             raise PermissionDenied
-        else:
-            data = self.queryset.get(user__username=self.request.user.username)
-            serializer = ProfileSerializer(data, context={"request": request})
-            return Response(serializer.data, status=status.HTTP_200_OK)
+        data = self.queryset.get(user__username=self.request.user.username)
+        serializer = ProfileSerializer(data, context={"request": request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class ProfilePhotoViewSet(UpdateModelMixin, GenericViewSet):
@@ -158,17 +154,16 @@ class ProfilePhotoViewSet(UpdateModelMixin, GenericViewSet):
         """Change user profile photo."""
         if str(self.request.user) == "AnonymousUser":
             raise PermissionDenied
-        else:
-            image = request.data["profile_image"]
-            data = self.queryset.get(user__username=self.request.user.username)
-            data.profile_image = image
-            serializer = ProfileImageSerializer(
-                data, context={"request": request}, partial=True
-            )
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_200_OK)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        image = request.data["profile_image"]
+        data = self.queryset.get(user__username=self.request.user.username)
+        data.profile_image = image
+        serializer = ProfileImageSerializer(
+            data, context={"request": request}, partial=True
+        )
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class GCMAuthorizedFilterSet(GCMDeviceAuthorizedViewSet):
@@ -188,7 +183,6 @@ class GCMAuthorizedFilterSet(GCMDeviceAuthorizedViewSet):
         """
         if str(self.request.user) == "AnonymousUser":
             raise PermissionDenied
-        else:
-            data = self.queryset.get(user__username=self.request.user.username)
-            serializer = GCMDeviceSerializer(data, context={"request": request})
-            return Response(serializer.data, status=status.HTTP_200_OK)
+        data = self.queryset.get(user__username=self.request.user.username)
+        serializer = GCMDeviceSerializer(data, context={"request": request})
+        return Response(serializer.data, status=status.HTTP_200_OK)

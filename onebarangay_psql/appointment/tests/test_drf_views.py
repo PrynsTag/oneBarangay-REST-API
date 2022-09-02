@@ -25,8 +25,9 @@ pytestmark = pytest.mark.django_db
 class TestAppointmentViewSet:
     """Test DRF AppointmentViewSet View."""
 
+    @staticmethod
     def test_get_queryset(
-        self, user: User, appointment: Appointment, rf: RequestFactory
+        user: User, appointment: Appointment, rf: RequestFactory
     ) -> None:
         """Test 'get_queryset' returns the appointment queryset.
 
@@ -78,7 +79,8 @@ class TestAppointmentViewSet:
 
         assert isinstance(permission_class, permission)
 
-    def test_perform_create(self, user: User, rf: RequestFactory) -> None:
+    @staticmethod
+    def test_perform_create(user: User, rf: RequestFactory) -> None:
         """Test 'perform_create' creates the appointment.
 
         Args:
@@ -112,7 +114,8 @@ class TestAppointmentViewSet:
         assert response.data["recipient_name"] == "Prince Velasco"
         assert response.data["purpose"] == "Test Appointment"
 
-    def test_appointment_me(self, admin_user: User, rf: RequestFactory) -> None:
+    @staticmethod
+    def test_appointment_me(admin_user: User, rf: RequestFactory) -> None:
         """Test 'appointment_me' returns the logged-in user's appointment.
 
         Args:
@@ -135,7 +138,8 @@ class TestAppointmentViewSet:
 class TestStatusUpdateViewSet:
     """Test the StatusUpdateViewSet."""
 
-    def test_get_object(self, appointment: Appointment, rf: RequestFactory) -> None:
+    @staticmethod
+    def test_get_object(appointment: Appointment, rf: RequestFactory) -> None:
         """Test 'get_object' returns the appointment.
 
         Args:
@@ -152,7 +156,8 @@ class TestStatusUpdateViewSet:
 
         assert view.get_object() == appointment
 
-    def test_perform_create(self, appointment: Appointment, rf: RequestFactory) -> None:
+    @staticmethod
+    def test_perform_create(appointment: Appointment, rf: RequestFactory) -> None:
         """Test 'perform_create' creates the status update.
 
         Args:

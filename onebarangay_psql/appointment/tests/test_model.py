@@ -13,7 +13,8 @@ pytestmark = pytest.mark.django_db
 class TestAppointment:
     """Test the Appointment model."""
 
-    def test_create_appointment(self, admin_user: User) -> None:
+    @staticmethod
+    def test_create_appointment(admin_user: User) -> None:
         """Test creating an announcement.
 
         Args:
@@ -32,7 +33,8 @@ class TestAppointment:
         assert a1.user == admin_user
         assert a1.document == "IND"
 
-    def test_str(self, admin_user: User) -> None:
+    @staticmethod
+    def test_str(admin_user: User) -> None:
         """Test the string representation of an appointment.
 
         Args:
@@ -49,7 +51,8 @@ class TestAppointment:
 
         assert str(a1) == f"{a1.user} - {a1.purpose}"
 
-    def test_update_appointment(self, admin_user: User) -> None:
+    @staticmethod
+    def test_update_appointment(admin_user: User) -> None:
         """Test updating an appointment.
 
         Args:
@@ -69,7 +72,8 @@ class TestAppointment:
 
         assert a1.start_appointment == updated_appointment
 
-    def test_appointment_ordering(self, admin_user: User) -> None:
+    @staticmethod
+    def test_appointment_ordering(admin_user: User) -> None:
         """Test the ordering of appointment.
 
         The most recent announcement should be first.
