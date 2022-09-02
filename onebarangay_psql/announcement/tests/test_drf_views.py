@@ -17,8 +17,9 @@ pytestmark = pytest.mark.django_db
 class TestAnnouncementViewSet:
     """Test DRF AnnouncementViewSet View."""
 
+    @staticmethod
     def test_get_queryset(
-        self, user: User, announcement: Announcement, rf: RequestFactory
+        user: User, announcement: Announcement, rf: RequestFactory
     ) -> None:
         """Test 'get_queryset' returns the announcement queryset.
 
@@ -69,7 +70,8 @@ class TestAnnouncementViewSet:
 
         assert isinstance(permission_class, permission)
 
-    def test_perform_create(self, user: User, rf: RequestFactory) -> None:
+    @staticmethod
+    def test_perform_create(user: User, rf: RequestFactory) -> None:
         """Test 'perform_create' creates the announcement.
 
         Args:
@@ -94,7 +96,8 @@ class TestAnnouncementViewSet:
         assert response.data["title"] == "Test"
         assert response.data["content"] == "Test"
 
-    def test_announcement_me(self, admin_user: User, rf: RequestFactory) -> None:
+    @staticmethod
+    def test_announcement_me(admin_user: User, rf: RequestFactory) -> None:
         """Test 'announcement_me' returns the logged-in user's announcement.
 
         Args:
@@ -128,5 +131,4 @@ def user_type(request: FixtureRequest, user: User, admin_user: User):
     """
     if request.param == "user":
         return user
-    else:
-        return admin_user
+    return admin_user

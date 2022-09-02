@@ -36,8 +36,9 @@ class TestUserAndProfileMePermission:
 
         assert get_response.status_code == status.HTTP_200_OK
 
+    @staticmethod
     def test_user_me_not_authenticated_permission(
-        self, api_client: APIClient, url_name: str
+        api_client: APIClient, url_name: str
     ) -> None:
         """Test for user and profile 'me' not authenticated permission.
 
@@ -55,8 +56,9 @@ class TestUserAndProfileMePermission:
 class TestUserAndProfileListPermission:
     """Test permission for listing users and profiles."""
 
+    @staticmethod
     def test_profile_list_admin_permission(
-        self, admin_client: Client, url_name: str
+        admin_client: Client, url_name: str
     ) -> None:
         """Test for profile list admin permission.
 
@@ -69,8 +71,9 @@ class TestUserAndProfileListPermission:
 
         assert response.status_code == status.HTTP_200_OK
 
+    @staticmethod
     def test_user_and_profile_list_user_permission(
-        self, client: Client, user: User, url_name: str
+        client: Client, user: User, url_name: str
     ) -> None:
         """Test for user and profile list user permission.
 
@@ -84,8 +87,9 @@ class TestUserAndProfileListPermission:
 
         assert response.status_code == status.HTTP_403_FORBIDDEN
 
+    @staticmethod
     def test_user_and_profile_list_not_authenticated_permission(
-        self, client: Client, url_name: str
+        client: Client, url_name: str
     ) -> None:
         """Test for user and profile list not authenticated permission.
 
@@ -111,8 +115,7 @@ def user_type(request: FixtureRequest, user: User, admin_user: User):
     """
     if request.param == "user":
         return user
-    else:
-        return admin_user
+    return admin_user
 
 
 @pytest.mark.parametrize("url_name", ["api:user-detail", "api:profile-detail"])
@@ -163,8 +166,9 @@ class TestUserAndProfileDetailPermission:
         assert put_response.status_code == status.HTTP_200_OK
         assert patch_response.status_code == status.HTTP_200_OK
 
+    @staticmethod
     def test_user_and_profile_detail_not_authenticated_permission(
-        self, api_client: Client, user: User, url_name: str
+        api_client: Client, user: User, url_name: str
     ) -> None:
         """Test user and profile detail permission.
 
@@ -176,8 +180,9 @@ class TestUserAndProfileDetailPermission:
         response = api_client.get(reverse(url_name, kwargs={"username": user.username}))
         assert response.status_code == status.HTTP_403_FORBIDDEN
 
+    @staticmethod
     def test_user_and_profile_detail_not_owner_permission(
-        self, api_client: Client, user: User, url_name: str
+        api_client: Client, user: User, url_name: str
     ) -> None:
         """Test user and profile detail not owner permission.
 

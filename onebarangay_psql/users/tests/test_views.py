@@ -32,7 +32,8 @@ class TestUserUpdateView:
         https://github.com/pytest-dev/pytest-django/pull/258
     """
 
-    def dummy_get_response(self, request: HttpRequest) -> None:
+    @staticmethod
+    def dummy_get_response(request: HttpRequest) -> None:
         """Get response dummy function.
 
         Args:
@@ -43,7 +44,8 @@ class TestUserUpdateView:
         """
         return None
 
-    def test_get_success_url(self, user: User, rf: RequestFactory) -> None:
+    @staticmethod
+    def test_get_success_url(user: User, rf: RequestFactory) -> None:
         """Test the UserUpdateView get_success_url method.
 
         Args:
@@ -58,7 +60,8 @@ class TestUserUpdateView:
 
         assert view.get_success_url() == f"/users/{user.username}/"
 
-    def test_get_object(self, user: User, rf: RequestFactory) -> None:
+    @staticmethod
+    def test_get_object(user: User, rf: RequestFactory) -> None:
         """Test the UserUpdateView get_object method.
 
         Args:
@@ -73,8 +76,9 @@ class TestUserUpdateView:
 
         assert view.get_object() == user
 
+    @staticmethod
     def test_form_valid(
-        self, user: User, rf: RequestFactory, mocker: MockFixture
+        user: User, rf: RequestFactory, mocker: MockFixture
     ) -> None:
         """Test the UserUpdateView form_valid method.
 
@@ -105,7 +109,8 @@ class TestUserUpdateView:
 class TestUserRedirectView:
     """Test the user redirect view."""
 
-    def test_get_redirect_url(self, user: User, rf: RequestFactory) -> None:
+    @staticmethod
+    def test_get_redirect_url(user: User, rf: RequestFactory) -> None:
         """Test the UserRedirectView get_redirect_url method.
 
         Args:
@@ -124,7 +129,8 @@ class TestUserRedirectView:
 class TestUserDetailView:
     """Test user detail view."""
 
-    def test_authenticated(self, user: User, rf: RequestFactory):
+    @staticmethod
+    def test_authenticated(user: User, rf: RequestFactory):
         """Test authenticated user."""
         request = rf.get("/fake-url/")
         request.user = UserFactory()
@@ -133,7 +139,8 @@ class TestUserDetailView:
 
         assert response.status_code == 200
 
-    def test_not_authenticated(self, user: User, rf: RequestFactory):
+    @staticmethod
+    def test_not_authenticated(user: User, rf: RequestFactory):
         """Test not authenticated user."""
         request = rf.get("/fake-url/")
         request.user = AnonymousUser()

@@ -19,8 +19,9 @@ pytestmark = pytest.mark.django_db
 class TestHouseRecordViewSet:
     """Test HouseRecordViewSet."""
 
+    @staticmethod
     def test_get_queryset(
-        self, admin_user: User, house_record: HouseRecord, rf: RequestFactory
+        admin_user: User, house_record: HouseRecord, rf: RequestFactory
     ):
         """Test get_queryset returns a house record queryset.
 
@@ -40,7 +41,8 @@ class TestHouseRecordViewSet:
 
         assert house_record in viewset.get_queryset()
 
-    def test_get_serializer(self, admin_user: User, rf: RequestFactory):
+    @staticmethod
+    def test_get_serializer(admin_user: User, rf: RequestFactory):
         """Test get_serializer returns a HouseRecordSerializer.
 
         Scenario:
@@ -59,7 +61,8 @@ class TestHouseRecordViewSet:
 
         assert isinstance(viewset.get_serializer(), HouseRecordSerializer)
 
-    def test_get_permission(self, admin_user: User, rf: RequestFactory):
+    @staticmethod
+    def test_get_permission(admin_user: User, rf: RequestFactory):
         """Test get_permission returns IsAdminUser.
 
         Scenario:
@@ -82,8 +85,9 @@ class TestHouseRecordViewSet:
 class TestFamilyMemberViewSet:
     """Test FamilyMemberViewSet."""
 
+    @staticmethod
     def test_get_queryset(
-        self, admin_user: User, family_member: FamilyMember, rf: RequestFactory
+        admin_user: User, family_member: FamilyMember, rf: RequestFactory
     ):
         """Test get_queryset returns a family member queryset.
 
@@ -103,7 +107,8 @@ class TestFamilyMemberViewSet:
 
         assert family_member in viewset.get_queryset()
 
-    def test_get_serializer(self, admin_user: User, rf: RequestFactory):
+    @staticmethod
+    def test_get_serializer(admin_user: User, rf: RequestFactory):
         """Test get_serializer returns an instance of FamilyMemberSerializer.
 
         Scenario:
@@ -122,7 +127,8 @@ class TestFamilyMemberViewSet:
 
         assert isinstance(viewset.get_serializer(), FamilyMemberSerializer)
 
-    def test_get_permission(self, admin_user: User, rf: RequestFactory):
+    @staticmethod
+    def test_get_permission(admin_user: User, rf: RequestFactory):
         """Test get_permission returns an instance of IsAdminUser.
 
         Scenario:

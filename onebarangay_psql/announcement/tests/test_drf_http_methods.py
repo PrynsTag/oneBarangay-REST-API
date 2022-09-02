@@ -12,7 +12,8 @@ User = get_user_model()
 class TestAnnouncementViewSetUrls:
     """Test AnnouncementViewSet URLs."""
 
-    def test_announcement_list_url(self, admin_api_client: Client) -> None:
+    @staticmethod
+    def test_announcement_list_url(admin_api_client: Client) -> None:
         """Test the announcement list url.
 
         Args:
@@ -21,8 +22,9 @@ class TestAnnouncementViewSetUrls:
         response = admin_api_client.get(reverse("api:announcement-list"))
         assert response.status_code == status.HTTP_200_OK
 
+    @staticmethod
     def test_announcement_retrieve_url(
-        self, admin_api_client: Client, announcement: Announcement
+        admin_api_client: Client, announcement: Announcement
     ) -> None:
         """Test the announcement retrieve url.
 
@@ -36,7 +38,8 @@ class TestAnnouncementViewSetUrls:
 
         assert response.status_code == status.HTTP_200_OK
 
-    def test_announcement_create_url(self, admin_api_client: Client) -> None:
+    @staticmethod
+    def test_announcement_create_url(admin_api_client: Client) -> None:
         """Test the announcement create url.
 
         Args:
@@ -53,8 +56,9 @@ class TestAnnouncementViewSetUrls:
         )
         assert response.status_code == status.HTTP_201_CREATED
 
+    @staticmethod
     def test_announcement_update_url(
-        self, admin_api_client: Client, announcement: Announcement
+        admin_api_client: Client, announcement: Announcement
     ) -> None:
         """Test the announcement update url.
 
@@ -73,8 +77,9 @@ class TestAnnouncementViewSetUrls:
         )
         assert response.status_code == status.HTTP_200_OK
 
+    @staticmethod
     def test_announcement_partial_update_url(
-        self, admin_api_client: Client, announcement: Announcement
+        admin_api_client: Client, announcement: Announcement
     ) -> None:
         """Test the announcement partial update url.
 
@@ -90,8 +95,9 @@ class TestAnnouncementViewSetUrls:
         )
         assert response.status_code == status.HTTP_200_OK
 
+    @staticmethod
     def test_announcement_delete_url(
-        self, admin_api_client: Client, announcement: Announcement
+        admin_api_client: Client, announcement: Announcement
     ) -> None:
         """Test the announcement delete url.
 
