@@ -63,11 +63,10 @@ class UserViewSet(
         """
         if self.request.user.is_superuser:
             return get_object_or_404(self.queryset, username=self.kwargs["username"])
-        else:
-            if self.request.user.username != self.kwargs["username"]:
-                raise PermissionDenied
+        if self.request.user.username != self.kwargs["username"]:
+            raise PermissionDenied
 
-            return get_object_or_404(self.queryset, username=self.kwargs["username"])
+        return get_object_or_404(self.queryset, username=self.kwargs["username"])
 
     @action(detail=False)
     def me(self, request) -> Response:
@@ -121,13 +120,12 @@ class ProfileViewSet(
             return get_object_or_404(
                 self.queryset, user__username=self.kwargs["username"]
             )
-        else:
-            if self.request.user.username != self.kwargs["username"]:
-                raise PermissionDenied
+        if self.request.user.username != self.kwargs["username"]:
+            raise PermissionDenied
 
-            return get_object_or_404(
-                self.queryset, user__username=self.kwargs["username"]
-            )
+        return get_object_or_404(
+            self.queryset, user__username=self.kwargs["username"]
+        )
 
     @action(detail=False)
     def me(self, request) -> Response:
