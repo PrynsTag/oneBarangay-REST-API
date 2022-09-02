@@ -285,9 +285,7 @@ class TestStatusViewSetUrls:
         assert response.status_code == status.HTTP_200_OK
 
     @staticmethod
-    def test_status_update_url(
-        admin_user: User, admin_api_client: Client
-    ) -> None:
+    def test_status_update_url(admin_user: User, admin_api_client: Client) -> None:
         """Test the status update url.
 
         Scenario:
