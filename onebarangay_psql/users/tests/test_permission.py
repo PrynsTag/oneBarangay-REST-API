@@ -57,9 +57,7 @@ class TestUserAndProfileListPermission:
     """Test permission for listing users and profiles."""
 
     @staticmethod
-    def test_profile_list_admin_permission(
-        admin_client: Client, url_name: str
-    ) -> None:
+    def test_profile_list_admin_permission(admin_client: Client, url_name: str) -> None:
         """Test for profile list admin permission.
 
         Args:

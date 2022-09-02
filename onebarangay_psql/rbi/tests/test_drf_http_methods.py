@@ -64,9 +64,7 @@ class TestHouseRecordViewSetUrls:
         assert response.status_code == status.HTTP_201_CREATED
 
     @staticmethod
-    def test_house_record_put(
-        admin_api_client: APIClient, house_record: HouseRecord
-    ):
+    def test_house_record_put(admin_api_client: APIClient, house_record: HouseRecord):
         """Test house record put.
 
         Scenario:
@@ -89,9 +87,7 @@ class TestHouseRecordViewSetUrls:
         assert response.status_code == status.HTTP_200_OK
 
     @staticmethod
-    def test_house_record_patch(
-        admin_api_client: APIClient, house_record: HouseRecord
-    ):
+    def test_house_record_patch(admin_api_client: APIClient, house_record: HouseRecord):
         """Test house record patch.
 
         Scenario:
@@ -158,9 +154,7 @@ class TestFamilyMemberViewSet:
         assert response.status_code == status.HTTP_200_OK
 
     @staticmethod
-    def test_family_member_post(
-        admin_api_client: APIClient, house_record: HouseRecord
-    ):
+    def test_family_member_post(admin_api_client: APIClient, house_record: HouseRecord):
         """Test family member post.
 
         Scenario:
