@@ -50,7 +50,7 @@ repos:
         language_version: python3.10
         exclude: ^test/
 
-  - repo: https://github.com/myint/docformatter
+  - repo: https://github.com/PyCQA/docformatter
     rev: v1.5.0
     hooks:
       - id: docformatter
@@ -90,7 +90,7 @@ repos:
         additional_dependencies: ["toml"]
 
   - repo: https://github.com/pycqa/pylint
-    rev: v2.15.2
+    rev: v2.15.3
     hooks:
       - id: pylint
         exclude: |
@@ -157,7 +157,7 @@ repos:
         ]
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.37.3
+    rev: v2.38.2
     hooks:
       - id: pyupgrade
         args: [ "--py36-plus", "--py37-plus", "--py38-plus", "--py39-plus" ]
