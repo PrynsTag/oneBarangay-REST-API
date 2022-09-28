@@ -10,7 +10,6 @@ class AnnouncementConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "onebarangay_psql.announcement"
 
-    @staticmethod
     def ready(self):
         """Import signal handlers."""
         # pylint: disable=C0415,W0611

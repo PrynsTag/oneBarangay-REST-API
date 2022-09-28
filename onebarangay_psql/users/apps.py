@@ -11,7 +11,6 @@ class UsersConfig(AppConfig):
     name = "onebarangay_psql.users"
     verbose_name = _("Users")
 
-    @staticmethod
     def ready(self):
         """Import signal handlers."""
         # pylint: disable=C0415,W0611
