@@ -77,9 +77,7 @@ class TestUserUpdateView:
         assert view.get_object() == user
 
     @staticmethod
-    def test_form_valid(
-        user: User, rf: RequestFactory, mocker: MockFixture
-    ) -> None:
+    def test_form_valid(user: User, rf: RequestFactory, mocker: MockFixture) -> None:
         """Test the UserUpdateView form_valid method.
 
         Args:
