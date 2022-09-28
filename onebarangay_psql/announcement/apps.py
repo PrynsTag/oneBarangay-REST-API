@@ -11,7 +11,7 @@ class AnnouncementConfig(AppConfig):
     name = "onebarangay_psql.announcement"
 
     @staticmethod
-    def ready():
+    def ready(self):
         """Import signal handlers."""
         # pylint: disable=C0415,W0611
         with contextlib.suppress(ImportError):

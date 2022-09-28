@@ -12,7 +12,7 @@ class UsersConfig(AppConfig):
     verbose_name = _("Users")
 
     @staticmethod
-    def ready():
+    def ready(self):
         """Import signal handlers."""
         # pylint: disable=C0415,W0611
         with contextlib.suppress(ImportError):
