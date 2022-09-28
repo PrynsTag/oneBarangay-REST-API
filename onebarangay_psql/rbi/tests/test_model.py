@@ -8,7 +8,8 @@ from onebarangay_psql.rbi.models import FamilyMember, HouseRecord
 class TestRBI:
     """Test the rbi model."""
 
-    def test_create_rbi(self):
+    @staticmethod
+    def test_create_rbi():
         """Test creating a rbi model.
 
         Scenario:
@@ -46,7 +47,8 @@ class TestRBI:
         assert hr.house_id == 1
         assert fm.last_name == hr.family_name
 
-    def test_house_record_str(self, house_record: HouseRecord):
+    @staticmethod
+    def test_house_record_str(house_record: HouseRecord):
         """Test the HouseRecord string representation.
 
         Scenario:
@@ -58,7 +60,8 @@ class TestRBI:
         """
         assert str(house_record) == f"{house_record.house_id}"
 
-    def test_family_member_str(self, family_member: FamilyMember):
+    @staticmethod
+    def test_family_member_str(family_member: FamilyMember):
         """Test the FamilyMember string representation.
 
         Scenario:
@@ -73,7 +76,8 @@ class TestRBI:
             == f"{family_member.house_record}. {family_member.first_name} {family_member.last_name}"
         )
 
-    def test_update_hr(self, house_record: HouseRecord):
+    @staticmethod
+    def test_update_hr(house_record: HouseRecord):
         """Test updating HouseRecord model.
 
         Scenario:
@@ -87,7 +91,8 @@ class TestRBI:
 
         assert house_record.street == "San Martino Street"
 
-    def test_update_fm(self, family_member: FamilyMember):
+    @staticmethod
+    def test_update_fm(family_member: FamilyMember):
         """Test updating FamilyMember model.
 
         Scenario:
@@ -101,7 +106,8 @@ class TestRBI:
 
         assert family_member.age == 27
 
-    def test_hr_ordering(self):
+    @staticmethod
+    def test_hr_ordering():
         """Test the HouseRecord ordering.
 
         Scenario:
@@ -128,7 +134,8 @@ class TestRBI:
         assert HouseRecord.objects.all()[0] == hr2
         assert HouseRecord.objects.all()[1] == hr1
 
-    def test_fm_ordering(self, house_record: HouseRecord):
+    @staticmethod
+    def test_fm_ordering(house_record: HouseRecord):
         """Test the FamilyMember ordering.
 
         Scenario:

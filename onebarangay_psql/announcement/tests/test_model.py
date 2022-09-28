@@ -10,7 +10,8 @@ pytestmark = pytest.mark.django_db
 class TestAnnouncement:
     """Test the Announcement model."""
 
-    def test_create_announcement(self, admin_user: User) -> None:
+    @staticmethod
+    def test_create_announcement(admin_user: User) -> None:
         """Test creating an announcement.
 
         Args:
@@ -29,7 +30,8 @@ class TestAnnouncement:
         assert a1.author == admin_user
         assert a1.tags == "this is a test announcement"
 
-    def test_str(self, admin_user: User) -> None:
+    @staticmethod
+    def test_str(admin_user: User) -> None:
         """Test the string representation of an announcement.
 
         Args:
@@ -44,7 +46,8 @@ class TestAnnouncement:
 
         assert str(a1) == "Test Announcement"
 
-    def test_get_absolute_url(self, admin_user: User) -> None:
+    @staticmethod
+    def test_get_absolute_url(admin_user: User) -> None:
         """Test the absolute url of an announcement.
 
         Args:
@@ -59,7 +62,8 @@ class TestAnnouncement:
 
         assert a1.get_absolute_url() == f"/api/announcement/{a1.slug}/"
 
-    def test_save_announcement(self, admin_user: User) -> None:
+    @staticmethod
+    def test_save_announcement(admin_user: User) -> None:
         """Test saving an announcement.
 
         Args:
@@ -77,7 +81,8 @@ class TestAnnouncement:
 
         assert a1.title == "Updated Test Announcement"
 
-    def test_announcement_ordering(self, admin_user: User) -> None:
+    @staticmethod
+    def test_announcement_ordering(admin_user: User) -> None:
         """Test the ordering of announcements.
 
         The most recent announcement should be first.

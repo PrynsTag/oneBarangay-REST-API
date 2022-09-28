@@ -211,7 +211,8 @@ class TestAppointmentViewSetUrls:
 
         assert response.status_code == status_code
 
-    def test_appointment_me(self, api_client: Client, user: User) -> None:
+    @staticmethod
+    def test_appointment_me(api_client: Client, user: User) -> None:
         """Test the appointment me url.
 
         Scenario:
@@ -240,8 +241,9 @@ class TestAppointmentViewSetUrls:
 class TestStatusViewSetUrls:
     """Test the StatusViewSet urls."""
 
+    @staticmethod
     def test_status_retrieve_url(
-        self, admin_api_client: Client, appointment: Appointment
+        admin_api_client: Client, appointment: Appointment
     ) -> None:
         """Test the status retrieve url.
 
@@ -256,8 +258,9 @@ class TestStatusViewSetUrls:
 
         assert response.status_code == status.HTTP_200_OK
 
+    @staticmethod
     def test_status_partial_update_url(
-        self, admin_user: User, admin_api_client: Client
+        admin_user: User, admin_api_client: Client
     ) -> None:
         """Test the status partial update url.
 
@@ -281,8 +284,9 @@ class TestStatusViewSetUrls:
         assert response.data["status"] == "Approved"
         assert response.status_code == status.HTTP_200_OK
 
+    @staticmethod
     def test_status_update_url(
-        self, admin_user: User, admin_api_client: Client
+        admin_user: User, admin_api_client: Client
     ) -> None:
         """Test the status update url.
 

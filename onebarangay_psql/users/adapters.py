@@ -10,7 +10,8 @@ from django.http import HttpRequest
 class AccountAdapter(DefaultAccountAdapter):
     """AccountAdapter class."""
 
-    def is_open_for_signup(self, request: HttpRequest) -> bool:
+    @staticmethod
+    def is_open_for_signup(request: HttpRequest) -> bool:
         """Check whether the site is open for signups.
 
         Args:
@@ -25,7 +26,8 @@ class AccountAdapter(DefaultAccountAdapter):
 class SocialAccountAdapter(DefaultSocialAccountAdapter):
     """SocialAccountAdapter class."""
 
-    def is_open_for_signup(self, request: HttpRequest, sociallogin: Any) -> bool:
+    @staticmethod
+    def is_open_for_signup(request: HttpRequest, sociallogin: Any) -> bool:
         """Check if social account is open for signup.
 
         Args:

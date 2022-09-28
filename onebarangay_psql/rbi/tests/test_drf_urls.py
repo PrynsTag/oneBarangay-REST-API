@@ -8,12 +8,14 @@ from onebarangay_psql.rbi.models import FamilyMember
 class TestHouseRecordViewSetUrls:
     """Test HouseRecordViewSet urls."""
 
-    def test_house_record_list(self):
+    @staticmethod
+    def test_house_record_list():
         """Test house record list url."""
         assert reverse("api:house-list") == "/api/house-record/"
         assert resolve("/api/house-record/").view_name == "api:house-list"
 
-    def test_house_record_detail(self, house_record):
+    @staticmethod
+    def test_house_record_detail(house_record):
         """Test house record detail url.
 
         Args:
@@ -32,12 +34,14 @@ class TestHouseRecordViewSetUrls:
 class TestFamilyMemberViewSetUrls:
     """Test FamilyMemberViewSet urls."""
 
-    def test_family_member_list(self):
+    @staticmethod
+    def test_family_member_list():
         """Test family member list url."""
         assert reverse("api:family-list") == "/api/family-member/"
         assert resolve("/api/family-member/").view_name == "api:family-list"
 
-    def test_family_member_detail(self, family_member: FamilyMember):
+    @staticmethod
+    def test_family_member_detail(family_member: FamilyMember):
         """Test family member detail url.
 
         Args:

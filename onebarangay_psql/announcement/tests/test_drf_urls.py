@@ -10,7 +10,8 @@ pytestmark = pytest.mark.django_db
 class TestAnnouncementViewSetUrls:
     """Test DRF URls for AnnouncementViewSet."""
 
-    def test_announcement_detail(self, announcement: Announcement):
+    @staticmethod
+    def test_announcement_detail(announcement: Announcement):
         """Test announcement 'detail' drf url to reverse and resolve.
 
         Args:
@@ -25,7 +26,8 @@ class TestAnnouncementViewSetUrls:
             == "api:announcement-detail"
         )
 
-    def test_announcement_list(self):
+    @staticmethod
+    def test_announcement_list():
         """Test announcement 'list' drf url to reverse and resolve."""
         assert reverse("api:announcement-list") == "/api/announcement/"
         assert resolve("/api/announcement/").view_name == "api:announcement-list"
