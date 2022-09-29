@@ -10,7 +10,7 @@ django-crispy-forms==1.14.0  # https://github.com/django-crispy-forms/django-cri
 django-environ==0.9.0  # https://github.com/joke2k/django-environ
 django-extensions==3.2.1  # https://github.com/django-extensions/django-extensions
 django-redis==5.2.0  # https://github.com/jazzband/django-redis
-django==4.1  # pyup: < 4.0  # https://www.djangoproject.com/
+django==4.1.1  # pyup: < 4.0  # https://www.djangoproject.com/
 djangorestframework==3.14.0  # https://github.com/encode/django-rest-framework
 
 # Django Admin
@@ -18,7 +18,7 @@ djangorestframework==3.14.0  # https://github.com/encode/django-rest-framework
 django-adminactions==2.0.0 # https://github.com/saxix/django-adminactions/
 django-auditlog==2.1.1 # https://github.com/jazzband/django-auditlog
 django-filter==22.1 # https://github.com/carltongibson/django-filter
-django-import-export==2.8.0 # https://github.com/django-import-export/django-import-export
+django-import-export==2.9.0 # https://github.com/django-import-export/django-import-export
 django-jazzmin==2.5.0  # https://github.com/farridav/django-jazzmin
 django-model-utils==4.2.0  # https://github.com/jazzband/django-model-utils
 django-push-notifications==3.0.0 # https://github.com/jazzband/django-push-notifications
@@ -34,7 +34,7 @@ drf-spectacular==0.23.1
 Pillow==9.2.0  # https://github.com/python-pillow/Pillow
 PyPDF2==2.11.0 # https://github.com/py-pdf/PyPDF2
 hiredis==2.0.0  # https://github.com/redis/hiredis-py
-newrelic==8.0.0.179 # https://github.com/newrelic/newrelic-python-agent
+newrelic==8.2.0.181 # https://github.com/newrelic/newrelic-python-agent
 psycopg2==2.9.3  # https://github.com/psycopg/psycopg2
 python-slugify==6.1.2  # https://github.com/un33k/python-slugify
 pytz==2022.2.1  # https://github.com/stub42/pytz
