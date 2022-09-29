@@ -27,7 +27,7 @@ django-tinymce==3.4.0 # https://github.com/jazzband/django-tinymce
 
 # Documentation
 # ------------------------------------------------------------------------------
-drf-spectacular==0.23.1
+drf-spectacular==0.24.2
 
 # Others
 # ------------------------------------------------------------------------------
