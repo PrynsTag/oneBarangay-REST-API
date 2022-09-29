@@ -1,7 +1,7 @@
 # Django
 # ------------------------------------------------------------------------------
 argon2-cffi==21.3.0  # https://github.com/hynek/argon2_cffi
-crispy-bootstrap5==0.6  # https://github.com/django-crispy-forms/crispy-bootstrap5
+crispy-bootstrap5==0.7  # https://github.com/django-crispy-forms/crispy-bootstrap5
 dj-rest-auth==2.2.5 # https://github.com/iMerica/dj-rest-auth
 django-allauth==0.51.0  # https://github.com/pennersr/django-allauth
 django-compressor==4.1  # https://github.com/django-compressor/django-compressor
