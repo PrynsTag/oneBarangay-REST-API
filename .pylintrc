@@ -255,6 +255,9 @@ ignored-classes=optparse.Values,thread._local,_thread._local
 # expressions are accepted.
 generated-members=REQUEST,acl_users,aq_parent,"[a-zA-Z]+_set{1,2}",save,delete
 
+# Ignores argument names when checking for unused import
+ignored-argument-names=arg|args|kwargs|self|cls|_|request
+
 [ BLACK ]
 
 # Conform to black's formatting style.
