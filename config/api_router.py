@@ -13,6 +13,7 @@ from onebarangay_psql.users.api.views import (
     UserViewSet,
 )
 
+
 router = BaseRouter()
 
 if settings.DEBUG:

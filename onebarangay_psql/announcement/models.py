@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
 from tinymce.models import HTMLField
 
+
 user = get_user_model()
 
 

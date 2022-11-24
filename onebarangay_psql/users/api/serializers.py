@@ -6,6 +6,7 @@ from rest_framework.relations import HyperlinkedRelatedField
 from onebarangay_psql.users.models import Profile
 from onebarangay_psql.utils.choice_field import ChoicesField
 
+
 User = get_user_model()
 
 

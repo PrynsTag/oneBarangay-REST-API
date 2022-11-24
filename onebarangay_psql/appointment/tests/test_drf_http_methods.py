@@ -12,6 +12,7 @@ from rest_framework import status
 from config.settings.base import APPS_DIR
 from onebarangay_psql.appointment.models import Appointment
 
+
 User = get_user_model()
 
 

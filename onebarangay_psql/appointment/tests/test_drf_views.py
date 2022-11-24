@@ -18,6 +18,7 @@ from onebarangay_psql.appointment.serializer import (
 from onebarangay_psql.appointment.viewset import AppointmentViewSet, StatusUpdateViewSet
 from onebarangay_psql.users.models import User
 
+
 pytestmark = pytest.mark.django_db
 
 

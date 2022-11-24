@@ -22,6 +22,7 @@ from onebarangay_psql.users.factories import UserFactory
 from onebarangay_psql.users.models import Profile
 from onebarangay_psql.utils.refresh_material_view import refresh_mv
 
+
 NUM_USERS = 50
 NUM_APPOINTMENTS = 25
 NUM_APPOINTMENTS_PER_USER = 4

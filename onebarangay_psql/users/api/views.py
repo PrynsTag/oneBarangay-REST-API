@@ -26,6 +26,7 @@ from onebarangay_psql.users.api.serializers import (
 from onebarangay_psql.users.models import Profile
 from onebarangay_psql.users.permissions import IsOwnProfile
 
+
 User = get_user_model()
 
 

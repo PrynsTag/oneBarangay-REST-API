@@ -3,6 +3,7 @@ import pytest
 
 from onebarangay_psql.users.models import User
 
+
 pytestmark = pytest.mark.django_db
 
 

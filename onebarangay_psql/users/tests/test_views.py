@@ -19,6 +19,7 @@ from onebarangay_psql.users.views import (
     user_detail_view,
 )
 
+
 pytestmark = pytest.mark.django_db
 
 

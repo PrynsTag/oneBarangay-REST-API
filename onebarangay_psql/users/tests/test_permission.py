@@ -10,6 +10,7 @@ from rest_framework.test import APIClient
 
 from onebarangay_psql.users.models import User
 
+
 pytestmark = pytest.mark.django_db
 
 

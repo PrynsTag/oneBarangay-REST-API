@@ -10,6 +10,7 @@ from onebarangay_psql.announcement.serializer import AnnouncementSerializer
 from onebarangay_psql.announcement.viewset import AnnouncementViewSet
 from onebarangay_psql.users.models import User
 
+
 pytestmark = pytest.mark.django_db
 
 

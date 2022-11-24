@@ -5,6 +5,7 @@ from django.dispatch import receiver
 
 from onebarangay_psql.users.models import Profile
 
+
 User = get_user_model()
 
 

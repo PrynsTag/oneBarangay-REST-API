@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from onebarangay_psql.users.forms import UserAdminCreationForm
 from onebarangay_psql.users.models import User
 
+
 pytestmark = pytest.mark.django_db
 
 

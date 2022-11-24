@@ -9,6 +9,7 @@ from config.settings.base import APPS_DIR
 from onebarangay_psql.appointment.models import Appointment
 from onebarangay_psql.users.factories import UserFactory
 
+
 with open(APPS_DIR / "media/appointment/government_id/default.png", "rb") as f:
     image = SimpleUploadedFile(f.name, f.read(), content_type="image/jpeg")
 

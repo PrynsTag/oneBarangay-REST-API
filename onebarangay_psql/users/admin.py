@@ -1,13 +1,13 @@
 """Register your user models here.."""
 from django.contrib import admin
-from django.contrib.auth import admin as auth_admin
-from django.contrib.auth import get_user_model
+from django.contrib.auth import admin as auth_admin, get_user_model
 from django.utils.translation import gettext as _
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
 from onebarangay_psql.users.forms import UserAdminChangeForm, UserAdminCreationForm
 from onebarangay_psql.users.models import Profile
+
 
 User = get_user_model()
 

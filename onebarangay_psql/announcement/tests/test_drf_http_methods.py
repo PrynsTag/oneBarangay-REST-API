@@ -6,6 +6,7 @@ from rest_framework import status
 
 from onebarangay_psql.announcement.models import Announcement
 
+
 User = get_user_model()
 
 

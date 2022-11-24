@@ -7,6 +7,7 @@ import pytest
 from onebarangay_psql.appointment.models import Appointment
 from onebarangay_psql.users.models import User
 
+
 pytestmark = pytest.mark.django_db
 
 

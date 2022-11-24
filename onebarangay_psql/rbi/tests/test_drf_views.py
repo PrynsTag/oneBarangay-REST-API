@@ -13,6 +13,7 @@ from onebarangay_psql.rbi.serializers import (
 from onebarangay_psql.rbi.viewset import FamilyMemberViewSet, HouseRecordViewSet
 from onebarangay_psql.users.models import User
 
+
 pytestmark = pytest.mark.django_db
 
 

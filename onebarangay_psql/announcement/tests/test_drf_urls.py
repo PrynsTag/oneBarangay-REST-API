@@ -4,6 +4,7 @@ from django.urls import resolve, reverse
 
 from onebarangay_psql.announcement.models import Announcement
 
+
 pytestmark = pytest.mark.django_db
 
 

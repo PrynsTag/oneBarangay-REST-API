@@ -5,6 +5,7 @@ from django.test import RequestFactory
 from onebarangay_psql.users.api.views import ProfileViewSet, UserViewSet
 from onebarangay_psql.users.models import User
 
+
 pytestmark = pytest.mark.django_db
 
 
