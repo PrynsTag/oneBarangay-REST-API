@@ -23,7 +23,7 @@ class TestUserViewSet:
         request = rf.get("/fake-url/")
         request.user = user
 
-        view.request = request
+        view.setup(request)
 
         assert user in view.get_queryset()
 
@@ -39,9 +39,9 @@ class TestUserViewSet:
         request = rf.get("/fake-url/")
         request.user = user
 
-        view.request = request
+        view.setup(request)
 
-        response = view.me(request)
+        response = view.me(request)  # type: ignore
 
         data = {
             "id": user.username,
@@ -65,7 +65,7 @@ class TestUserViewSet:
             request = rf.get("/fake-url/")
             request.user = user
 
-            view.request = request
+            view.setup(request)
 
             assert user.profile in view.get_queryset()
 
@@ -81,9 +81,10 @@ class TestUserViewSet:
             request = rf.get("/fake-url/")
             request.user = user
 
-            view.request = request
+            view.setup(request)
 
-            response = view.me(request)
+            response = view.me(request)  # type: ignore
+
             user_data = [
                 ("username", user.username),
                 ("email", user.email),
@@ -104,7 +105,7 @@ class TestUserViewSet:
             request = rf.get("/fake-url/")
             request.user = user
 
-            view.request = request
+            view.setup(request)
             view.kwargs = {"username": user.username}
 
             assert user == view.get_object().user
