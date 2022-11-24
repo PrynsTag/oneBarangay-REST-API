@@ -99,7 +99,7 @@ repos:
             )$
         args: [ "--load-plugins=pylint_django", "--django-settings-module=config.settings.local" ]
         additional_dependencies:
-          - pylint_django
+          - pylint-django
           - django
           - faker
           - djangorestframework
