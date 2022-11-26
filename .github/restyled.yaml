@@ -13,6 +13,7 @@ restylers:
     - jq:
           enabled: false
     - "*":
+          enabled: true
 
 exclude:
     - "**/*.patch"
