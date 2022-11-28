@@ -19,6 +19,13 @@ class User(AbstractUser):
     first_name = None  # type: ignore
     last_name = None  # type: ignore
 
+    class Meta:
+        """Meta class for User model."""
+
+        ordering = ["-id"]
+        verbose_name = _("user")
+        verbose_name_plural = _("users")
+
     def __str__(self):
         """User model string representation."""
         return self.username
@@ -91,6 +98,13 @@ class Profile(models.Model):
     gender = models.CharField(
         _("Gender"), max_length=1, choices=Gender.choices, blank=True
     )
+
+    class Meta:
+        """Meta class for Profile model."""
+
+        ordering = ["-id"]
+        verbose_name = _("profile")
+        verbose_name_plural = _("profiles")
 
     def __str__(self):
         """Profile model string representation."""
