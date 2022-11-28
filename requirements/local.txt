@@ -5,7 +5,7 @@
 black==22.10.0  # https://github.com/psf/black
 coverage==6.5.0  # https://github.com/nedbat/coveragepy
 coveralls==3.3.1 # https://github.com/TheKevJames/coveralls-python ## Coverage Report
-django-coverage-plugin==2.0.3  # https://github.com/nedbat/django_coverage_plugin
+django-coverage-plugin==2.0.4  # https://github.com/nedbat/django_coverage_plugin
 django-stubs==1.13.0  # https://github.com/typeddjango/django-stubs
 djangorestframework-stubs==1.8.0  # https://github.com/typeddjango/djangorestframework-stubs
 djhtml==1.5.2  # https://github.com/rtts/djhtml
