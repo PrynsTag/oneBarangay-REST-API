@@ -124,6 +124,7 @@ repos:
           - django-push-notifications
           - PyPDF2
           - reportlab
+          - djangorestframework-jsonapi
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v0.991
@@ -153,7 +154,8 @@ repos:
           django-tinymce,
           django-push-notifications,
           PyPDF2,
-          reportlab
+          reportlab,
+          djangorestframework-jsonapi
         ]
 
   - repo: https://github.com/asottile/pyupgrade

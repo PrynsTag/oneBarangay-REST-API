@@ -12,6 +12,7 @@ django-extensions==3.2.1  # https://github.com/django-extensions/django-extensio
 django-redis==5.2.0  # https://github.com/jazzband/django-redis
 django==4.1.2  # pyup: < 4.0  # https://www.djangoproject.com/
 djangorestframework==3.14.0  # https://github.com/encode/django-rest-framework
+djangorestframework-jsonapi[django-filter]==6.0.0  # https://github.com/django-json-api/django-rest-framework-json-api
 
 # Django Admin
 # ------------------------------------------------------------------------------
