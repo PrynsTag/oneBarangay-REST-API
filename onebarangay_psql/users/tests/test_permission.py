@@ -62,7 +62,6 @@ class TestUserAndProfileListPermission:
         """Test for profile list admin permission.
 
         Args:
-            admin_user (User): Admin user model.
             admin_client (APIClient): Django rest framework client.
             url_name (str): URL name.
         """
@@ -135,15 +134,31 @@ class TestUserAndProfileDetailPermission:
         """
         api_client.force_authenticate(user_type)
 
-        last_login_data = datetime.now()
-        patch_data = {"last_login": last_login_data}
-        put_data = {
-            "last_login": last_login_data,
-            "gender": user_type.profile.gender or "O",
-            "civil_status": user_type.profile.civil_status,
-        }
         user_data = {"username": user_type.username}
+        last_login_data = datetime.now()
         url = reverse(url_name, kwargs=user_data)
+        resource_type = "User" if "user-detail" in url_name else "Profile"
+
+        patch_data = {
+            "data": {
+                "type": resource_type,
+                "id": user_type.username,
+                "attributes": {
+                    "last_login": last_login_data,
+                },
+            }
+        }
+        put_data = {
+            "data": {
+                "type": resource_type,
+                "id": user_type.username,
+                "attributes": {
+                    "last_login": last_login_data,
+                    "gender": user_type.profile.gender or "O",
+                    "civil_status": user_type.profile.civil_status,
+                },
+            }
+        }
 
         get_response = api_client.get(url)
         put_response = api_client.put(url, put_data | user_data)

@@ -99,11 +99,13 @@ class TestAppointmentViewSet:
             "start_appointment": datetime.now(tz=ZoneInfo("Asia/Manila")),
             "document": "IND",
             "government_id": image,
+            "status": "PEN",
         }
 
         request = rf.post("/fake-url/")
         request.user = user
         request.data = appointment_data
+        request.query_params = {}
 
         view.request = request
         view.format_kwarg = None
@@ -127,6 +129,7 @@ class TestAppointmentViewSet:
 
         request = rf.get("/fake-url/")
         request.user = admin_user
+        request.query_params = {}
 
         view.request = request
         view.format_kwarg = None
@@ -172,6 +175,7 @@ class TestStatusUpdateViewSet:
         request = rf.post("/fake-url/")
         request.appointment = appointment
         request.data = status_update_data
+        request.query_params = {}
 
         view.request = request
         view.format_kwarg = None

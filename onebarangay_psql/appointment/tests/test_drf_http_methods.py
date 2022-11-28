@@ -94,12 +94,14 @@ class TestAppointmentViewSetUrls:
         response = api_client.post(
             reverse("api:appointment-list"),
             {
-                "recipient_name": "Prince Velasco",
+                "recipient_name": f"{user_type.first_name} {user_type.last_name}",
                 "purpose": "Test Appointment",
                 "start_appointment": datetime.now(tz=ZoneInfo("Asia/Manila")),
                 "document": "IND",
                 "government_id": image,
+                "status": "PEN",
             },
+            format="multipart",
         )
         assert response.status_code == status.HTTP_201_CREATED
 
@@ -136,7 +138,9 @@ class TestAppointmentViewSetUrls:
                 "start_appointment": appointment.start_appointment,
                 "document": appointment.document,
                 "government_id": appointment.government_id,
+                "status": appointment.status,
             },
+            format="multipart",
         )
 
         if user_type == "admin":
@@ -174,6 +178,7 @@ class TestAppointmentViewSetUrls:
             {
                 "purpose": appointment.purpose + " Updated",
             },
+            format="multipart",
         )
 
         if user_type == "admin":
@@ -220,7 +225,7 @@ class TestAppointmentViewSetUrls:
             - As a user, I should be able to get my appointments.
         Args:
             api_client (Client): The api client sending the get request.
-            user_type (User): The user requesting the appointments.
+            user (User): The user requesting the appointments.
         """
         api_client.force_login(user)
 
@@ -279,7 +284,16 @@ class TestStatusViewSetUrls:
         )
         response = admin_api_client.patch(
             reverse("api:status-detail", kwargs={"pk": a1.id}),
-            {"status": "APP"},
+            {
+                "data": {
+                    "type": "Appointment",
+                    "id": a1.id,
+                    "attributes": {
+                        "status": "APP",
+                    },
+                }
+            },
+            format="vnd.api+json",
         )
 
         assert response.data["status"] == "Approved"
@@ -303,7 +317,16 @@ class TestStatusViewSetUrls:
         )
         response = admin_api_client.put(
             reverse("api:status-detail", kwargs={"pk": a1.id}),
-            {"status": "CAN"},
+            {
+                "data": {
+                    "type": "Appointment",
+                    "id": a1.id,
+                    "attributes": {
+                        "status": "CAN",
+                    },
+                }
+            },
+            format="vnd.api+json",
         )
 
         assert response.data["status"] == "Cancelled"

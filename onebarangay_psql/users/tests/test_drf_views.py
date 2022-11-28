@@ -39,6 +39,7 @@ class TestUserViewSet:
         view = UserViewSet()
         request = rf.get("/fake-url/")
         request.user = user
+        request.query_params = {}  # type: ignore
 
         view.setup(request)
 
@@ -81,6 +82,7 @@ class TestUserViewSet:
             view = ProfileViewSet()
             request = rf.get("/fake-url/")
             request.user = user
+            request.query_params = {}  # type: ignore
 
             view.setup(request)
 

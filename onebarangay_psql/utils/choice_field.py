@@ -1,5 +1,5 @@
 """Create your custom choice field here."""
-from rest_framework import serializers
+from rest_framework_json_api import serializers
 
 
 class ChoicesField(serializers.ChoiceField):

@@ -49,10 +49,15 @@ class TestAnnouncementViewSetUrls:
         response = admin_api_client.post(
             reverse("api:announcement-list"),
             {
-                "title": "This is a new announcement",
-                "content": "This is the content of the new announcement",
-                "is_featured": "True",
-                "tags": '["tag1", "tag2"]',
+                "data": {
+                    "type": "Announcement",
+                    "attributes": {
+                        "title": "This is a new announcement",
+                        "content": "This is the content of the new announcement",
+                        "is_featured": "True",
+                        "tags": '["tag1", "tag2"]',
+                    },
+                }
             },
         )
         assert response.status_code == status.HTTP_201_CREATED
@@ -70,10 +75,16 @@ class TestAnnouncementViewSetUrls:
         response = admin_api_client.put(
             reverse("api:announcement-detail", kwargs={"slug": announcement.slug}),
             {
-                "title": announcement.title + " updated",
-                "content": announcement.content,
-                "is_featured": announcement.is_featured,
-                "tags": '["tag1", "tag2"]',
+                "data": {
+                    "type": "Announcement",
+                    "id": announcement.slug,
+                    "attributes": {
+                        "title": announcement.title + " updated",
+                        "content": announcement.content,
+                        "is_featured": announcement.is_featured,
+                        "tags": '["tag1", "tag2"]',
+                    },
+                }
             },
         )
         assert response.status_code == status.HTTP_200_OK
@@ -91,7 +102,13 @@ class TestAnnouncementViewSetUrls:
         response = admin_api_client.patch(
             reverse("api:announcement-detail", kwargs={"slug": announcement.slug}),
             {
-                "content": announcement.content + " updated",
+                "data": {
+                    "type": "Announcement",
+                    "id": announcement.slug,
+                    "attributes": {
+                        "content": announcement.content + " updated",
+                    },
+                }
             },
         )
         assert response.status_code == status.HTTP_200_OK

@@ -1,7 +1,7 @@
 """Create your user and profile serializers here."""
 from django.contrib.auth import get_user_model
-from rest_framework import serializers
-from rest_framework.relations import HyperlinkedRelatedField
+from rest_framework_json_api import serializers
+from rest_framework_json_api.relations import HyperlinkedRelatedField
 
 from onebarangay_psql.users.models import Profile
 from onebarangay_psql.utils.choice_field import ChoicesField

@@ -86,6 +86,7 @@ class TestAnnouncementViewSet:
         request = rf.post("/fake-url/")
         request.user = user
         request.data = announcement_data
+        request.query_params = {}
 
         view.request = request
         view.format_kwarg = None
@@ -109,6 +110,7 @@ class TestAnnouncementViewSet:
 
         request = rf.get("/fake-url/")
         request.user = admin_user
+        request.query_params = {}
 
         view.request = request
         view.format_kwarg = None

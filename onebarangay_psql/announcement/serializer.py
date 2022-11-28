@@ -1,6 +1,6 @@
 """Create your announcement serializer here."""
-from rest_framework import serializers
-from rest_framework.relations import HyperlinkedRelatedField
+from rest_framework_json_api import serializers
+from rest_framework_json_api.relations import HyperlinkedRelatedField
 from taggit.serializers import TaggitSerializer, TagListSerializerField
 
 from onebarangay_psql.announcement.models import Announcement
