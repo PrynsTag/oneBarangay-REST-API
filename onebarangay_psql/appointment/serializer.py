@@ -14,6 +14,9 @@ class AppointmentSerializer(serializers.ModelSerializer):
     user: HyperlinkedRelatedField = serializers.HyperlinkedRelatedField(
         view_name="api:user-detail", lookup_field="username", read_only=True
     )
+    url = serializers.HyperlinkedIdentityField(
+        view_name="api:appointment-detail", lookup_field="pk"
+    )
     username = serializers.ReadOnlyField(source="user.username")
     email = serializers.ReadOnlyField(source="user.email")
 
