@@ -20,7 +20,7 @@ django-adminactions==2.0.0 # https://github.com/saxix/django-adminactions/
 django-auditlog==2.2.0 # https://github.com/jazzband/django-auditlog
 django-filter==22.1 # https://github.com/carltongibson/django-filter
 django-import-export==3.0.1 # https://github.com/django-import-export/django-import-export
-django-jazzmin==2.5.0  # https://github.com/farridav/django-jazzmin
+django-jazzmin==2.6.0  # https://github.com/farridav/django-jazzmin
 django-model-utils==4.3.1  # https://github.com/jazzband/django-model-utils
 django-push-notifications==3.0.0 # https://github.com/jazzband/django-push-notifications
 django-taggit==3.0.0 # https://github.com/jazzband/django-taggit
