@@ -72,6 +72,8 @@
 
 ## About the Project
 
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
+
 The manual way of processing transactions in the barangay (**village**) is still prevalent
 today. Filling out necessary records by using pen and paper that are stored in
 log books and folders in the barangay (**village**). There are records which have been
@@ -175,10 +177,16 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-## Running the tests
+### Running the tests
 
+#### With Django
 ```bash
 python manage.py test
+```
+
+#### With Pytest
+```bash
+pytest
 ```
 
 ### Deployment
@@ -379,6 +387,8 @@ If you found this project useful, please consider donating to help me maintain a
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[product-screenshot]: docs/images/oneBarangay_Product_Screenshot.png
 
 [cookiecutter-django-image]: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?style=for-the-badge&logo=cookiecutter
 
