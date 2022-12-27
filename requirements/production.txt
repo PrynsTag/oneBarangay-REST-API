@@ -4,7 +4,7 @@
 
 # Django
 # ------------------------------------------------------------------------------
-django-anymail[sendgrid]==8.6  # https://github.com/anymail/django-anymail
+django-anymail[sendgrid]==9.0  # https://github.com/anymail/django-anymail
 django-storages[google]==1.13.1  # https://github.com/jschneier/django-storages
 
 gunicorn==20.1.0  # https://github.com/benoitc/gunicorn
