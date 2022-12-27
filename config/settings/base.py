@@ -146,6 +146,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # MIDDLEWARE
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
+CUSTOM_MIDDLEWARE = [
+    "onebarangay_psql.log.middleware.PageViewsMiddleware",
+    "onebarangay_psql.log.middleware.TimeSpentMiddleware",
+]
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",
@@ -160,6 +164,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "auditlog.middleware.AuditlogMiddleware",
     "django.contrib.admindocs.middleware.XViewMiddleware",
+    *CUSTOM_MIDDLEWARE,
 ]
 
 # STATIC

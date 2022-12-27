@@ -11,6 +11,8 @@ from django.views.generic import TemplateView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
 
+from onebarangay_psql import log
+
 
 urlpatterns: list[URLPattern | URLResolver] = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
@@ -27,6 +29,7 @@ urlpatterns: list[URLPattern | URLResolver] = [
     path("adminactions/", include("adminactions.urls")),
     path("tinymce/", include("tinymce.urls")),
     path("i18n/", include("django.conf.urls.i18n")),
+    path("metrics/", log.views.prometheus_metrics, name="prometheus-metrics"),
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
 

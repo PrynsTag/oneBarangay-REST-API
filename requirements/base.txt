@@ -43,3 +43,4 @@ rcssmin==1.1.0  # https://github.com/ndparker/rcssmin
 redis==4.4.0  # https://github.com/redis/redis-py
 reportlab==3.6.12 # https://www.reportlab.com/
 whitenoise==6.2.0  # https://github.com/evansd/whitenoise
+prometheus-client==0.15.0 # https://github.com/prometheus/client_python
