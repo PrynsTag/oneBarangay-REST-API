@@ -12,7 +12,7 @@ djhtml==1.5.2  # https://github.com/rtts/djhtml
 flake8-isort==5.0.3  # https://github.com/gforcada/flake8-isort
 flake8==6.0.0  # https://github.com/PyCQA/flake8
 mypy==0.991  # https://github.com/python/mypy
-pre-commit==2.20.0  # https://github.com/pre-commit/pre-commit
+pre-commit==2.21.0  # https://github.com/pre-commit/pre-commit
 pylint-django==2.5.3  # https://github.com/PyCQA/pylint-django
 
 # Testing
