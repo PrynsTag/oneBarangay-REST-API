@@ -109,7 +109,6 @@ class HouseRecordAdmin(ImportExportModelAdmin):
         )
 
         for obj in queryset:
-
             data = [
                 [
                     "#",
