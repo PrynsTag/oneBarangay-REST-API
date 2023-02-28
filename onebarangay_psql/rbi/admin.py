@@ -3,6 +3,7 @@ from datetime import datetime
 
 from django.contrib import admin
 from django.core.files.temp import NamedTemporaryFile
+from django.db.models import QuerySet
 from django.http import HttpResponse
 from django.templatetags.static import static
 from import_export import resources
@@ -98,7 +99,7 @@ class HouseRecordAdmin(ImportExportModelAdmin):
         permissions=["view"],
         description="Download selected rbi as pdf",
     )
-    def export_rbi_to_pdf(self, request, queryset: list[HouseRecord]):
+    def export_rbi_to_pdf(self, request, queryset: QuerySet[HouseRecord]):
         """Print RBI."""
         file = NamedTemporaryFile(suffix=".pdf")
         filename = file.name
