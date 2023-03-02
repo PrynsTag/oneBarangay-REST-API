@@ -8,7 +8,7 @@ coveralls==3.3.1 # https://github.com/TheKevJames/coveralls-python ## Coverage R
 django-coverage-plugin==3.0.0  # https://github.com/nedbat/django_coverage_plugin
 django-stubs==1.13.1  # https://github.com/typeddjango/django-stubs
 djangorestframework-stubs==1.8.0  # https://github.com/typeddjango/djangorestframework-stubs
-djhtml==1.5.2  # https://github.com/rtts/djhtml
+djhtml==3.0.2  # https://github.com/rtts/djhtml
 flake8-isort==6.0.0  # https://github.com/gforcada/flake8-isort
 flake8==6.0.0  # https://github.com/PyCQA/flake8
 mypy==1.0.1  # https://github.com/python/mypy
