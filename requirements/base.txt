@@ -42,5 +42,5 @@ pytz==2022.7.1  # https://github.com/stub42/pytz
 rcssmin==1.1.0  # https://github.com/ndparker/rcssmin
 redis==4.5.1  # https://github.com/redis/redis-py
 reportlab==3.6.12 # https://www.reportlab.com/
-whitenoise==6.3.0  # https://github.com/evansd/whitenoise
+whitenoise==6.4.0  # https://github.com/evansd/whitenoise
 prometheus-client==0.15.0 # https://github.com/prometheus/client_python
