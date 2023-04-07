@@ -11,7 +11,7 @@ djangorestframework-stubs==1.9.1  # https://github.com/typeddjango/djangorestfra
 djhtml==3.0.6  # https://github.com/rtts/djhtml
 flake8-isort==6.0.0  # https://github.com/gforcada/flake8-isort
 flake8==6.0.0  # https://github.com/PyCQA/flake8
-mypy==1.0.1  # https://github.com/python/mypy
+mypy==1.2.0  # https://github.com/python/mypy
 pre-commit==3.1.1  # https://github.com/pre-commit/pre-commit
 pylint-django==2.5.3  # https://github.com/PyCQA/pylint-django
 
