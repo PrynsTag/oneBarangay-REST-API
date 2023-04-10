@@ -21,7 +21,7 @@ django-debug-toolbar==3.8.1  # https://github.com/jazzband/django-debug-toolbar
 factory-boy==3.2.1  # https://github.com/FactoryBoy/factory_boy
 httpie==3.2.1 # https://github.com/httpie/httpie ## For HTTP requests
 ipdb==0.13.11  # https://github.com/gotcha/ipdb
-jupyterlab==3.6.2  # https://docs.jupyter.org/en/latest/ ## For shell commands
+jupyterlab==3.6.3  # https://docs.jupyter.org/en/latest/ ## For shell commands
 psycopg2-binary==2.9.5  # https://github.com/psycopg/psycopg2
 pytest-django==4.5.2  # https://github.com/pytest-dev/pytest-django
 pytest-mock==3.10.0 # https://github.com/pytest-dev/pytest-mock/
