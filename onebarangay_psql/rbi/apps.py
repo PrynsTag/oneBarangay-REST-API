@@ -1,4 +1,5 @@
 """Create your rbi apps here."""
+
 from django.apps import AppConfig
 
 

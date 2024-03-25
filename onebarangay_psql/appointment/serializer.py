@@ -1,4 +1,5 @@
 """Create your appointment serializer here."""
+
 from rest_framework_json_api import serializers
 from rest_framework_json_api.relations import HyperlinkedRelatedField
 

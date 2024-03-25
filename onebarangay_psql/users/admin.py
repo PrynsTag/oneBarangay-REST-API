@@ -1,4 +1,5 @@
 """Register your user models here.."""
+
 from django.contrib import admin
 from django.contrib.auth import admin as auth_admin, get_user_model
 from django.utils.translation import gettext as _

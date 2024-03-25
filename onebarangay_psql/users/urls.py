@@ -1,4 +1,5 @@
 """Create your URL for the user's app."""
+
 from django.urls import path
 
 from onebarangay_psql.users.views import (

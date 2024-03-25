@@ -1,4 +1,5 @@
 """Create your rbi models here."""
+
 from auditlog.registry import auditlog
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models

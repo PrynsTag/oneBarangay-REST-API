@@ -1,4 +1,5 @@
 """Create your announcement models here."""
+
 from auditlog.registry import auditlog
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator

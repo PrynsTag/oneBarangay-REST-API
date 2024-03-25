@@ -1,4 +1,5 @@
 """Create your custom management commands here."""
+
 import random
 from datetime import date, datetime, timedelta
 from pathlib import Path

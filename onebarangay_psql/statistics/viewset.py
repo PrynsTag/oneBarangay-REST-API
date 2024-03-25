@@ -1,4 +1,5 @@
 """Create your statistics viewsets here."""
+
 import datetime
 import time
 from typing import Any

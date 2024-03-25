@@ -1,4 +1,5 @@
 """Create your statistics apps here."""
+
 from django.apps import AppConfig
 
 
