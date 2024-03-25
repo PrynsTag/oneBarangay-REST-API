@@ -1,4 +1,5 @@
 """Refreshes Material Views."""
+
 import datetime
 import time
 

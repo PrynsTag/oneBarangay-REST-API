@@ -1,4 +1,5 @@
 """Create your appointment models here."""
+
 from datetime import timedelta
 
 from auditlog.registry import auditlog

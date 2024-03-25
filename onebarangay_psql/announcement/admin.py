@@ -1,4 +1,5 @@
 """Register your announcement models here."""
+
 from django.contrib import admin
 from django.utils.html import strip_tags
 from import_export import resources

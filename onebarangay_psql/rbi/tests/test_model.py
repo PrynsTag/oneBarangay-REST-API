@@ -1,4 +1,5 @@
 """Create your rbi model tests here."""
+
 import datetime
 from zoneinfo import ZoneInfo
 

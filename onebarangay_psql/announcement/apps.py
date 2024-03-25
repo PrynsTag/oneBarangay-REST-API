@@ -1,4 +1,5 @@
 """Create your app config for announcement apps."""
+
 import contextlib
 
 from django.apps import AppConfig

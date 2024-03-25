@@ -1,4 +1,5 @@
 """Views for Prometheus monitoring."""
+
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from prometheus_client import CONTENT_TYPE_LATEST

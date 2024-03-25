@@ -1,4 +1,5 @@
 """Create your rbi serializers here."""
+
 from rest_framework_json_api import serializers
 
 from onebarangay_psql.rbi.models import FamilyMember, HouseRecord

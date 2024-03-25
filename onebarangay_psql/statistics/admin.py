@@ -1,4 +1,5 @@
 """Register your statistics models here."""
+
 from adminactions import actions
 from django.contrib import admin
 

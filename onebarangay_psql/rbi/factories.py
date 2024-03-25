@@ -1,4 +1,5 @@
 """Create your rbi factories here."""
+
 from zoneinfo import ZoneInfo
 
 import factory

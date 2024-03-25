@@ -1,4 +1,5 @@
 """Create your rbi drf urls tests here."""
+
 from django.urls import resolve
 from rest_framework.reverse import reverse
 
