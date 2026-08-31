@@ -1,4 +1,5 @@
 """Create your announcement serializer here."""
+
 from rest_framework_json_api import serializers
 from rest_framework_json_api.relations import HyperlinkedRelatedField
 from taggit.serializers import TaggitSerializer, TagListSerializerField

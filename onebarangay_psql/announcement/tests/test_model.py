@@ -1,4 +1,5 @@
 """Create your announcement model tests here."""
+
 import pytest
 
 from onebarangay_psql.announcement.models import Announcement

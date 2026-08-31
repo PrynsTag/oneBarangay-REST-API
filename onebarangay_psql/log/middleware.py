@@ -1,4 +1,5 @@
 """Page Views and Time Spent custom middleware for Prometheus."""
+
 import time
 
 from onebarangay_psql.utils.prometheus import PROM_GRAPHQL_REQUEST_TIME, PROM_PAGEVIEWS

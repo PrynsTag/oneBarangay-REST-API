@@ -1,4 +1,5 @@
 """Create your statistics drf viewsets test here."""
+
 import pytest
 from django.test import RequestFactory
 from django.urls import reverse
