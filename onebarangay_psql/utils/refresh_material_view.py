@@ -12,7 +12,8 @@ def refresh_mv():
     """Refresh Materialized Views in the Database."""
     start_time = time.monotonic()
     with connection.cursor() as cursor:
-        cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY materialized_statistics_total; REFRESH
+        cursor.execute(
+            """REFRESH MATERIALIZED VIEW CONCURRENTLY materialized_statistics_total; REFRESH
                        MATERIALIZED VIEW CONCURRENTLY materialized_statistics_user_signup; REFRESH MATERIALIZED
                        VIEW CONCURRENTLY materialized_statistics_user_signup_monthly; REFRESH MATERIALIZED VIEW
                        CONCURRENTLY materialized_statistics_appointment; REFRESH MATERIALIZED VIEW CONCURRENTLY
@@ -23,7 +24,7 @@ def refresh_mv():
                        materialized_statistics_civil_status; REFRESH MATERIALIZED VIEW CONCURRENTLY
                        materialized_statistics_average; REFRESH MATERIALIZED VIEW CONCURRENTLY
                        materialized_statistics_social_class;"""
-           )
+        )
     end_time = time.monotonic()
 
     RefreshMaterializedView.objects.create(
