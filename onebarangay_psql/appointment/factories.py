@@ -1,4 +1,5 @@
 """Create your appointment factories here."""
+
 from zoneinfo import ZoneInfo
 
 import factory

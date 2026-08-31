@@ -1,4 +1,5 @@
 """Create your announcement permissions here."""
+
 from rest_framework import permissions
 
 

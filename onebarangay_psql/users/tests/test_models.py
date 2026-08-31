@@ -1,4 +1,5 @@
 """Create your user and profile test models here."""
+
 import pytest
 
 from onebarangay_psql.users.models import User

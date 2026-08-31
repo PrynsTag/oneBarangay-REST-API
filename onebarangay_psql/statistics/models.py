@@ -1,4 +1,5 @@
 """Create your statistics models here."""
+
 from django.db import models
 
 

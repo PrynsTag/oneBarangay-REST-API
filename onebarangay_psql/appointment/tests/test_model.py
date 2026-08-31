@@ -1,4 +1,5 @@
 """Create your appointment model tests here."""
+
 import zoneinfo
 from datetime import datetime, timedelta
 

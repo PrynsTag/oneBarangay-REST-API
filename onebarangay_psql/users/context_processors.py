@@ -1,4 +1,5 @@
 """Cree your context processors here for user's app."""
+
 from django.conf import settings
 
 

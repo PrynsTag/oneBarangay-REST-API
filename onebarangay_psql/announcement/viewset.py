@@ -1,4 +1,5 @@
 """Create your announcement views here."""
+
 from django.utils.html import strip_tags
 from push_notifications.models import GCMDevice
 from rest_framework import viewsets

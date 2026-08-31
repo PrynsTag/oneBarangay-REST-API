@@ -1,4 +1,5 @@
 """Create your test for the user views here."""
+
 import pytest
 from django.conf import settings
 from django.contrib import messages

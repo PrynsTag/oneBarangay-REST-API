@@ -1,1 +1,1 @@
-"""init placeholders for config."""
+"""Init placeholders for config."""

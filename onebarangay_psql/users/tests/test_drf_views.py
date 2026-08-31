@@ -1,4 +1,5 @@
 """Create your test for the DRF views."""
+
 import pytest
 from django.test import RequestFactory
 

@@ -1,4 +1,5 @@
 """Create forms for the user's app."""
+
 from allauth.account.forms import SignupForm
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 from django.contrib.auth import forms as admin_forms, get_user_model
