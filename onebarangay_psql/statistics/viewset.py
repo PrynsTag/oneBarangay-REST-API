@@ -105,7 +105,8 @@ class RefreshMaterialViewSet(
         """Create a new refresh materialized view."""
         start_time = time.monotonic()
         with connection.cursor() as cursor:
-            cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY materialized_statistics_total; REFRESH
+            cursor.execute(
+                """REFRESH MATERIALIZED VIEW CONCURRENTLY materialized_statistics_total; REFRESH
                            MATERIALIZED VIEW CONCURRENTLY materialized_statistics_user_signup; REFRESH MATERIALIZED
                            VIEW CONCURRENTLY materialized_statistics_appointment; REFRESH MATERIALIZED VIEW
                            CONCURRENTLY materialized_statistics_user_login; REFRESH MATERIALIZED VIEW CONCURRENTLY
@@ -116,7 +117,7 @@ class RefreshMaterialViewSet(
                            materialized_statistics_social_class; REFRESH MATERIALIZED VIEW CONCURRENTLY
                            materialized_statistics_user_signup_monthly; REFRESH MATERIALIZED VIEW CONCURRENTLY
                            materialized_statistics_user_login_monthly;"""
-               )
+            )
         end_time = time.monotonic()
 
         serializer = self.get_serializer(
