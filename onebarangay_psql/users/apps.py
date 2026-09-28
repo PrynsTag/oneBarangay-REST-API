@@ -1,4 +1,5 @@
 """Create your app config for user apps."""
+
 import contextlib
 
 from django.apps import AppConfig

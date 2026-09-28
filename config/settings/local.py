@@ -1,4 +1,5 @@
 """Define your local settings here."""
+
 # pylint: disable=W0401,W0614
 from .base import *  # noqa
 from .base import env
