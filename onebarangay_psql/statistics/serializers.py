@@ -1,4 +1,5 @@
 """Create your statistics serializers here."""
+
 from rest_framework_json_api import serializers
 
 from onebarangay_psql.statistics import models

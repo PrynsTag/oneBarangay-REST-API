@@ -1,4 +1,5 @@
 """Create your test for user urls."""
+
 import pytest
 from django.urls import resolve, reverse
 

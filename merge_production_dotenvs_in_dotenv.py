@@ -1,4 +1,5 @@
 """Merge Environments in .env file."""
+
 import os
 from collections.abc import Sequence
 from pathlib import Path

@@ -1,4 +1,5 @@
 """Create your announcement factories here."""
+
 import factory
 from django.utils.text import slugify
 from factory import Faker

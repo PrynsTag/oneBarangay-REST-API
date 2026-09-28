@@ -1,4 +1,5 @@
 """Custom pagination for onebarangay_psql."""
+
 from rest_framework.pagination import PageNumberPagination
 
 
