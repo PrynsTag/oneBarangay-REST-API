@@ -1,4 +1,5 @@
 """Create your statistics drf urls tests here."""
+
 import pytest
 from django.urls import resolve, reverse
 

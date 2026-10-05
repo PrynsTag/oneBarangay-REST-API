@@ -1,4 +1,5 @@
 """Utility for storing static files in Google Cloud Storage."""
+
 from storages.backends.gcloud import GoogleCloudStorage
 
 
