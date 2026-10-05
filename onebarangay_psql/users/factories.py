@@ -1,4 +1,5 @@
 """Create your test factories here."""
+
 from collections.abc import Sequence
 from typing import Any
 

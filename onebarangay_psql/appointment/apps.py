@@ -1,4 +1,5 @@
 """Create your appointment apps here."""
+
 from django.apps import AppConfig
 
 

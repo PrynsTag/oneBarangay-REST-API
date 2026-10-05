@@ -1,4 +1,5 @@
 """Util for getting the prometheus metrics."""
+
 from prometheus_client import CollectorRegistry, Counter, Histogram, generate_latest
 
 

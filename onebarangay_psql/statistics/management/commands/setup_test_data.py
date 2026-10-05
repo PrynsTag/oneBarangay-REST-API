@@ -1,4 +1,5 @@
 """Create your custom management commands here."""
+
 import random
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -143,7 +144,7 @@ class Command(BaseCommand):
 
 
 def set_sequence(
-    model: Union[Appointment, Announcement, User, HouseRecord, FamilyMember]
+    model: Union[Appointment, Announcement, User, HouseRecord, FamilyMember],
 ) -> None:
     """Reset the id sequence of a table.
 
